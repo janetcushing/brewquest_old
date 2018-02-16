@@ -12,5 +12,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "a beer and brewery search application",
+  "main": "index.js",
+  "repository": "https://github.com/laurmw6/beer-quest.git",
+  "author": "Janet Cushing, Lauren Wilson, Elizah Hulseman, James Roth",
+  "license": "MIT"
 }
