@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD:public/manifest.json
   "short_name": "Beer Quest",
   "name": "Brew Quest",
+=======
+  "short_name": "Beer Quest React App",
+  "name": "BEER QUEST React App",
+>>>>>>> 84e46499b6d8ef85bce874c5e32fd140a15db774:client/public/manifest.json
   "icons": [
     {
       "src": "beer-glass-10.jpeg",
