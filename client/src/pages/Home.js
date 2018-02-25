@@ -9,7 +9,7 @@ const Home = () =>
       fermentum, sed luctus urna tincidunt. Etiam ut feugiat ex. Cras non risus
       mi. Curabitur mattis rutrum ipsum, ut aliquet urna imperdiet ac. Sed nec
       nulla aliquam, bibendum odio eget, vestibulum tortor. Cras rutrum ligula
-      in tincidunt commodo. Morbi sit amet mollis orci, in tristique ex. Donec
+      in tincidunt commodo. Morbi amet mollis orci, in tristique ex. Donec
       nec ornare elit. Donec blandit est sed risus feugiat porttitor. Vestibulum
       molestie hendrerit massa non consequat. Vestibulum vitae lorem tortor. In
       elementum ultricies tempus. Interdum et malesuada fames ac ante ipsum
