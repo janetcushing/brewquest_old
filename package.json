@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "an application to search for local breweries and beers",
   "main": "index.js",
-  "repository": "https://github.com/laurmw6/beer-quest.git",
+  "repository": "git+https://github.com/laurmw6/beer-quest",
   "scripts": {
     "server": "node server.js",
     "client": "node scripts/start-client.js",
@@ -18,18 +18,16 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "mongojs": "^2.5.0",
     "mongoose": "^5.0.7"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1",
     "nodemon": "^1.11.0"
   },
-  "repository": "git+https://github.com/laurmw6/beer-quest",
   "bugs": {
     "url": "https://github.com/laurmw6/beer-quest"
   },
   "homepage": "https://github.com/laurmw6/beer-quest#readme"
 }
-
