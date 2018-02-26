@@ -28,16 +28,15 @@ getBreweryData = (req, res) => {
     .get(BASEURL + APIKEY + FORMAT + POSTAL + req.params.location)
     .then(response => {
       console.log(`came back successfully`);
-      console.log(response);
+      // console.log(response);
       console.log(response.status);
       console.log(response.statusText);
       console.log(response.totalResults);
-      // console.log(res.res);
-      console.log(response.data);
+      console.log(response.data[0]);
      
       const breweryDetails = [];
 
-      res.data.data.forEach(function (element, i) {
+      response.data.data.forEach(function (element, i) {
         let details = {
           "details_key": i,
           "breweryId": element.breweryId,
@@ -57,11 +56,11 @@ getBreweryData = (req, res) => {
           "isClosed": element.isClosed,
 
         }
-        breweryDetails.push(details);
-        console.log("breweryDetails.length");
-        console.log(breweryDetails.length);
-        res.send(breweryDetails);
+        breweryDetails.push(details);    
       });
+      console.log("breweryDetails.length");
+        console.log(breweryDetails.length);
+        res.send({breweryDetails});
     })
     .catch(error => {
       console.log("Error returned from getBreweryData");
