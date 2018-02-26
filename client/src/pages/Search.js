@@ -13,10 +13,14 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Panel from "../components/Panel";
+import BrewerySummary from "../components/BrewerySummary";
 // import axios from "axios";
 // import API_db from "../utils/API_db";
 // import ArticleDetail from "./ArticleDetail";
-import AppbarRow from "../components/AppbarRow";
+// import AppbarRow from "../components/AppbarRow";
+// import ApiSearch from "../utils/ApiSearch";
+// import API from "../utils/API";
+import axios from "axios";
 
 
 class Search extends Component {
@@ -69,58 +73,17 @@ class Search extends Component {
 
 
   searchPlaces = query => {
-    console.log("Im in searchPlaces")
-
-
-
-    // const query1 = ({
-    //   'q': this.state.search,
-    //   'begin_date': beginDate,
-    //   'end_date': endDate
-    // });
-    // console.log("query1: ");
-    // console.log(query1);
-    // API.search(query)
-    //   .then(res => this.setState({ result: res.data }))
-    //   .catch(err => console.log(err));
-    // let url =
-    //   "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
-    // url += "apikey=c0b4d2e16a014795bbdce9d7e4df8a95";
-    // url += "&q=" + query1.q;
-    // if (query1.begin_date) {
-    //   url += "&begin_date=" + query1.begin_date;
-    // }
-    // if (query1.end_date) {
-    //   url += "&end_date=" + query1.end_date;
-    // }
-    // // url += "fl=web_url,snippet,pub_date,headline,_id";
-    // console.log(`url: ${url}`);
-    // axios
-    //   .get(url)
-    //   .then(response => {
-    //     console.log(`came back successfully`);
-    //     const detailsArray = [];
-
-    //     response.data.response.docs.forEach(function (element, i) {
-    // //       let details = {
-    //         "details_key": i,
-    //         "title": response.data.response.docs[i].headline.main,
-    //         "web_url": response.data.response.docs[i].web_url,
-    //         "pub_date": response.data.response.docs[i].pub_date,
-    //         "snippet": response.data.response.docs[i].snippet
-    //   //     }
-    //     detailsArray.push(details);
-    //     console.log("detailsArray.length");
-    //     console.log(detailsArray.length);
-    //   });
-    //   this.setState({
-    //     result: detailsArray
-    //   });
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    // });
+    console.log("Im in searchPlaces");
+    console.log("/api/places/" + query);
+    axios.get("/api/places/" + query)
+      .then(res => {
+        console.log("im back from getting the api data");
+        console.log(res.data.breweryDetails);
+        this.setState({ result: res.data.breweryDetails });
+      })
+      .catch(err => console.log(err));
   };
+
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -201,12 +164,12 @@ class Search extends Component {
               <Panel>
                 <div>
                   <form className="form" >
-                    <label htmlform="search" > Search Location: </label>
+                    <label htmlform="search" ></label>
                     <input value={this.state.searchLocation}
                       name="searchLocation"
                       onChange={this.handleInputChange}
                       type="text"
-                      placeholder="Current Location" />
+                      placeholder="Current Location Zip Code" />
                     <button id="searchLocationBtn"
                       onClick={this.handleFormSubmit}
                       className="btn btn-primary" >
@@ -223,6 +186,36 @@ class Search extends Component {
           <Row>
             <Col size="sm-12">
               <Panel heading="RESULTS">
+              <div>
+                <ul className="list-group">
+                  {this.state.result.map(element =>
+                    <li className="list-group-item"
+                      key={element.details_key}>
+                      <BrewerySummary
+                        name={element.name}
+                        type={element.locationTypeDisplay}
+                        street={element.streetAddress}
+                        city={element.locality}
+                        st={element.region}
+                        postalCode={element.postalCode}
+                        phone={element.phone}     
+                      />
+                      <button id="saveBtn"
+                        onClick={this.handleSave}
+                        value={element.details_key}
+                        className="btn btn-primary" >
+                        Save
+                        </button>
+                        <button id="moreInfo"
+                         onClick={this.handleMoreInfo}
+                        value={element.details_key}
+                        className="btn btn-primary" >
+                        More Info -->
+                        </button>
+                    </li>
+                  )}
+                </ul>
+              </div>
               </Panel>
             </Col>
           </Row>

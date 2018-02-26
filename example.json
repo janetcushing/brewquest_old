@@ -1,0 +1,209 @@
+{
+    data: Array(8),
+    status: 200,
+    statusText: "OK",
+    headers: {…},
+    config: {…},
+    …
+}
+config
+    : {
+        adapter: ƒ,
+        transformRequest: {…},
+        transformResponse: {…},
+        timeout: 0,
+        xsrfCookieName: "XSRF-TOKEN",
+        …
+    }
+data
+    :
+    Array(8)
+0
+    :
+    brewery: {
+        id: "acknSl",
+        name: "Great Rhythm Brewing Company",
+        nameShortDisplay: "Great Rhythm",
+        description: "Brewery in Portsmouth, NH producing fresh, hoppy beers.",
+        website: "http://greatrhythmbrewing.com/",
+        …
+    }
+breweryId
+    :
+    "acknSl"
+country
+    : {
+        isoCode: "US",
+        name: "UNITED STATES",
+        displayName: "United States",
+        isoThree: "USA",
+        numberCode: 840,
+        …
+    }
+countryIsoCode
+    :
+    "US"
+createDate
+    :
+    "2013-01-24 23:58:02"
+id
+    :
+    "ueswRW"
+inPlanning
+    :
+    "N"
+isClosed
+    :
+    "N"
+isPrimary
+    :
+    "Y"
+latitude
+    :
+    43.0734493
+locality
+    :
+    "Portsmouth"
+locationType
+    :
+    "micro"
+locationTypeDisplay
+    :
+    "Micro Brewery"
+longitude
+    :
+    -70.769996
+name
+    :
+    "Brewery & Taproom"
+openToPublic
+    :
+    "Y"
+phone
+    :
+    "(603) 430-9640"
+postalCode
+    :
+    "03801"
+region
+    :
+    "New Hampshire"
+status
+    :
+    "verified"
+statusDisplay
+    :
+    "Verified"
+streetAddress
+    :
+    "105 Bartlett St"
+updateDate
+    :
+    "2017-03-06 20:36:45"
+website
+    :
+    "http://greatrhythmbrewing.com/"
+yearOpened
+    :
+    "2016"
+__proto__
+    :
+    Object
+1
+    : {
+        id: "buuCTR",
+        name: "Cataqua Public House",
+        streetAddress: "35 Corporate Dr",
+        locality: "Portsmouth",
+        region: "New Hampshire",
+        …
+    }
+2
+    : {
+        id: "azeG7v",
+        name: "Liar's Bench Beer Co.",
+        streetAddress: "459 Islington Street #4",
+        locality: "Portsmouth",
+        region: "New Hampshire",
+        …
+    }
+3
+    : {
+        id: "1JLE39",
+        name: "Main Brewery",
+        streetAddress: "225 Heritage Ave",
+        locality: "Portsmouth",
+        region: "New Hampshire",
+        …
+    }
+4
+    : {
+        id: "2Zp1Ge",
+        name: "Main Brewery",
+        streetAddress: "165 High St",
+        locality: "Portsmouth",
+        region: "New Hampshire",
+        …
+    }
+5
+    : {
+        id: "fKk5B1",
+        name: "Main Brewpub",
+        streetAddress: "56 Market Street",
+        locality: "Portsmouth",
+        region: "New Hampshire",
+        …
+    }
+6
+    : {
+        id: "mil2Zv",
+        name: "Portsmouth",
+        streetAddress: "1 Redhook Way",
+        extendedAddress: "Pease International Tradeport",
+        locality: "Portsmouth",
+        …
+    }
+7
+    : {
+        id: "Vp2e5D",
+        name: "Smuttynose Brewing Co.",
+        streetAddress: "105 Towle Farm Road",
+        locality: "Hampton",
+        region: "New Hampshire",
+        …
+    }
+length
+    :
+    8
+__proto__
+    :
+    Array(0)
+headers
+    : {
+        date: "Mon, 26 Feb 2018 19:05:11 GMT",
+        content - encoding: "gzip",
+        x - powered - by: "Express",
+        etag: "W/"
+        4 a8a - S1EpcaL8rmc8P09A1433sxH9kcg "",
+        vary: "Accept-Encoding",
+        …
+    }
+request
+    :
+    XMLHttpRequest {
+        onreadystatechange: ƒ,
+        readyState: 4,
+        timeout: 0,
+        withCredentials: false,
+        upload: XMLHttpRequestUpload,
+        …
+    }
+status
+    :
+    200
+statusText
+    :
+    "OK"
+__proto__
+    :
+    Object
