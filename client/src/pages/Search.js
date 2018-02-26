@@ -13,6 +13,7 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Panel from "../components/Panel";
+import BrewerySummary from "../components/BrewerySummary";
 // import axios from "axios";
 // import API_db from "../utils/API_db";
 // import ArticleDetail from "./ArticleDetail";
@@ -73,46 +74,14 @@ class Search extends Component {
 
   searchPlaces = query => {
     console.log("Im in searchPlaces");
-    // let zipQuery = query;
-    // API.search(zipQuery)
-    //   .then(res => this.setState({ result: res.data }))
-    //   .catch(err => console.log(err));
-//     const BASEURL = "http://api.brewerydb.com/v2/locations?";
-// const APIKEY  = "key=32c6dc015d7cf847c9bd1c05f34160ee";
-// const FORMAT  = "&format=json";
-// const POSTAL  = "&postalCode="
-// console.log("query" + query);
-// console.log("url: " + BASEURL + APIKEY + FORMAT + POSTAL + query);
-// axios
-//   .get(BASEURL + APIKEY + FORMAT + POSTAL + query, { crossdomain: true })
-//   .then(response => {
-//     console.log(`came back successfully`);
-//     const detailsArray = [];
-
-//     response.data.forEach(function (element, i) {
-//       let details = {
-//         "details_key": i,
-//         "result": response.data[i]
-//       }
-//       detailsArray.push(details);
-//       console.log("detailsArray.length");
-//       console.log(detailsArray.length);
-  //   });
-  //   this.setState({
-  //     result: detailsArray
-  //   });
-  // })
-  // .catch(error => {
-  //   console.log(error);
-  // });
-  console.log("/api/places/" + query);
-  axios.get("/api/places/" + query)
-  .then(res => {
-    console.log("im back from getting the api data");
-    console.log(res);
-    // this.setState({ result: res.breweryDetails });
-  })
-  .catch(err => console.log(err));  
+    console.log("/api/places/" + query);
+    axios.get("/api/places/" + query)
+      .then(res => {
+        console.log("im back from getting the api data");
+        console.log(res.data.breweryDetails);
+        this.setState({ result: res.data.breweryDetails });
+      })
+      .catch(err => console.log(err));
   };
 
 
@@ -217,6 +186,36 @@ class Search extends Component {
           <Row>
             <Col size="sm-12">
               <Panel heading="RESULTS">
+              <div>
+                <ul className="list-group">
+                  {this.state.result.map(element =>
+                    <li className="list-group-item"
+                      key={element.details_key}>
+                      <BrewerySummary
+                        name={element.name}
+                        type={element.locationTypeDisplay}
+                        street={element.streetAddress}
+                        city={element.locality}
+                        st={element.region}
+                        postalCode={element.postalCode}
+                        phone={element.phone}     
+                      />
+                      <button id="saveBtn"
+                        onClick={this.handleSave}
+                        value={element.details_key}
+                        className="btn btn-primary" >
+                        Save
+                        </button>
+                        <button id="moreInfo"
+                         onClick={this.handleMoreInfo}
+                        value={element.details_key}
+                        className="btn btn-primary" >
+                        More Info -->
+                        </button>
+                    </li>
+                  )}
+                </ul>
+              </div>
               </Panel>
             </Col>
           </Row>
