@@ -1,5 +1,6 @@
 const router = require("express").Router();
-// const booksController = require("../../controllers/booksController");
+const controller = require("../../controllers/controller");
+const placesApiController = require("../../controllers/placesApiController");
 
 // Matches with "/api/books"
 // router.route("/")
@@ -14,6 +15,6 @@ const router = require("express").Router();
 //   .delete(booksController.remove);
 
 // Matches with "/api/place/:searchLocation"
-// router.route("/places/:searchLocation")
-
+router.route("/api/places/:query")
+.get(placesApiController.getPlaces(req.params.id));
 module.exports = router;
