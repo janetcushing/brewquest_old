@@ -1,3 +1,7 @@
+http://api.brewerydb.com/v2/locations?key=32c6dc015d7cf847c9bd1c05f34160ee&format=json&postalCode=03801
+
+
+
 {
     data: Array(8),
     status: 200,

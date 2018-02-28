@@ -78,6 +78,7 @@ class Search extends Component {
     axios.get("/api/places/" + query)
       .then(res => {
         console.log("im back from getting the api data");
+        console.log(res);
         console.log(res.data.breweryDetails);
         this.setState({ result: res.data.breweryDetails });
       })
@@ -192,13 +193,12 @@ class Search extends Component {
                     <li className="list-group-item"
                       key={element.details_key}>
                       <BrewerySummary
+                      icon={element.icon}
                         name={element.name}
-                        type={element.locationTypeDisplay}
-                        street={element.streetAddress}
-                        city={element.locality}
-                        st={element.region}
-                        postalCode={element.postalCode}
-                        phone={element.phone}     
+                        type={"Brewery"}
+                        rating={element.rating}  
+                        address={element.vicinity}
+                        open_now={element.open_now ? "Yes" : "No"}
                       />
                       <button id="saveBtn"
                         onClick={this.handleSave}
@@ -206,12 +206,12 @@ class Search extends Component {
                         className="btn btn-primary" >
                         Save
                         </button>
-                        <button id="moreInfo"
+                        {/* <button id="moreInfo"
                          onClick={this.handleMoreInfo}
                         value={element.details_key}
                         className="btn btn-primary" >
                         More Info -->
-                        </button>
+                        </button> */}
                     </li>
                   )}
                 </ul>
