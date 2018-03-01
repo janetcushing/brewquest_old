@@ -1,25 +1,10 @@
-import React, { Component } from "react";
-// import ReactDOM from 'react-dom';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import MyAwesomeReactComponent from '../components/MyAwesomeReactComponent';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import Dialog from 'material-ui/Dialog';
-// import { deepOrange500 } from 'material-ui/styles/colors';
-// import { green100, green500, green700 } from 'material-ui/styles/colors';
-// import FlatButton from 'material-ui/FlatButton';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+import React, {
+  Component
+} from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Panel from "../components/Panel";
-// import BrewerySummary from "../components/BrewerySummary";
-// import axios from "axios";
-// import API_db from "../utils/API_db";
-// import ArticleDetail from "./ArticleDetail";
-// import AppbarRow from "../components/AppbarRow";
-// import ApiSearch from "../utils/ApiSearch";
-// import API from "../utils/API";
 import axios from "axios";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
 
@@ -70,25 +55,31 @@ class Search extends Component {
   }
 
 
-
-
-
   searchPlaces = query => {
     console.log("Im in searchPlaces");
     console.log("/api/places/" + query);
     axios.get("/api/places/" + query)
       .then(res => {
-        console.log("im back from getting the api data");
-        console.log(res);
-        console.log(res.data.breweryDetails);
-        this.setState({ result: res.data.breweryDetails });
+        if (res.data === "locaton error") {
+          alert("Please enter a valid location");
+        } else {
+          console.log("im back from getting the api data");
+          console.log(res);
+          console.log(res.data.breweryDetails);
+          this.setState({
+            result: res.data.breweryDetails
+          });
+        }
       })
       .catch(err => console.log(err));
   };
 
 
   handleInputChange = event => {
-    const { name, value } = event.target;
+    const {
+      name,
+      value
+    } = event.target;
     this.setState({
       [name]: value
     });
@@ -151,49 +142,69 @@ class Search extends Component {
 
 
   render() {
-    return (
-      <div>
-        <Container>
-          <Row>
-            <Col size="sm-12">
-              {/* <AppbarRow /> */}
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row>
-            <Col size="sm-12">
-              <Panel>
-                <div>
-                  <form className="form" >
-                    <label htmlform="search" ></label>
-                    <input value={this.state.searchLocation}
-                      name="searchLocation"
-                      onChange={this.handleInputChange}
-                      type="text"
-                      placeholder="Current Location Zip Code" />
-                    <button id="searchLocationBtn"
-                      onClick={this.handleFormSubmit}
-                      className="btn btn-primary" >
-                      SEARCH
-                  </button>
-                  </form>
-                </div>
-              </Panel>
-            </Col>
-          </Row>
-        </Container>
+    return ( <
+      div >
+      <
+      Container >
+      <
+      Row >
+      <
+      Col size = "sm-12" > { /* <AppbarRow /> */ } <
+      /Col> <
+      /Row> <
+      /Container> <
+      Container >
+      <
+      Row >
+      <
+      Col size = "sm-12" >
+      <
+      Panel >
+      <
+      div >
+      <
+      form className = "form" >
+      <
+      label htmlform = "search" > < /label> <
+      input value = {
+        this.state.searchLocation
+      }
+      name = "searchLocation"
+      onChange = {
+        this.handleInputChange
+      }
+      type = "text"
+      placeholder = "Current Location Zip Code" / >
+      <
+      button id = "searchLocationBtn"
+      onClick = {
+        this.handleFormSubmit
+      }
+      className = "btn btn-primary" >
+      SEARCH <
+      /button> <
+      /form> <
+      /div> <
+      /Panel> <
+      /Col> <
+      /Row> <
+      /Container>
 
-        <Container>
-          <Row>
-            <Col size="sm-12">
-              <ResultsCard
-              results={this.state.result}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <
+      Container >
+      <
+      Row >
+      <
+      Col size = "sm-12" >
+      <
+      ResultsCard results = {
+        this.state.result
+      }
+      /> <
+      /Col> <
+      /Row> <
+      /Container> <
+      /div>
     );
   }
 }

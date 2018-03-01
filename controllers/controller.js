@@ -5,8 +5,14 @@ const Express = require("express");
 const mongojs = require("mongojs");
 const router = Express.Router();
 const axios = require("axios");
-const where = require('node-where');
-
+const NodeGeocoder = require('node-geocoder');
+const options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: 'AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs',
+  formatter: null
+};
+const geocoder = NodeGeocoder(options);
 //=================================================
 // global variables
 //=================================================
@@ -14,99 +20,208 @@ const where = require('node-where');
 //=================================================
 // Functions
 //=================================================
+// function getLatLong(zipCode) {
+//   const geocoder = new google.maps.Geocoder();
+//   // var restaurants;
+//   geocoder.geocode({
+//       'address': zipCode
+//   }, function (results, status) {
+//       if (status == google.maps.GeocoderStatus.OK) {
+//           var latitude = results[0].geometry.location.lat();
+//           var longitude = results[0].geometry.location.lng();
+//           //This is the "ajax" call to the Zomato server to fetch 5 restaurants serving x cuisine within 15+/- miles of the zip code requested.
+//           $.get(
+
+//             /*
+//           https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs&location=43.0875,-70.8358&rankby=distance&keyword=brewery
+//           */
+//           }
+//         });
+//       }
+const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+const RANKBY = "&rankby=distance"
+const KEYWORD = "&keyword=brewery"
+const FORMAT = "&format=json";
+const LOCATION = "&location="
+const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
+const breweryDetails = [];
+
+getLatitudeAndLongitude = (res, req) => {
+  console.log("Im in getLatitudeAndLongitude");
+  loc = req.params.location;
+  geocoder.geocode(loc)
+    .then(function (locResponse) {
+      console.log(locResponse);
+      console.log(`Lat: ${locResponse[0].latitude}`);
+      console.log(`Lat: ${locResponse[0].longitude}`);
+      let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
+      console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
+      getApiData(locn, res);
+    }).catch(function (err) {
+      console.log(err);
+      res.send("location error");
+    });
+}
+
+getApiData = (locn, res) => {
+  console.log("Im in getApiData");
+  console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
+  axios
+    .get(BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD)
+    .then(response => {
+      console.log(`came back successfully`);
+      console.log(response.status);
+      console.log(response.statusText);
+      console.log(response);
+      response.data.results.forEach(function (element, i) {
+        let details = {
+          "details_key": i,
+          "breweryId": element.id,
+          "icon": element.icon,
+          "lat": element.geometry.location.lat,
+          "lng": element.geometry.location.lng,
+          "name": element.name,
+          "place_id": element.place_id,
+          "rating": element.rating,
+          "vicinity": element.vicinity,
+          //these will be populated from the detail api
+          "fullAddress": "fullAddress",
+          "phone": "phone",
+          "numReviews": "numReviews",
+          "website": "website"
+        } //end of details json object
+        console.log(details);
+        breweryDetails.push(details);
+      });
+      res.send({
+        breweryDetails
+      });
+    })
+    .catch(error => {
+      console.log("Error returned from getBreweryData");
+      console.log(error);
+    });
+}
 
 getBreweryData = (req, res) => {
   console.log("Im in getBreweryData");
-  console.log("req.params.location" + req.params.location);
-  let loc = req.params.location;
-  where.is(loc, function (err, result) {
-    if (result) {
-      console.log('Lat: ' + result.get('lat'));
-      console.log('Lng: ' + result.get('lng'));
-      const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-      const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
-      let location = "&location=" + result.get('lat') + "," + result.get('lng');
-      console.log(`lLOCATION ${location}`);
-      const RANKBY = "&rankby=distance"
-      const KEYWORD = "&keyword=brewery"
-      console.log("url: " + BASEURL + APIKEY + location + RANKBY + KEYWORD);
-      axios
-        .get(BASEURL + APIKEY + location + RANKBY + KEYWORD)
-        .then(response => {
-          console.log(`came back successfully`);
-          console.log(response.status);
-          console.log(response.statusText);
-          const breweryDetails = [];
+ 
+  getLatitudeAndLongitude(res, req);
 
-          response.data.results.forEach(function (element, i) {
-            let openStatus = false;
-            let photoHtmlAttr = "";
-            let photoRef = "";
-            let details = {
-              "details_key": i,
-              "breweryId": element.id,
-              "icon": element.icon,
-              "lat": element.geometry.location.lat,
-              "lng": element.geometry.location.lng,
-              "name": element.name,
-              // "open_now": openStatus,
-              // "photo_html_attributions": photoHtmlAttr,
-              // "photo_reference": photoRef,
-              "place_id": element.place_id,
-              "rating": element.rating,
-              "vicinity": element.vicinity,
-              //these will be populated from the detail api
-              "fullAddress": detailResponse.formatted_address,
-              "phone": detailResponse.formatted_phone_number,
-              "numReviews": detailResponse.reviews.length,
-              "website": detailResponse.website
-            } //end of details json object
-            console.log("details");
-            console.log(details);
-            breweryDetails.push(details);
-            console.log("breweryDetails.length2");
-            console.log(breweryDetails);
-          }); //end of forEach loop
 
-          breweryDetails.forEach(function (detailArray, j) {
-            const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
-            let place = "&placeid=" + breweryDetails.place_id;
-            console.log("about to get the detail api");
-            console.log("detail place: " + breweryDetails.name);
-            axios
-              .get(DETAILURL + APIKEY + place)
-              .then(detailResponse => {
-                console.log(`came back from detail API successfully`);
-                detailsArray.placeId = detailResponse.placeId;
-                detailArray.fullAddress = detailResponse.formatted_address;
-                detailArray.phone = detailResponse.formatted_phone_number;
-                detailArray.numReviews = detailResponse.reviews.length;
-                detailArray.website = detailResponse.website;
-                console.log(detailArray);
-              }).catch(error => {
-                console.log("Error returned from getBreweryData");
-                console.log(error);
-                res.status(500).send("A Server Error Occurred");
-              });
-            console.log("end of forEach loop2");
-          }); //end of forEach loop
 
-        }).catch(function () {
-          console.log(err);
-          res.send("location error");
-        });
-      // res.send({
-      //   breweryDetails
-      // });
-    }
-    //else of result
-    else {
-      console.log(err);
-      res.send("location error");
-    }
-  }); // end of  where.is
+  // console.log(locn);
+  // console.log(`Lat: ${res.latitude}`);
+  // console.log(`Lat: ${res.longitude}`);
+  // let locn = res.latitude + "," + res.longitude;
+  // console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
+  // axios
+  //   .get(BASEURL + APIKEY + location + RANKBY + KEYWORD)
+  //   .then(response => {
+  //     console.log(`came back successfully`);
+  //     // console.log(response);
+  //     console.log(response.status);
+  //     console.log(response.statusText);
+  //     const breweryDetails = [];
+  //     response.data.data.forEach(function (element, i) {
+  //       let details = {
+  //         "details_key": i,
+  //         "breweryId": element.id,
+  //         "icon": element.icon,
+  //         "lat": element.geometry.location.lat,
+  //         "lng": element.geometry.location.lng,
+  //         "name": element.name,
+  //         "place_id": element.place_id,
+  //         "rating": element.rating,
+  //         "vicinity": element.vicinity,
+  //         //these will be populated from the detail api
+  //         "fullAddress":  "fullAddress",
+  //         "phone": "phone",
+  //         "numReviews": "numReviews",
+  //         "website": "website"
+  //       } //end of details json object
+  //     breweryDetails.push(details);
+  //   });
+  //   console.log("breweryDetails.length");
+  //   console.log(breweryDetails.length);
+  //   res.send({
+  //     breweryDetails
+  //   });
+  // })
+  // .catch(error => {
+  //   console.log("Error returned from getBreweryData");
+  //   console.log(error);
+  // });
+
+
+  // });
 } //end of getBrewery data
 
+
+
+// const lat = 43.0875;
+// const long = -70.8358;
+// const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+// const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+// const LOCATION = "&location=" + lat + ',' + long;
+// const RANKBY = "&rankby=distance"
+// const KEYWORD = "&keyword=brewery"
+// console.log("query" + req.params.location);
+// console.log("url: " + BASEURL + APIKEY + LOCATION + RANKBY + KEYWORD);
+// // , { crossdomain: true }
+// axios
+//   .get(BASEURL + APIKEY + LOCATION + RANKBY + KEYWORD)
+//   .then(response => {
+//     console.log(`came back successfully`);
+//     // console.log(response);
+//     console.log(response.status);
+//     console.log(response.statusText);
+//     console.log(response.data.results);
+
+//     const breweryDetails = [];
+//     response.data.results.forEach(function (element, i) {
+//     let details = {
+//       "details_key": i,
+//     "breweryId": element.id,
+//     "icon": element.icon,
+//     "lat": element.geometry.location.lat,
+//     "lng": element.geometry.location.lng,
+//     "name": element.name,
+//     // "open_now": element.opening_hours.open_now,
+//     // "photo_html_attributions": element.photos[0].html_attributions,
+//     // "photo_reference": element.photos[0].photo_reference,
+//     "place_id": element.place_id,
+//     "rating": element.rating,
+//     "vicinity": element.vicinity
+//     }
+// let details = {
+//   "breweryId": response.data.results[0].id,
+//   "icon": response.data.results[0].icon,
+//   "latitude": response.data.results[0].geometry.location.lat,
+//   "longitude": response.data.results[0].geometry.location.lng,
+//   "name": response.data.results[0].name,
+//   "open_now": response.data.results[0].opening_hours.open_now,
+//   "photo_html_attributions": response.data.results[0].photos[0].html_attributions,
+//   "photo_reference": response.data.results[0].photos[0].photo_reference,
+//   "place_id": response.data.results[0].place_id,
+//   "rating": response.data.results[0].rating
+// }
+//   breweryDetails.push(details);
+//   // console.log(response.data.results[0].photos);
+//   });
+//   console.log("breweryDetails.length");
+//   console.log(breweryDetails.length);
+//   res.send({
+//     breweryDetails
+//   });
+// })
+// .catch(error => {
+//   console.log("Error returned from getBreweryData");
+//   console.log(error);
+// });
+
+// }
 
 
 //==============
