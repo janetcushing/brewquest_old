@@ -97,7 +97,7 @@ class Search extends Component {
 
 
   
-  handleSave = (event) => {
+  handleBrewerySave = (event) => {
     event.preventDefault();
     console.log(`im in handleSave`);
     console.log("value", event.target.value)
