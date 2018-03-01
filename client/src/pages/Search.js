@@ -1,12 +1,11 @@
-import React, {
-  Component
-} from "react";
+import React, {Component} from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Panel from "../components/Panel";
 import axios from "axios";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
+import API_db from "../utils/API_db";
 
 
 class Search extends Component {
@@ -76,10 +75,7 @@ class Search extends Component {
 
 
   handleInputChange = event => {
-    const {
-      name,
-      value
-    } = event.target;
+    const {name,value} = event.target;
     this.setState({
       [name]: value
     });
@@ -100,24 +96,28 @@ class Search extends Component {
   };
 
 
-
+  
   handleSave = (event) => {
     event.preventDefault();
     console.log(`im in handleSave`);
-    // console.log("value", event.target.value)
-    // let i = event.target.value; 
-    // let detailsToSave = {
-    //   title: this.state.result[event.target.value].title,
-    //   web_url: this.state.result[event.target.value].web_url,
-    //   snippet: this.state.result[event.target.value].snippet,
-    //   pub_date: this.state.result[event.target.value].pub_date
-    // }
-    // console.log(detailsToSave);
-    // API_db.saveArticle(detailsToSave);
-    // console.log("savedResult");
-    // this.removeFromResult(i);
+    console.log("value", event.target.value)
+    let detailsToSave = {
+      name: this.state.result[event.target.value].name,
+      brewery_id: this.state.result[event.target.value].brewery_id,
+      icon: this.state.result[event.target.value].icon,
+      lat: this.state.result[event.target.value].lat,
+      lng: this.state.result[event.target.value].lng,
+      place_id: this.state.result[event.target.value].place_id,
+      rating: this.state.result[event.target.value].rating,
+      full_address: this.state.result[event.target.value].full_address,
+      phone: this.state.result[event.target.value].phone,
+      num_reviews: this.state.result[event.target.value].num_reviews,
+      website: this.state.result[event.target.value].website
+    }
+    console.log(detailsToSave);
+    API_db.saveBrewery(detailsToSave);
+    console.log("savedResult");
     // this.loadSavedArticles();
-
   };
 
 
@@ -142,51 +142,51 @@ class Search extends Component {
 
 
   render() {
-      return (
-        <div>
-          <Container>
-            <Row>
-              <Col size="sm-12">
-                {/* <AppbarRow /> */}
-              </Col>
-            </Row>
-          </Container>
-          <Container>
-            <Row>
-              <Col size="sm-12">
-                <Panel>
-                  <div>
-                    <form className="form" >
-                      <label htmlform="search" ></label>
-                      <input value={this.state.searchLocation}
-                        name="searchLocation"
-                        onChange={this.handleInputChange}
-                        type="text"
-                        placeholder="Current Location Zip Code" />
-                      <button id="searchLocationBtn"
-                        onClick={this.handleFormSubmit}
-                        className="btn btn-primary" >
-                        SEARCH
+    return (
+      <div>
+        <Container>
+          <Row>
+            <Col size="sm-12">
+              {/* <AppbarRow /> */}
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col size="sm-12">
+              <Panel>
+                <div>
+                  <form className="form" >
+                    <label htmlform="search" ></label>
+                    <input value={this.state.searchLocation}
+                      name="searchLocation"
+                      onChange={this.handleInputChange}
+                      type="text"
+                      placeholder="Current Location Zip Code" />
+                    <button id="searchLocationBtn"
+                      onClick={this.handleFormSubmit}
+                      className="btn btn-primary" >
+                      SEARCH
                     </button>
-                    </form>
-                  </div>
-                </Panel>
-              </Col>
-            </Row>
-          </Container>
-  
-          <Container>
-            <Row>
-              <Col size="sm-12">
-                <ResultsCard
+                  </form>
+                </div>
+              </Panel>
+            </Col>
+          </Row>
+        </Container>
+
+        <Container>
+          <Row>
+            <Col size="sm-12">
+              <ResultsCard
                 results={this.state.result}
-                />
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      );
-    }
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
   }
-  
-    export default Search;
+}
+
+export default Search;
