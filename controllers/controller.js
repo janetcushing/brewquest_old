@@ -5,7 +5,14 @@ const Express = require("express");
 const mongojs = require("mongojs");
 const router = Express.Router();
 const axios = require("axios");
-
+const NodeGeocoder = require('node-geocoder');
+const options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: 'AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs',
+  formatter: null
+};
+const geocoder = NodeGeocoder(options);
 //=================================================
 // global variables
 //=================================================
@@ -31,113 +38,62 @@ const axios = require("axios");
 //           }
 //         });
 //       }
+const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+const RANKBY = "&rankby=distance"
+const KEYWORD = "&keyword=brewery"
+const FORMAT = "&format=json";
+const LOCATION = "&location="
+const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
+const breweryDetails = [];
 
-getBreweryData = (req, res) => {
-  console.log("Im in getBreweryData");
-  // const BASEURL = "http://api.brewerydb.com/v2/locations?";
-  // const APIKEY = "key=32c6dc015d7cf847c9bd1c05f34160ee";
-  // const FORMAT = "&format=json";
-  // const POSTAL = "&postalCode="
-  // console.log("query" + req.params.location); 
-  // console.log("url: " + BASEURL + APIKEY + FORMAT + POSTAL + req.params.location);
-  // // , { crossdomain: true }
-  // axios
-  //   .get(BASEURL + APIKEY + FORMAT + POSTAL + req.params.location)
-  //   .then(response => {
-  //     console.log(`came back successfully`);
-  //     // console.log(response);
-  //     console.log(response.status);
-  //     console.log(response.statusText);
-  //     console.log(response.totalResults);
-  //     console.log(response.data[0]);
+getLatitudeAndLongitude = (res, req) => {
+  console.log("Im in getLatitudeAndLongitude");
+  loc = req.params.location;
+  geocoder.geocode(loc)
+    .then(function (locResponse) {
+      console.log(locResponse);
+      console.log(`Lat: ${locResponse[0].latitude}`);
+      console.log(`Lat: ${locResponse[0].longitude}`);
+      let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
+      console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
+      getApiData(locn, res);
+    }).catch(function (err) {
+      console.log(err);
+      res.send("location error");
+    });
+}
 
-  //     const breweryDetails = [];
-
-  // response.data.data.forEach(function (element, i) {
-  //   let details = {
-  //     "details_key": i,
-  //     "breweryId": element.breweryId,
-  //     "name": element.brewery.name,
-  //     "latitude": element.latitude,
-  //     "longitude": element.longetude,
-  //     "locality": element.locality,
-  //     "locationType": element.locationType,
-  //     "locationTypeDisplay": element.locationTypeDisplay,
-  //     "phone": element.phone,
-  //     "postalCode": element.postalCode,
-  //     "region": element.region,
-  //     "streetAddress": element.streetAddress,
-  //     "website": element.website,
-  //     "description": element.brewery.description,
-  //     "country": element.country,
-  //     "isClosed": element.isClosed,
-
-  //   }
-  //     breweryDetails.push(details);    
-  //   });
-  //   console.log("breweryDetails.length");
-  //     console.log(breweryDetails.length);
-  //     res.send({breweryDetails});
-  // })
-  // .catch(error => {
-  //   console.log("Error returned from getBreweryData");
-  //   console.log(error);
-  // });
-
-
-
-  const lat = 43.0875;
-  const long = -70.8358;
-  const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-  const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
-  const LOCATION = "&location=" + lat + ',' + long;
-  const RANKBY = "&rankby=distance"
-  const KEYWORD = "&keyword=brewery"
-  console.log("query" + req.params.location);
-  console.log("url: " + BASEURL + APIKEY + LOCATION + RANKBY + KEYWORD);
-  // , { crossdomain: true }
+getApiData = (locn, res) => {
+  console.log("Im in getApiData");
+  console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
   axios
-    .get(BASEURL + APIKEY + LOCATION + RANKBY + KEYWORD)
+    .get(BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD)
     .then(response => {
       console.log(`came back successfully`);
-      // console.log(response);
       console.log(response.status);
       console.log(response.statusText);
-      console.log(response.data.results);
-
-      const breweryDetails = [];
+      console.log(response);
       response.data.results.forEach(function (element, i) {
-      let details = {
-        "details_key": i,
-      "breweryId": element.id,
-      "icon": element.icon,
-      "lat": element.geometry.location.lat,
-      "lng": element.geometry.location.lng,
-      "name": element.name,
-      // "open_now": element.opening_hours.open_now,
-      // "photo_html_attributions": element.photos[0].html_attributions,
-      // "photo_reference": element.photos[0].photo_reference,
-      "place_id": element.place_id,
-      "rating": element.rating,
-      "vicinity": element.vicinity
-      }
-      // let details = {
-      //   "breweryId": response.data.results[0].id,
-      //   "icon": response.data.results[0].icon,
-      //   "latitude": response.data.results[0].geometry.location.lat,
-      //   "longitude": response.data.results[0].geometry.location.lng,
-      //   "name": response.data.results[0].name,
-      //   "open_now": response.data.results[0].opening_hours.open_now,
-      //   "photo_html_attributions": response.data.results[0].photos[0].html_attributions,
-      //   "photo_reference": response.data.results[0].photos[0].photo_reference,
-      //   "place_id": response.data.results[0].place_id,
-      //   "rating": response.data.results[0].rating
-      // }
-      breweryDetails.push(details);
-      // console.log(response.data.results[0].photos);
+        let details = {
+          "details_key": i,
+          "breweryId": element.id,
+          "icon": element.icon,
+          "lat": element.geometry.location.lat,
+          "lng": element.geometry.location.lng,
+          "name": element.name,
+          "place_id": element.place_id,
+          "rating": element.rating,
+          "vicinity": element.vicinity,
+          //these will be populated from the detail api
+          "fullAddress": "fullAddress",
+          "phone": "phone",
+          "numReviews": "numReviews",
+          "website": "website"
+        } //end of details json object
+        console.log(details);
+        breweryDetails.push(details);
       });
-      console.log("breweryDetails.length");
-      console.log(breweryDetails.length);
       res.send({
         breweryDetails
       });
@@ -146,8 +102,126 @@ getBreweryData = (req, res) => {
       console.log("Error returned from getBreweryData");
       console.log(error);
     });
-
 }
+
+getBreweryData = (req, res) => {
+  console.log("Im in getBreweryData");
+ 
+  getLatitudeAndLongitude(res, req);
+
+
+
+  // console.log(locn);
+  // console.log(`Lat: ${res.latitude}`);
+  // console.log(`Lat: ${res.longitude}`);
+  // let locn = res.latitude + "," + res.longitude;
+  // console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
+  // axios
+  //   .get(BASEURL + APIKEY + location + RANKBY + KEYWORD)
+  //   .then(response => {
+  //     console.log(`came back successfully`);
+  //     // console.log(response);
+  //     console.log(response.status);
+  //     console.log(response.statusText);
+  //     const breweryDetails = [];
+  //     response.data.data.forEach(function (element, i) {
+  //       let details = {
+  //         "details_key": i,
+  //         "breweryId": element.id,
+  //         "icon": element.icon,
+  //         "lat": element.geometry.location.lat,
+  //         "lng": element.geometry.location.lng,
+  //         "name": element.name,
+  //         "place_id": element.place_id,
+  //         "rating": element.rating,
+  //         "vicinity": element.vicinity,
+  //         //these will be populated from the detail api
+  //         "fullAddress":  "fullAddress",
+  //         "phone": "phone",
+  //         "numReviews": "numReviews",
+  //         "website": "website"
+  //       } //end of details json object
+  //     breweryDetails.push(details);
+  //   });
+  //   console.log("breweryDetails.length");
+  //   console.log(breweryDetails.length);
+  //   res.send({
+  //     breweryDetails
+  //   });
+  // })
+  // .catch(error => {
+  //   console.log("Error returned from getBreweryData");
+  //   console.log(error);
+  // });
+
+
+  // });
+} //end of getBrewery data
+
+
+
+// const lat = 43.0875;
+// const long = -70.8358;
+// const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+// const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+// const LOCATION = "&location=" + lat + ',' + long;
+// const RANKBY = "&rankby=distance"
+// const KEYWORD = "&keyword=brewery"
+// console.log("query" + req.params.location);
+// console.log("url: " + BASEURL + APIKEY + LOCATION + RANKBY + KEYWORD);
+// // , { crossdomain: true }
+// axios
+//   .get(BASEURL + APIKEY + LOCATION + RANKBY + KEYWORD)
+//   .then(response => {
+//     console.log(`came back successfully`);
+//     // console.log(response);
+//     console.log(response.status);
+//     console.log(response.statusText);
+//     console.log(response.data.results);
+
+//     const breweryDetails = [];
+//     response.data.results.forEach(function (element, i) {
+//     let details = {
+//       "details_key": i,
+//     "breweryId": element.id,
+//     "icon": element.icon,
+//     "lat": element.geometry.location.lat,
+//     "lng": element.geometry.location.lng,
+//     "name": element.name,
+//     // "open_now": element.opening_hours.open_now,
+//     // "photo_html_attributions": element.photos[0].html_attributions,
+//     // "photo_reference": element.photos[0].photo_reference,
+//     "place_id": element.place_id,
+//     "rating": element.rating,
+//     "vicinity": element.vicinity
+//     }
+// let details = {
+//   "breweryId": response.data.results[0].id,
+//   "icon": response.data.results[0].icon,
+//   "latitude": response.data.results[0].geometry.location.lat,
+//   "longitude": response.data.results[0].geometry.location.lng,
+//   "name": response.data.results[0].name,
+//   "open_now": response.data.results[0].opening_hours.open_now,
+//   "photo_html_attributions": response.data.results[0].photos[0].html_attributions,
+//   "photo_reference": response.data.results[0].photos[0].photo_reference,
+//   "place_id": response.data.results[0].place_id,
+//   "rating": response.data.results[0].rating
+// }
+//   breweryDetails.push(details);
+//   // console.log(response.data.results[0].photos);
+//   });
+//   console.log("breweryDetails.length");
+//   console.log(breweryDetails.length);
+//   res.send({
+//     breweryDetails
+//   });
+// })
+// .catch(error => {
+//   console.log("Error returned from getBreweryData");
+//   console.log(error);
+// });
+
+// }
 
 
 //==============
