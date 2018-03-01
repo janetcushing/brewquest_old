@@ -24,8 +24,10 @@ const ResultsCard = props =>
                         {'Category: Brewery'}
                         <br/>
                         {/* {'Price: ' + result.price} */}
-                        {/* {'Total Reviews: ' + result.type} */}
-                        {'Address: ' + result.vicinity}
+                        {' Total Reviews: ' + result.numReviews }
+                        {/* {' Address: ' + result.fullAddress } */}
+                        {' Address: ' + result.vicinity }
+                        { result.phone }
                         {/* {'Open Now?: ' + (result.open_now ? 'Yes' : 'No')} */}
 
                         <CardActions>
