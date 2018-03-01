@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 const ResultsCard = props =>
+
     <Card>
         <CardTitle title="Results" />
         <CardText>
@@ -32,13 +33,12 @@ const ResultsCard = props =>
                         { result.phone }
                         { result.website }
                         {/* {'Open Now?: ' + (result.open_now ? 'Yes' : 'No')} */}
-
                         <CardActions>
                             <FlatButton
                                 // primary={true}
                                 // href={result.web_url}
                                 // target="_blank"
-                                onClick={(event) => props.handleSave(event)}
+                                onClick={(event) => props.handleBrewerySave(event)}
                                 value={result.details_key}
                                 label="Save to My List" />
                                  
