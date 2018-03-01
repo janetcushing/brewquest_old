@@ -13,7 +13,7 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Panel from "../components/Panel";
-import BrewerySummary from "../components/BrewerySummary";
+// import BrewerySummary from "../components/BrewerySummary";
 // import axios from "axios";
 // import API_db from "../utils/API_db";
 // import ArticleDetail from "./ArticleDetail";
@@ -21,6 +21,7 @@ import BrewerySummary from "../components/BrewerySummary";
 // import ApiSearch from "../utils/ApiSearch";
 // import API from "../utils/API";
 import axios from "axios";
+import ResultsCard from "../components/ResultsCard/ResultsCard";
 
 
 class Search extends Component {
@@ -186,37 +187,9 @@ class Search extends Component {
         <Container>
           <Row>
             <Col size="sm-12">
-              <Panel heading="RESULTS">
-              <div>
-                <ul className="list-group">
-                  {this.state.result.map(element =>
-                    <li className="list-group-item"
-                      key={element.details_key}>
-                      <BrewerySummary
-                      icon={element.icon}
-                        name={element.name}
-                        type={"Brewery"}
-                        rating={element.rating}  
-                        address={element.vicinity}
-                        open_now={element.open_now ? "Yes" : "No"}
-                      />
-                      <button id="saveBtn"
-                        onClick={this.handleSave}
-                        value={element.details_key}
-                        className="btn btn-primary" >
-                        Save
-                        </button>
-                        {/* <button id="moreInfo"
-                         onClick={this.handleMoreInfo}
-                        value={element.details_key}
-                        className="btn btn-primary" >
-                        More Info -->
-                        </button> */}
-                    </li>
-                  )}
-                </ul>
-              </div>
-              </Panel>
+              <ResultsCard
+              results={this.state.result}
+              />
             </Col>
           </Row>
         </Container>

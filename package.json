@@ -17,6 +17,7 @@
   "author": "Janet Cushing, James Roth, Lauren Wilson, Elizah Hulseman",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
