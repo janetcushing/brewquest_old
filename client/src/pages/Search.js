@@ -142,71 +142,51 @@ class Search extends Component {
 
 
   render() {
-    return ( <
-      div >
-      <
-      Container >
-      <
-      Row >
-      <
-      Col size = "sm-12" > { /* <AppbarRow /> */ } <
-      /Col> <
-      /Row> <
-      /Container> <
-      Container >
-      <
-      Row >
-      <
-      Col size = "sm-12" >
-      <
-      Panel >
-      <
-      div >
-      <
-      form className = "form" >
-      <
-      label htmlform = "search" > < /label> <
-      input value = {
-        this.state.searchLocation
-      }
-      name = "searchLocation"
-      onChange = {
-        this.handleInputChange
-      }
-      type = "text"
-      placeholder = "Current Location Zip Code" / >
-      <
-      button id = "searchLocationBtn"
-      onClick = {
-        this.handleFormSubmit
-      }
-      className = "btn btn-primary" >
-      SEARCH <
-      /button> <
-      /form> <
-      /div> <
-      /Panel> <
-      /Col> <
-      /Row> <
-      /Container>
-
-      <
-      Container >
-      <
-      Row >
-      <
-      Col size = "sm-12" >
-      <
-      ResultsCard results = {
-        this.state.result
-      }
-      /> <
-      /Col> <
-      /Row> <
-      /Container> <
-      /div>
-    );
+      return (
+        <div>
+          <Container>
+            <Row>
+              <Col size="sm-12">
+                {/* <AppbarRow /> */}
+              </Col>
+            </Row>
+          </Container>
+          <Container>
+            <Row>
+              <Col size="sm-12">
+                <Panel>
+                  <div>
+                    <form className="form" >
+                      <label htmlform="search" ></label>
+                      <input value={this.state.searchLocation}
+                        name="searchLocation"
+                        onChange={this.handleInputChange}
+                        type="text"
+                        placeholder="Current Location Zip Code" />
+                      <button id="searchLocationBtn"
+                        onClick={this.handleFormSubmit}
+                        className="btn btn-primary" >
+                        SEARCH
+                    </button>
+                    </form>
+                  </div>
+                </Panel>
+              </Col>
+            </Row>
+          </Container>
+  
+          <Container>
+            <Row>
+              <Col size="sm-12">
+                <ResultsCard
+                results={this.state.result}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      );
+    }
   }
-}
-
-export default Search;
+  
+    export default Search;
