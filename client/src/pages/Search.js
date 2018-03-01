@@ -198,6 +198,8 @@ class Search extends Component {
                         type={"Brewery"}
                         rating={element.rating}  
                         address={element.vicinity}
+                        stt={element.stt}
+                        zip={element.zip}
                         open_now={element.open_now ? "Yes" : "No"}
                       />
                       <button id="saveBtn"
