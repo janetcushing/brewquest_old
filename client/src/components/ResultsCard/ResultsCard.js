@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+// import Search from "../../pages/Search";
+
 
 const ResultsCard = props =>
     <Card>
@@ -24,8 +26,8 @@ const ResultsCard = props =>
                         {'Category: Brewery'}
                         <br/>
                         {/* {'Price: ' + result.price} */}
-                        {' Total Reviews: ' + result.numReviews }
-                        {' Address: ' + result.fullAddress }
+                        {' Total Reviews: ' + result.num_reviews }
+                        {' Address: ' + result.full_address }
                         {/* {' Address: ' + result.vicinity } */}
                         { result.phone }
                         { result.website }
@@ -36,7 +38,10 @@ const ResultsCard = props =>
                                 // primary={true}
                                 // href={result.web_url}
                                 // target="_blank"
+                                onClick={(event) => props.handleSave(event)}
+                                value={result.details_key}
                                 label="Save to My List" />
+                                 
 
                             <FlatButton
                                 // secondary={true}
