@@ -1,9 +1,7 @@
 import React from "react";
-import Navpills from "../components/Navpills";
 
 const Home = () =>
   <div>
-    <Navpills />
     <div>
       <h1>Home Page</h1>
       <p>
