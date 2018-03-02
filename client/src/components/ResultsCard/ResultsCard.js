@@ -18,7 +18,7 @@ const ResultsCard = props =>
                         avatar={result.icon}
                         actAsExpander={true}
                         showExpandableButton={true}
-                        title={result.name}
+                        title={result.brewery_name}
                         subtitle={'Rating: ' + result.rating} />
                         
 
@@ -26,19 +26,20 @@ const ResultsCard = props =>
 
                         {'Category: Brewery'}
                         <br/>
-                        {/* {'Price: ' + result.price} */}
+                        {'Price: ' + result.price_level}
                         {' Total Reviews: ' + result.num_reviews }
                         {' Address: ' + result.full_address }
                         {/* {' Address: ' + result.vicinity } */}
                         { result.phone }
                         { result.website }
+                        {result.details_key}
                         {/* {'Open Now?: ' + (result.open_now ? 'Yes' : 'No')} */}
                         <CardActions>
                             <FlatButton
                                 // primary={true}
                                 // href={result.web_url}
                                 // target="_blank"
-                                onClick={(event) => props.handleBrewerySave(event)}
+                                onClick={(event) => props.handleBrewerySave(event, result.details_key)}
                                 value={result.details_key}
                                 label="Save to My List" />
                                  

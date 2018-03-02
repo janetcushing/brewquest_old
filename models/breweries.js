@@ -8,7 +8,11 @@ const Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 
 const BreweriesSchema = new Schema({
-  name: {
+  brewery_id: {
+    type: String,
+    trim: true
+  },
+  brewery_name: {
     type: String,
     trim: true,
     required: "name is Required",
@@ -19,23 +23,23 @@ const BreweriesSchema = new Schema({
       "String should be longer."
     ]
   },
-  icon: {
-    type: String,
-    trim: true
-  },
-  rating: {
-    type: String,
-    trim: true
-  },
   full_address: {
     type: String,
     trim: true
   },
-  rating: {
+  icon: {
     type: String,
     trim: true
   },
-  phone: {
+  insertDate: {
+    type: Date,
+    default: Date.now
+  },
+  latitude: {
+    type: String,
+    trim: true
+  },
+  longitude: {
     type: String,
     trim: true
   },
@@ -43,23 +47,23 @@ const BreweriesSchema = new Schema({
     type: String,
     trim: true
   },
-  website: {
-    type: String,
-    trim: true
-  },
-  brewery_id: {
-    type: String,
-    trim: true
-  },
-  lat: {
-    type: String,
-    trim: true
-  },
-  lng: {
+  phone: {
     type: String,
     trim: true
   },
   place_id: {
+    type: String,
+    trim: true
+  },
+  price_level: {
+    type: String,
+    trim: true
+  },
+  rating: {
+    type: String,
+    trim: true
+  },
+  website: {
     type: String,
     trim: true
   }

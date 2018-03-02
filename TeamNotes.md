@@ -11,3 +11,7 @@ Here are the steps to run this app locally.
 4) cd .. and yarn install again
 
 5) enter the command 'yarn start' and it should start both the server and bring up the app on localhost:3000
+
+6) There is data to seed the database.  Run this command from the beer-quest directory:
+
+node scripts/seedDB.js

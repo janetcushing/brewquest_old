@@ -15,6 +15,6 @@ export default {
   // Saves an article to the database
   saveBrewery: function(breweryData) {
     console.log("im in saveBrewery");
-    return axios.post("/api/brewery", breweryData);
+    return axios.post("/api/brewery/" + breweryData.brewery_name, breweryData);
   }
 };
