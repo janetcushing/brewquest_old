@@ -180,6 +180,7 @@ class Search extends Component {
             <Col size="sm-12">
               <ResultsCard
                 results={this.state.result}
+                handleBrewerySave = {this.handleBrewerySave}
               />
             </Col>
           </Row>
