@@ -5,6 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
+import Login from "../Login";
 
 export default class Nav extends React.Component {
 
@@ -19,12 +20,14 @@ export default class Nav extends React.Component {
 
     render() {
         return (
-            <div>
 
+            <div>
                 <AppBar
                     showMenuIconButton={false}
                     iconElementRight={<IconButton onClick={this.handleToggle}><NavigationMenu /></IconButton>}
-                />
+                >
+                    <Login />
+                </AppBar>
                 <Drawer
                     openSecondary={true}
                     docked={false}

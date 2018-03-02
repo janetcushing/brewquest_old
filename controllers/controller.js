@@ -20,7 +20,7 @@ const Breweries = require("../models/breweries.js");
 //=================================================
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 const APIKEY2 = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
-const APIKEY = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
+const APIKEY = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
 const RANKBY = "&rankby=distance"
 const KEYWORD = "&keyword=brewery"
 const FORMAT = "&format=json";
