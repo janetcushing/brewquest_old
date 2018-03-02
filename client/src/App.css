@@ -22,6 +22,19 @@
   font-size: large;
 }
 
+/* Home Page Background Image */
+
+#home-page-background {
+  background-image: url("images/bar.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

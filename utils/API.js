@@ -13,5 +13,21 @@ export default {
   }
 };
 
-
-
+export default {
+  // Gets all books
+  getSavedPlaces: function() {
+    return axios.get("/api/savedplaces");
+  },
+  // Gets the book with the given id
+  getSavedPlace: function(id) {
+    return axios.get("/api/savedplaces/" + id);
+  },
+  // Deletes the book with the given id
+  deleteSavedPlace: function(id) {
+    return axios.delete("/api/savedplaces/" + id);
+  },
+  // Saves a book to the database
+  savePlace: function(savedPlacesData) {
+    return axios.post("/api/savedplaces", savedPlacesData);
+  }
+};

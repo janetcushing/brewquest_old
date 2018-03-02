@@ -5,7 +5,6 @@ import Col from "../components/Col";
 import Panel from "../components/Panel";
 import axios from "axios";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
-import Nav from "../components/Nav";
 import API_db from "../utils/API_db";
 
 
@@ -98,22 +97,24 @@ class Search extends Component {
 
 
   
-  handleBrewerySave = (event) => {
+  handleBrewerySave = (event, details_key) => {
     event.preventDefault();
-    console.log(`im in handleSave`);
-    console.log("value", event.target.value)
+    console.log(`im in handleBrewerySave`);
+    console.log("value", details_key);
+    // console.log("key", this.result.details_key);
     let detailsToSave = {
-      name: this.state.result[event.target.value].name,
-      brewery_id: this.state.result[event.target.value].brewery_id,
-      icon: this.state.result[event.target.value].icon,
-      lat: this.state.result[event.target.value].lat,
-      lng: this.state.result[event.target.value].lng,
-      place_id: this.state.result[event.target.value].place_id,
-      rating: this.state.result[event.target.value].rating,
-      full_address: this.state.result[event.target.value].full_address,
-      phone: this.state.result[event.target.value].phone,
-      num_reviews: this.state.result[event.target.value].num_reviews,
-      website: this.state.result[event.target.value].website
+      brewery_id: this.state.result[details_key].brewery_id,
+      brewery_name: this.state.result[details_key].brewery_name,
+      full_address: this.state.result[details_key].full_address,
+      icon: this.state.result[details_key].icon,
+      latitude: this.state.result[details_key].lat,
+      longitude: this.state.result[details_key].lng,
+      num_reviews: this.state.result[details_key].num_reviews,
+      phone: this.state.result[details_key].phone,
+      place_id: this.state.result[details_key].place_id,
+      price_level:  this.state.result[details_key].price_level,
+      rating: this.state.result[details_key].rating,
+      website: this.state.result[details_key].website
     }
     console.log(detailsToSave);
     API_db.saveBrewery(detailsToSave);
@@ -145,7 +146,6 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <Nav />
         <Container>
           <Row>
             <Col size="sm-12">
