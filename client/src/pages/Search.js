@@ -5,6 +5,7 @@ import Col from "../components/Col";
 import Panel from "../components/Panel";
 import axios from "axios";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
+import Nav from "../components/Nav";
 import API_db from "../utils/API_db";
 
 
@@ -144,6 +145,7 @@ class Search extends Component {
   render() {
     return (
       <div>
+        <Nav />
         <Container>
           <Row>
             <Col size="sm-12">
@@ -181,6 +183,7 @@ class Search extends Component {
               <ResultsCard
                 results={this.state.result}
                 handleBrewerySave = {this.handleBrewerySave}
+
               />
             </Col>
           </Row>
