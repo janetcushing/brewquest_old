@@ -22,6 +22,7 @@ import Panel from "../components/Panel";
 // import API from "../utils/API";
 import axios from "axios";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
+import Nav from "../components/Nav";
 
 
 class Search extends Component {
@@ -153,6 +154,7 @@ class Search extends Component {
   render() {
     return (
       <div>
+        <Nav />
         <Container>
           <Row>
             <Col size="sm-12">
@@ -188,7 +190,7 @@ class Search extends Component {
           <Row>
             <Col size="sm-12">
               <ResultsCard
-              results={this.state.result}
+                results={this.state.result}
               />
             </Col>
           </Row>
