@@ -19,8 +19,10 @@ const Breweries = require("../models/breweries.js");
 // global variables
 //=================================================
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-const APIKEY2 = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
-const APIKEY = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
+
+const APIKEY = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
+const APIKEY1 = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+const APIKEY2 = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
 const RANKBY = "&rankby=distance"
 const KEYWORD = "&keyword=brewery"
 const FORMAT = "&format=json";
@@ -106,6 +108,7 @@ getPlacesDetailApiData = (breweryDetails, res) => {
   console.log("Im in getPlacesDetailApiData");
   for (let ii = 0; ii < breweryDetails.length; ii++) {
     let place = "&place_id=" + breweryDetails[ii].place_id;
+    console.log(DETAILURL + APIKEY + place);
     axios
       .get(DETAILURL + APIKEY + place)
       .then(detailResponse => {
