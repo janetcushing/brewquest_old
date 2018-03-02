@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import SearchField from "../components/SearchField";
 
+
+
+
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 
@@ -15,6 +19,8 @@ class Home extends Component {
       open: false,
     };
   }
+
+  
 
   handleRequestClose() {
     this.setState({
@@ -31,6 +37,7 @@ class Home extends Component {
   render() {
 
     return (
+     
       <div>
         <div>
           <SearchField />

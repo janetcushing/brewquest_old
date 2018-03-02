@@ -20,9 +20,9 @@ const Breweries = require("../models/breweries.js");
 //=================================================
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
-const APIKEY1 = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
-const APIKEY = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
-const APIKEY2 = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
+const APIKEY = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
+const APIKEY2 = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+const APIKEY1 = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
 const RANKBY = "&rankby=distance"
 const KEYWORD = "&keyword=brewery"
 const FORMAT = "&format=json";
@@ -47,7 +47,6 @@ getBreweryData = (req, res) => {
   geocoder.geocode(loc)
     .then(function (locResponse) {
       let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
-      console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
       //second step, call the google places api
       getPlacesApiData(locn, res);
     }).catch(function (err) {
@@ -88,7 +87,7 @@ getPlacesApiData = (locn, res) => {
           "website": "website"
         } //end of details json object
         breweryDetails.push(details);
-        console.log(breweryDetails);
+        // console.log(breweryDetails);
       });
       //third step call the google places detail api
       getPlacesDetailApiData(breweryDetails, res);
@@ -127,10 +126,11 @@ getPlacesDetailApiData = (breweryDetails, res) => {
         console.log(detailResponse.status);
         breweryDetails[ii].full_address = detailResponse.data.result.formatted_address;
         breweryDetails[ii].phone = detailResponse.data.result.formatted_phone_number;
-        breweryDetails[ii].price_level = detailResponse.data.result.price_level;
+        // breweryDetails[ii].price_level = detailResponse.data.result.price_level;
         breweryDetails[ii].num_reviews = detailResponse.data.result.reviews.length;
         breweryDetails[ii].website = detailResponse.data.result.website;
         console.log("1");
+        console.log(breweryDetails[ii]);
         if (ii == breweryDetails.length - 1) {
           res.send({
             breweryDetails
