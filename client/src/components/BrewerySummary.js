@@ -4,7 +4,7 @@ import React from "react";
 const BrewerySummary = props => (
   <div>
     <div className="text-left">
-      <span><img src={props.icon}></img><h4>{props.name}</h4></span>
+      <span><img src={props.icon} alt="icon img"></img><h4>{props.name}</h4></span>
         <p>Rating: {props.rating}</p>
         <p>Category: {props.type}</p>
         <p>Price: {props.price}</p>
@@ -12,7 +12,8 @@ const BrewerySummary = props => (
         <p>Open Now: {props.open_now}</p>
     </div>
       <div className="text-right">
-        <p>{props.address}</p>
+        <p>{props.address} {props.stt}</p>
+        <p>{props.zip}</p>
       </div>
     </div>
     );
