@@ -1,22 +1,64 @@
-import React from "react";
+import React, { Component } from "react";
+import SearchField from "../components/SearchField";
 
-const Home = () =>
-  <div>
-    <div>
-      <h1>Home Page</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque velit,
-        lobortis ut magna varius, blandit rhoncus sem. Morbi lacinia nisi ac dui
-        fermentum, sed luctus urna tincidunt. Etiam ut feugiat ex. Cras non risus
-        mi. Curabitur mattis rutrum ipsum, ut aliquet urna imperdiet ac. Sed nec
-        nulla aliquam, bibendum odio eget, vestibulum tortor. Cras rutrum ligula
-        in tincidunt commodo. Morbi amet mollis orci, in tristique ex. Donec
-        nec ornare elit. Donec blandit est sed risus feugiat porttitor. Vestibulum
-        molestie hendrerit massa non consequat. Vestibulum vitae lorem tortor. In
-        elementum ultricies tempus. Interdum et malesuada fames ac ante ipsum
-        primis in faucibus.
-    </p>
-    </div>
-  </div>;
+
+
+
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+
+
+class Home extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.handleTouchTap = this.handleTouchTap.bind(this);
+    this.state = {
+      open: false,
+    };
+  }
+
+  
+
+  handleRequestClose() {
+    this.setState({
+      open: false,
+    });
+  }
+
+  handleTouchTap() {
+    this.setState({
+      open: true,
+    });
+  }
+
+  render() {
+
+    return (
+     
+      <div>
+        <div>
+          <SearchField />
+        </div>
+        <div>
+          <h2>Find Beer</h2>
+          <p>Search for places you can go to get a really good beer!</p>
+        </div>
+        <div>
+          <h2>Save Places</h2>
+          <p>Save places you want to check out to your saved list!</p>
+        </div>
+        <div>
+          <h2>Rate Places</h2>
+          <p>Rate the places you visit and see others' reviews.</p>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Home;
+
+
