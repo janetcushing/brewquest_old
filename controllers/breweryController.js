@@ -18,10 +18,10 @@ const Breweries = require("../models/breweries.js");
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
-// const APIKEY = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
+const APIKEY3 = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
 const APIKEY = "key=AIzaSyAl8-KwRAZXg-L9F_Quj7tU_z940kny4Z4";
 const APIKEY2 = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
-// const APIKEY1 = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
+const APIKEY4 = "key=AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ";
 // const APIKEY3 = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
 const RANKBY = "&rankby=distance"
 const KEYWORD = "&keyword=brewery"
@@ -48,8 +48,7 @@ const getPlacesApiData = (locn, res) => {
     .then(response => JSON.parse(response))
     .then(body => {
       console.log(`came back successfully`);
-      // console.log(body);
-      // console.log(response.html_attributions);
+      console.log(body);
       // console.log(response.next_page_token);
       // console.log(body.results[0]);
       body.results.forEach(function (element, i) {
@@ -146,6 +145,7 @@ module.exports = {
     loc = req.params.location;
     geocoder.geocode(loc)
       .then(function (locResponse) {
+        console.log(locResponse);
         let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
         //second step, call the google places api
         getPlacesApiData(locn, res);
