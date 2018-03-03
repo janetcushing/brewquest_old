@@ -58,30 +58,30 @@ class Search extends Component {
 
 
   
-  // handleBrewerySave = (event, details_key) => {
-  //   event.preventDefault();
-  //   console.log(`im in handleBrewerySave`);
-  //   console.log("value", details_key);
-  //   // console.log("key", this.result.details_key);
-  //   let detailsToSave = {
-  //     brewery_id: this.state.result[details_key].brewery_id,
-  //     brewery_name: this.state.result[details_key].brewery_name,
-  //     full_address: this.state.result[details_key].full_address,
-  //     icon: this.state.result[details_key].icon,
-  //     latitude: this.state.result[details_key].lat,
-  //     longitude: this.state.result[details_key].lng,
-  //     num_reviews: this.state.result[details_key].num_reviews,
-  //     phone: this.state.result[details_key].phone,
-  //     place_id: this.state.result[details_key].place_id,
-  //     price_level:  this.state.result[details_key].price_level,
-  //     rating: this.state.result[details_key].rating,
-  //     website: this.state.result[details_key].website
-  //   }
-  //   console.log(detailsToSave);
-  //   API_db.saveBrewery(detailsToSave);
-  //   console.log("savedResult");
-  //   // this.loadSavedArticles();
-  // };
+  handleBrewerySave = (event, details_key) => {
+    event.preventDefault();
+    console.log(`im in handleBrewerySave`);
+    console.log("value", details_key);
+    // console.log("key", this.result.details_key);
+    let detailsToSave = {
+      brewery_id: this.state.result[details_key].brewery_id,
+      brewery_name: this.state.result[details_key].brewery_name,
+      full_address: this.state.result[details_key].full_address,
+      icon: this.state.result[details_key].icon,
+      latitude: this.state.result[details_key].lat,
+      longitude: this.state.result[details_key].lng,
+      num_reviews: this.state.result[details_key].num_reviews,
+      phone: this.state.result[details_key].phone,
+      place_id: this.state.result[details_key].place_id,
+      price_level:  this.state.result[details_key].price_level,
+      rating: this.state.result[details_key].rating,
+      website: this.state.result[details_key].website
+    }
+    console.log(detailsToSave);
+    API_db.saveBrewery(detailsToSave);
+    console.log("savedResult");
+    // this.loadSavedArticles();
+  };
 
 
   // removeFromResult = (i) => {
