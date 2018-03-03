@@ -29,11 +29,51 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  height: 100vh;
+  height: 85vh;
   display: flex;
   align-items: center;
   margin: 0px;
 }
+
+/* Home Page Background Text and Search Field Styling */
+
+#title-div {
+  float: right;
+}
+
+#search-field-div {
+  float: right;
+}
+
+#beer-text {
+  font-size: 30px;
+  color: white;
+}
+
+#find-beer-home {
+  float: left;
+  width: 33.4%;
+  background-color: #424242;
+  text-align: center;
+  color: #FAFAFA;
+}
+
+#save-places-home {
+  float: left;
+  width: 33.3%;
+  background-color: #FAFAFA;
+  text-align: center;
+  color: #424242;
+}
+
+#rate-places-home {
+  float: left;
+  width: 33.3%;
+  background-color: #424242;
+  text-align: center;
+  color: #FAFAFA;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
