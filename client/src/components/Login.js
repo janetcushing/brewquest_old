@@ -1,8 +1,14 @@
 import React from 'react';
 import Tabs from "../components/Tabs";
-import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import {grey50} from 'material-ui/styles/colors';
+
+const styles = {
+    labelStyle: {
+      color: grey50,
+    }
+  };
 
   
   class Login extends React.Component {
@@ -48,10 +54,10 @@ import Dialog from 'material-ui/Dialog';
               onRequestClose={this.handleRequestClose}
             >
             </Dialog>
-            <RaisedButton
+            <FlatButton
               label="Login"
-              secondary={true}
               onTouchTap={this.handleTouchTap}
+              labelStyle={styles.labelStyle}
             />
           </div>
       );
