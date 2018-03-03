@@ -5,6 +5,7 @@ import Col from "../components/Col";
 import Panel from "../components/Panel";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
 import API from "../utils/API";
+import API_db from "../utils/API_db";
 
 
 class Search extends Component {
