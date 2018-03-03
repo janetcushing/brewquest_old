@@ -3,7 +3,8 @@ const bodyParser = require("body-parser");
 var path = require("path");
 const mongoose = require("mongoose");
 // const routes = require("./routes");
-const routes = require("./routes/routes");
+const routes = require("./routes");
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -11,14 +12,22 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Serve up static assets
-app.use(express.static("client/build"));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
+
+// app.get("*", function(req, res){
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
+
 // Add routes, both API and view
 app.use(routes);
 
 // Set up mongoose access to mongoDB database
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/beerquest",{});
+  process.env.MONGODB_URI || "mongodb://localhost/beerquest",
+  {});
 
 // Start the API server
 app.listen(PORT, function() {
