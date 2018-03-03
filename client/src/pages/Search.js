@@ -144,6 +144,7 @@ class Search extends Component {
 
 
   render() {
+
     return (
       <div>
         <Container>
@@ -183,7 +184,7 @@ class Search extends Component {
               <ResultsCard
                 results={this.state.result}
                 handleBrewerySave = {this.handleBrewerySave}
-
+                
               />
             </Col>
           </Row>
