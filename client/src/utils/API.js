@@ -21,6 +21,10 @@ export default {
     console.log("im in search on the client side");
     console.log(BASEURL + APIKEY + FORMAT + POSTAL + query);
     return axios.fetch(BASEURL + APIKEY + FORMAT + POSTAL + query);
+  },
+  getPlaces: function(query) {
+    console.log("query: " + query);
+   return axios.get("/api/findbrewery/" + query)
   }
 };
 
