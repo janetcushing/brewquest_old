@@ -4,9 +4,9 @@ import React from "react";
 export const SavedList = ({ children }) => {
   return (
     <div>
-      <ul>
+      <p>
         {children}
-      </ul>
+      </p>
     </div>
   );
 };
