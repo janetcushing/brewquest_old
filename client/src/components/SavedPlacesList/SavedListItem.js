@@ -1,6 +1,6 @@
 import React from "react";
 
 export const SavedListItem = props =>
-  <li>
+  <p>
     {props.children}
-  </li>;
+  </p>;
