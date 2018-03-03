@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import SavedPlaces from "./pages/SavedPlaces";
 // import Dropdown from "./components/Dropdown";
 
 
@@ -19,6 +20,7 @@ const App = () =>
         <Nav />
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />
+        <Route exact path="/savedplaces" component={SavedPlaces} />
       </div>
     </Router>
   </MuiThemeProvider>;
