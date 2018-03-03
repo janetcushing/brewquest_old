@@ -6,6 +6,16 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import Login from "../Login";
+import { grey50, grey800 } from 'material-ui/styles/colors';
+
+const styles = {
+    style: {
+        background: grey800,
+    }, 
+    iconStyle: {
+        iconStyle: grey50,
+    }
+};
 
 export default class Nav extends React.Component {
 
@@ -23,10 +33,17 @@ export default class Nav extends React.Component {
 
             <div>
                 <AppBar
-                    showMenuIconButton={false}
-                    iconElementRight={<IconButton onClick={this.handleToggle}><NavigationMenu /></IconButton>}
+                    title={<span style={styles.title}>Brew Quest</span>}
+                    style={styles.style}
+                    // showMenuIconButton={false}
+                    iconElementLeft={<IconButton><img src="../../../images/logo.png"/></IconButton>}
+                    iconElementRight={
+                        <div>
+                            <Login />
+                            <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
+                        </div>
+                    }
                 >
-                    <Login />
                 </AppBar>
                 <Drawer
                     openSecondary={true}
@@ -38,9 +55,8 @@ export default class Nav extends React.Component {
                     <Link to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Places</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link>
-                    <Link to="/savedplaces"><MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem></Link>
+                    <MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem>
                     <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-
                 </Drawer>
             </div>
         );
