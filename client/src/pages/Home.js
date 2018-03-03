@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import SearchField from "../components/SearchField";
-
-
-
-
+import "../App.css";
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -20,8 +17,6 @@ class Home extends Component {
     };
   }
 
-  
-
   handleRequestClose() {
     this.setState({
       open: false,
@@ -37,22 +32,29 @@ class Home extends Component {
   render() {
 
     return (
-     
+
       <div>
-        <div>
-          <SearchField />
+        <div id="home-page-background">
+          <div id="title-div">
+            <h2 id="beer-text">Where can I find a really good beer?</h2>
+          </div>
+          <div id="search-field-div">
+            <SearchField/>
+          </div>
         </div>
-        <div>
-          <h2>Find Beer</h2>
-          <p>Search for places you can go to get a really good beer!</p>
-        </div>
-        <div>
-          <h2>Save Places</h2>
-          <p>Save places you want to check out to your saved list!</p>
-        </div>
-        <div>
-          <h2>Rate Places</h2>
-          <p>Rate the places you visit and see others' reviews.</p>
+        <div id="secondary-info">
+          <div id="find-beer-home">
+            <h2>Find Beer</h2>
+            <p>Search for places you can go to get a really good beer!</p>
+          </div>
+          <div id="save-places-home">
+            <h2>Save Places</h2>
+            <p>Save places you want to check out to your saved list!</p>
+          </div>
+          <div id="rate-places-home">
+            <h2>Rate Places</h2>
+            <p>Rate the places you visit and see others' reviews.</p>
+          </div>
         </div>
       </div>
     );
