@@ -5,7 +5,7 @@ import Col from "../components/Col";
 import Panel from "../components/Panel";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
 import API from "../utils/API";
-import API_db from "../utils/API_db";
+// import API_db from "../utils/API_db";
 
 
 class Search extends Component {
@@ -20,11 +20,11 @@ class Search extends Component {
 
   searchPlaces = query => {
     console.log("Im in searchPlaces");
-    console.log("/places/" + query);
-    
+    console.log("/api/findbrewery/" + query);
+ 
     API.getPlaces(query)
       .then(res => {
-        if (res.data === "locaton error") {
+        if (res.data === "location error from geocoder.geocode") {
           alert("Please enter a valid location");
         } else {
           this.setState({
@@ -79,7 +79,7 @@ class Search extends Component {
       website: this.state.result[details_key].website
     }
     console.log(detailsToSave);
-    API_db.saveBrewery(detailsToSave);
+    API.saveBrewery(detailsToSave);
     console.log("savedResult");
     // this.loadSavedArticles();
   };
