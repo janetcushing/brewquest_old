@@ -17,19 +17,19 @@ export default {
   savePlace: function(savedPlacesData) {
     return axios.post("/api/savedplaces", savedPlacesData);
   },
-  search: function(query) {
-    console.log("im in search on the client side");
-    console.log(BASEURL + APIKEY + FORMAT + POSTAL + query);
-    return axios.fetch(BASEURL + APIKEY + FORMAT + POSTAL + query);
-  },
+  // search: function(query) {
+  //   console.log("im in search on the client side");
+  //   console.log(BASEURL + APIKEY + FORMAT + POSTAL + query);
+  //   return axios.fetch(BASEURL + APIKEY + FORMAT + POSTAL + query);
+  // },
   getPlaces: function(query) {
     console.log("query: " + query);
    return axios.get("/api/findbrewery/" + query)
+  },
+  // Saves a brewery to the database
+  saveBrewery: function(breweryData) {
+    console.log("im in saveBrewery on the client side");
+    return axios.post("/api/savebrewery/" + breweryData.brewery_name, breweryData);
   }
 };
 
-
-const BASEURL = "http://api.brewerydb.com/v2/locations?";
-const APIKEY  = "key=32c6dc015d7cf847c9bd1c05f34160ee";
-const FORMAT  = "&format=json";
-const POSTAL  = "&postalCode="
