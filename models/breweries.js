@@ -66,6 +66,11 @@ const BreweriesSchema = new Schema({
   website: {
     type: String,
     trim: true
+  },
+  been_there: {
+    type: Boolean,
+    trim: true,
+    default: false
   }
 });
 
