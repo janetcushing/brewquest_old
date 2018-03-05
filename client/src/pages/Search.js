@@ -3,9 +3,9 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import Panel from "../components/Panel";
-import axios from "axios";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
-import API_db from "../utils/API_db";
+import API from "../utils/API";
+// import API_db from "../utils/API_db";
 
 
 class Search extends Component {
@@ -17,54 +17,16 @@ class Search extends Component {
   };
 
 
-  //  When this component mounts, get the saved articles to display
-  componentDidMount() {
-    console.log("in component did mount", this.state);
-    this.loadSavedPlaces();
-  }
-
-  loadSavedPlaces = () => {
-    console.log("in loadSavedPubs");
-    console.log("state: ", this.state);
-    // API_db.getSavedArticles()
-    //   .then(result => {
-    //     console.log("im about to display result");
-    //     console.log(result.data[0]);
-    //     console.log("state: ", this.state);
-    //     const savedDetailsArray = [];
-    //     result.data.forEach(function (element, i) {
-    //       let details = {
-    //         "details_key": i,
-    //         "id": element._id,
-    //         "title": element.title,
-    //         "web_url": element.web_url,
-    //         "pub_date": element.date_published,
-    //         "snippet": element.snippet
-    //       }
-    //       savedDetailsArray.push(details);
-    //       console.log("savedDetailsArray.length");
-    //       console.log(savedDetailsArray.length);
-    //     });
-    //   this.setState({
-    //     saved: savedDetailsArray
-    //   });
-    // }).catch(err => {
-    //   console.log(`Caught an error in loadSavedArticles: ${err}`);
-    // });
-  }
-
 
   searchPlaces = query => {
     console.log("Im in searchPlaces");
-    console.log("/api/places/" + query);
-    axios.get("/api/places/" + query)
+    console.log("/api/findbrewery/" + query);
+ 
+    API.getPlaces(query)
       .then(res => {
-        if (res.data === "locaton error") {
+        if (res.data === "location error from geocoder.geocode") {
           alert("Please enter a valid location");
         } else {
-          console.log("im back from getting the api data");
-          console.log(res);
-          console.log(res.data.breweryDetails);
           this.setState({
             result: res.data.breweryDetails
           });
@@ -117,7 +79,7 @@ class Search extends Component {
       website: this.state.result[details_key].website
     }
     console.log(detailsToSave);
-    API_db.saveBrewery(detailsToSave);
+    API.saveBrewery(detailsToSave);
     console.log("savedResult");
     // this.loadSavedArticles();
   };
@@ -184,7 +146,6 @@ class Search extends Component {
               <ResultsCard
                 results={this.state.result}
                 handleBrewerySave = {this.handleBrewerySave}
-                
               />
             </Col>
           </Row>

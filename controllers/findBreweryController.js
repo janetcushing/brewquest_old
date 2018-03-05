@@ -4,10 +4,8 @@
 const Express = require("express");
 const request = require("request");
 const rp = require("request-promise");
-const mongojs = require("mongojs");
 const router = Express.Router();
 const path = require("path");
-const axios = require("axios");
 const NodeGeocoder = require('node-geocoder');
 
 const Breweries = require("../models/breweries.js");
@@ -18,23 +16,23 @@ const Breweries = require("../models/breweries.js");
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
-// const APIKEY = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
-const APIKEY = "key=AIzaSyAl8-KwRAZXg-L9F_Quj7tU_z940kny4Z4";
+const APIKEY1 = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
+const APIKEY4 = "key=AIzaSyAl8-KwRAZXg-L9F_Quj7tU_z940kny4Z4";
 const APIKEY2 = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
-// const APIKEY1 = "key=AIzaSyA7t69YFqsUbFeIvgtZxcCSHMoZxO0ZYDs";
-// const APIKEY3 = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
+const APIKEY3 = "key=AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ";
+const APIKEY = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
 const RANKBY = "&rankby=distance"
 const KEYWORD = "&keyword=brewery"
 const FORMAT = "&format=json";
 const LOCATION = "&location="
 
-const options = {
+const OPTIONS = {
   provider: 'google',
   httpAdapter: 'https',
   apiKey: 'AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ',
   formatter: null
 };
-const geocoder = NodeGeocoder(options);
+const GEOCODER = NodeGeocoder(OPTIONS);
 const breweryDetails = [];
 
 //---------------------------------------------------------- 
@@ -49,7 +47,6 @@ const getPlacesApiData = (locn, res) => {
     .then(body => {
       console.log(`came back successfully`);
       // console.log(body);
-      // console.log(response.html_attributions);
       // console.log(response.next_page_token);
       // console.log(body.results[0]);
       body.results.forEach(function (element, i) {
@@ -72,7 +69,7 @@ const getPlacesApiData = (locn, res) => {
           "website": "website"  
         } //end of details json object
         breweryDetails.push(details);
-        console.log(breweryDetails);
+        // console.log(breweryDetails);
       });
       // //third step call the google places detail api
       getPlacesDetailApiData(breweryDetails, res);
@@ -115,7 +112,7 @@ const getPlacesDetailApiData = (breweryDetails, res) => {
         breweryDetails[ii].num_reviews = detailBody.result.reviews.length;
         breweryDetails[ii].website = detailBody.result.website;
         console.log("1");
-        console.log(breweryDetails[ii]);
+        // console.log(breweryDetails[ii]);
         if (ii == breweryDetails.length - 1) {
           res.send({
             breweryDetails
@@ -144,43 +141,44 @@ module.exports = {
     console.log("Im in getBreweryData");
     //first step, translate the search location to longitude and latitude
     loc = req.params.location;
-    geocoder.geocode(loc)
+    GEOCODER.geocode(loc)
       .then(function (locResponse) {
+        console.log(locResponse);
         let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
         //second step, call the google places api
         getPlacesApiData(locn, res);
       }).catch(function (err) {
         console.log(err);
-        res.send("location error");
+        res.send("location error from geocoder.geocode");
       });
   },
 
 
 
-  insertNewBreweryIntoDatabase: (req, res) => {
-    console.log("Im in insertNewBreweryIntoDatabase");
-    console.log(req.body);
-    let currentBrewery = {
-      brewery_id: req.body.brewery_id,
-      brewery_name: req.body.brewery_name,
-      full_address: req.body.full_address,
-      icon: req.body.icon,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-      num_reviews: req.body.num_reviews,
-      phone: req.body.phone,
-      place_id: req.body.place_id,
-      price_level: req.body.price_level,
-      rating: req.body.rating,
-      website: req.body.website
-    };
-    Breweries.create(currentBrewery, function (err, data) {
-      if (err) {
-        console.log(`There was a DB error from insertNewBreweryIntoDatabase: ${err} `);
-        res.status(500).end();
-      } else {
-        res.send("success");
-      }
-    });
-  }
+  // insertNewBreweryIntoDatabase: (req, res) => {
+  //   console.log("Im in insertNewBreweryIntoDatabase");
+  //   console.log(req.body);
+  //   let currentBrewery = {
+  //     brewery_id: req.body.brewery_id,
+  //     brewery_name: req.body.brewery_name,
+  //     full_address: req.body.full_address,
+  //     icon: req.body.icon,
+  //     latitude: req.body.latitude,
+  //     longitude: req.body.longitude,
+  //     num_reviews: req.body.num_reviews,
+  //     phone: req.body.phone,
+  //     place_id: req.body.place_id,
+  //     price_level: req.body.price_level,
+  //     rating: req.body.rating,
+  //     website: req.body.website
+  //   };
+  //   Breweries.create(currentBrewery, function (err, data) {
+  //     if (err) {
+  //       console.log(`There was a DB error from insertNewBreweryIntoDatabase: ${err} `);
+  //       res.status(500).end();
+  //     } else {
+  //       res.send("success");
+  //     }
+  //   });
+  // }
 }
