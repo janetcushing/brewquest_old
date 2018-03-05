@@ -10,12 +10,32 @@ class Home extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleRequestClose = this.handleRequestClose.bind(this);
-    this.handleTouchTap = this.handleTouchTap.bind(this);
     this.state = {
       open: false,
+      searchLocation: ""
     };
+
+    this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.handleTouchTap = this.handleTouchTap.bind(this);
   }
+
+  handleSearchLocationChange = event => {
+    this.setState({ searchLocation: event.target.value });
+  };
+
+  handleFormSubmit = event => {
+    // console.log("im in handleFormSubmit");
+    // event.preventDefault();
+    // if (!this.state.searchLocation) {
+    //   alert("Please add search criteria");
+    // }
+    // console.log(this.state.searchLocation);
+    // this.setState({
+    //   searchLocation: this.state.searchLocation
+    // });
+    // console.log("I just set the state");
+    // this.searchPlaces(this.state.searchLocation);
+  };
 
   handleRequestClose() {
     this.setState({
@@ -39,7 +59,10 @@ class Home extends Component {
             <h2 id="beer-text">Where can I find a really good beer?</h2>
           </div>
           <div id="search-field-div">
-            <SearchField/>
+            <SearchField
+              handleSearchLocationChange={this.handleSearchLocationChange}
+              handleFormSubmit={this.handleFormSubmit}
+              searchLocation={this.state.searchLocation} />
           </div>
         </div>
         <div id="secondary-info">

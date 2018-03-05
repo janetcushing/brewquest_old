@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
-import Panel from "../components/Panel";
+import SearchField from "../components/SearchField";
 import ResultsCard from "../components/ResultsCard/ResultsCard";
 import API from "../utils/API";
 // import API_db from "../utils/API_db";
@@ -10,18 +10,36 @@ import API from "../utils/API";
 
 class Search extends Component {
   // Setting the component's initial state
-  state = {
-    searchLocation: "",
-    result: [],
-    saved: []
-  };
+  constructor(props, context) {
+    super(props, context);
 
+    this.state = {
+      searchLocation: "",
+      result: [],
+      saved: []
+    };
+  }
 
+  componentWillMount() {
+    if (this.props.location.state) {
+
+      this.setState({ searchLocation: this.props.location.state.searchLocation });
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.location.state) {
+
+      console.log("current state: " + this.state.searchLocation);
+
+      this.searchPlaces(this.state.searchLocation);
+    }
+  }
 
   searchPlaces = query => {
     console.log("Im in searchPlaces");
     console.log("/api/findbrewery/" + query);
- 
+
     API.getPlaces(query)
       .then(res => {
         if (res.data === "location error from geocoder.geocode") {
@@ -36,29 +54,26 @@ class Search extends Component {
   };
 
 
-  handleInputChange = event => {
-    const {name,value} = event.target;
-    this.setState({
-      [name]: value
-    });
+  handleSearchLocationChange = event => {
+    this.setState({ searchLocation: event.target.value });
   };
 
   handleFormSubmit = event => {
-    console.log("im in handleFormSubmit");
     event.preventDefault();
     if (!this.state.searchLocation) {
+
       alert("Please add search criteria");
+
+    } else {
+
+      console.log(this.state.searchLocation);
+      this.searchPlaces(this.state.searchLocation);
+
     }
-    console.log(this.state.searchLocation);
-    this.setState({
-      searchLocation: this.state.searchLocation
-    });
-    console.log("I just set the state");
-    this.searchPlaces(this.state.searchLocation);
   };
 
 
-  
+
   handleBrewerySave = (event, details_key) => {
     event.preventDefault();
     console.log(`im in handleBrewerySave`);
@@ -74,7 +89,7 @@ class Search extends Component {
       num_reviews: this.state.result[details_key].num_reviews,
       phone: this.state.result[details_key].phone,
       place_id: this.state.result[details_key].place_id,
-      price_level:  this.state.result[details_key].price_level,
+      price_level: this.state.result[details_key].price_level,
       rating: this.state.result[details_key].rating,
       website: this.state.result[details_key].website
     }
@@ -119,23 +134,11 @@ class Search extends Component {
         <Container>
           <Row>
             <Col size="sm-12">
-              <Panel>
-                <div>
-                  <form className="form" >
-                    <label htmlform="search" ></label>
-                    <input value={this.state.searchLocation}
-                      name="searchLocation"
-                      onChange={this.handleInputChange}
-                      type="text"
-                      placeholder="Current Location Zip Code" />
-                    <button id="searchLocationBtn"
-                      onClick={this.handleFormSubmit}
-                      className="btn btn-primary" >
-                      SEARCH
-                    </button>
-                  </form>
-                </div>
-              </Panel>
+              <SearchField
+                handleSearchLocationChange={this.handleSearchLocationChange}
+                handleFormSubmit={this.handleFormSubmit}
+                searchLocation={this.state.searchLocation}
+              />
             </Col>
           </Row>
         </Container>
@@ -145,7 +148,7 @@ class Search extends Component {
             <Col size="sm-12">
               <ResultsCard
                 results={this.state.result}
-                handleBrewerySave = {this.handleBrewerySave}
+                handleBrewerySave={this.handleBrewerySave}
               />
             </Col>
           </Row>
