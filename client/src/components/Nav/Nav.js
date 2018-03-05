@@ -55,7 +55,7 @@ export default class Nav extends React.Component {
                     <Link to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Places</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link>
-                    <MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem>
+                    <Link to="/savedplaces"><MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem></Link>
                     <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                 </Drawer>
             </div>
