@@ -7,6 +7,7 @@ import API from "../utils/API";
 // import { Link } from "react-router-dom";
 import { SavedListItem, SavedList } from "../components/SavedPlacesList";
 import Clear from 'material-ui/svg-icons/content/clear';
+import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 
 
 class SavedPlaces extends Component {
@@ -49,10 +50,15 @@ class SavedPlaces extends Component {
             <SavedList>
               {this.state.results.map(result => {
                   return (
+                    <Card>
                     <SavedListItem key={result._id}>
-                    <a href={result.website}>{result.brewery_name}</a>
+                    <CardTitle title={result.brewery_name} subtitle={result.full_address}/>
+                    {/* <a href={result.website}>{result.brewery_name}</a> */}
+                      <CardActions>
                       <Clear onClick={() => this.deletePlace(result._id)}/>
+                        </CardActions>
                     </SavedListItem>
+                    </Card>
                   );
                 })}
              </SavedList>

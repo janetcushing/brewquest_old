@@ -19,7 +19,8 @@ const brewerySeed = [
     "place_id" : "ChIJ1dtdktu_4okRsOc0QyQ4OXY",
     "price_level": "1",
     "rating" : "4.2",
-    "website" : "http://redhook.com/"
+    "website" : "http://redhook.com/",
+    "been_there" : "true"
 },
 {
   "brewery_id" : "01daf25ee9bc3663b541d7f7827d80f968e20a4a",
@@ -31,7 +32,8 @@ const brewerySeed = [
   "place_id" : "ChIJDUFu746V4okRFJuVwzAg4jQ",
   "price_level": "2",
   "rating" : "4.7",
-  "website" : "http://www.stonefacebrewing.com/"
+  "website" : "http://www.stonefacebrewing.com/",
+  "been_there" : "false"
 },
 {
   "brewery_id" : "2b9d174fdfa8a36695ef8d1b462dab5d51a9b284",
@@ -42,7 +44,8 @@ const brewerySeed = [
   "place_id" : "ChIJZcrytpq_4okRSp5MHNImhV4",
   "price_level": "3",
   "rating" : "3",
-  "website" : "https://www.loadedquestionbrewing.com/"
+  "website" : "https://www.loadedquestionbrewing.com/",
+  "been_there" : "false"
 }
 ];
 

@@ -1,7 +1,14 @@
 {
+<<<<<<< HEAD
+  "main.css": "static/css/main.65027555.css",
+  "main.css.map": "static/css/main.65027555.css.map",
+  "main.js": "static/js/main.89e61261.js",
+  "main.js.map": "static/js/main.89e61261.js.map"
+=======
   "main.css": "static/css/main.84c2161a.css",
   "main.css.map": "static/css/main.84c2161a.css.map",
   "main.js": "static/js/main.7105c097.js",
   "main.js.map": "static/js/main.7105c097.js.map",
   "static/media/bar.jpg": "static/media/bar.33207ed1.jpg"
+>>>>>>> 090ac722a0c08a78ffd997cdc79e82d0d5e3f9d1
 }
