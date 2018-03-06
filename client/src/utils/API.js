@@ -10,6 +10,16 @@ export default {
     return axios.get("/api/savedplaces/" + id);
   },
   // Deletes the book with the given id
+
+  deleteSavedPlaceByBreweryId: function(breweryId) {
+    console.log("im in deleteSavedPlace brewery_id: " + breweryId);
+    return axios.delete("/api/savedplaces/" + breweryId);
+  },
+  // Saves a place to the database
+  savePlace: function(savedPlacesData) {
+    console.log("im in savePlace on the client side");
+    return axios.post("/api/savedplaces"  + savedPlacesData.brewery_id, savedPlacesData);
+    
   deleteSavedPlace: function (id) {
     return axios.delete("/api/savedplaces/" + id);
   },
@@ -24,6 +34,7 @@ export default {
     return axios.put("/api/savedplaces/" + id, {
       been_there: false
     })
+
   },
   // Saves a book to the database
   // savePlace: function(savedPlacesData) {
@@ -34,15 +45,17 @@ export default {
   //   console.log(BASEURL + APIKEY + FORMAT + POSTAL + query);
   //   return axios.fetch(BASEURL + APIKEY + FORMAT + POSTAL + query);
   // },
-  getPlaces: function (query) {
+
+  getApiPlaces: function(query) {
     console.log("query: " + query);
-    return axios.get("/api/findbrewery/" + query)
-  },
+   return axios.get("/api/apiplaces/" + query)
+  }
+
   // Saves a brewery to the database
   // saveBrewery: function(breweryData) {
   //   console.log("im in saveBrewery on the client side");
   //   return axios.post("/api/savebrewery/" + breweryData.brewery_name, breweryData);
-  // },
+  // }
 
 };
 

@@ -6,7 +6,9 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import Login from "../Login";
+import Logout from "../Logout";
 import { grey50, grey800 } from 'material-ui/styles/colors';
+import { login, logout, isLoggedIn } from '../../utils/AuthService';
 
 const styles = {
     style: {
@@ -26,7 +28,14 @@ export default class Nav extends React.Component {
 
     handleToggle = () => this.setState({ open: !this.state.open });
 
-    handleClose = () => this.setState({ open: false });
+    handleClose = () => 
+    {
+       if (isLoggedIn()){
+        this.setState({ open: false, LoggedIn: true });
+       } else {
+        this.setState({ open: false, LoggedIn: false });
+       }
+}
 
     render() {
         return (
@@ -36,10 +45,12 @@ export default class Nav extends React.Component {
                     title={<span style={styles.title}>Brew Quest</span>}
                     style={styles.style}
                     // showMenuIconButton={false}
-                    iconElementLeft={<IconButton><img src="../../../images/logo.png"/></IconButton>}
+                    iconElementLeft={<IconButton><img src="../../../images/logo.png" alt="logo" /></IconButton>}
                     iconElementRight={
                         <div>
-                            <Login />
+                           {
+                           (isLoggedIn()) ? <Logout /> : <Login/>
+                           }
                             <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
                         </div>
                     }
@@ -55,8 +66,19 @@ export default class Nav extends React.Component {
                     <Link to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Places</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link>
-                    <Link to="/savedplaces"><MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem></Link>
-                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    {
+                        (isLoggedIn()) ? <Link to="/savedplaces">
+                            <MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem>
+                        </Link> :  <Link to="/login"> </Link> 
+                    }
+
+                    {
+                        (isLoggedIn()) ? <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                            : (<button className="btn btn-info log" onClick={() => login()}>LogIn</button>)
+                    }
+                     
+                        
+                    
                 </Drawer>
             </div>
         );
