@@ -14,6 +14,10 @@ const styles = {
     }, 
     iconStyle: {
         iconStyle: grey50,
+    },
+    logoStyle: {
+        width: '100px'
+
     }
 };
 
@@ -36,7 +40,7 @@ export default class Nav extends React.Component {
                     title={<span style={styles.title}>Brew Quest</span>}
                     style={styles.style}
                     // showMenuIconButton={false}
-                    iconElementLeft={<IconButton><img src="../../../images/logo.png"/></IconButton>}
+                    iconElementLeft={<img src={require(`../../images/logo.png`)} style={styles.logoStyle}/>}
                     iconElementRight={
                         <div>
                             <Login />
@@ -58,6 +62,8 @@ export default class Nav extends React.Component {
                     <Link to="/savedplaces"><MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem></Link>
                     <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                 </Drawer>
+
+                {/* <img src={require(`../../images/logo.png`)}/> */}
             </div>
         );
     }
