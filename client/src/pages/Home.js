@@ -61,10 +61,7 @@ class Home extends Component {
             <h2 id="beer-text">Where can I find a really good beer?</h2>
           </div>
           <div id="search-field-div">
-            <SearchField
-              handleSearchLocationChange={this.handleSearchLocationChange}
-              handleFormSubmit={this.handleFormSubmit}
-              searchLocation={this.state.searchLocation} />
+            <SearchField/>
           </div>
         </div>
         <div id="secondary-info">
@@ -80,6 +77,9 @@ class Home extends Component {
             <h2>Rate Places</h2>
             <p>Rate the places you visit and see others' reviews.</p>
           </div>
+        </div>
+        <div id="footer">
+          <p>Brew Quest</p>
         </div>
       </div>
     );
