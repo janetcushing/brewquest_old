@@ -1,8 +1,9 @@
 import React from 'react';
-import Tabs from "../components/Tabs";
+// import Tabs from "../components/Tabs";
 import FlatButton from 'material-ui/FlatButton';
-import Dialog from 'material-ui/Dialog';
+// import Dialog from 'material-ui/Dialog';
 import {grey50} from 'material-ui/styles/colors';
+import { login } from '../utils/AuthService';
 
 const styles = {
     labelStyle: {
@@ -29,33 +30,34 @@ const styles = {
     }
   
     handleTouchTap() {
+      login();
       this.setState({
         open: true,
       });
     }
   
     render() {
-      const standardActions = (
-        <div>
-          <Tabs></Tabs>
-          <FlatButton
-            label="Ok"
-            primary={true}
-            onTouchTap={this.handleRequestClose}
-          />
-        </div>
-      );
+      // const standardActions = (
+      //   <div>
+      //     <Tabs></Tabs>
+      //     <FlatButton
+      //       label="Ok"
+      //       primary={true}
+      //       onTouchTap={this.handleRequestClose}
+      //     />
+      //   </div>
+      // );
   
       return (
         <div>
-            <Dialog
+            {/* <Dialog
               open={this.state.open}
               actions={standardActions}
               onRequestClose={this.handleRequestClose}
             >
-            </Dialog>
+            </Dialog> */}
             <FlatButton
-              label="Login"
+              label="Login" 
               onTouchTap={this.handleTouchTap}
               labelStyle={styles.labelStyle}
             />

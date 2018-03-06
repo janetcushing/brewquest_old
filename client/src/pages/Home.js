@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchField from "../components/SearchField";
 import "../App.css";
 
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 
@@ -12,7 +13,8 @@ class Home extends Component {
 
     this.state = {
       open: false,
-      searchLocation: ""
+      searchLocation: "",
+      LoggedIn: ""
     };
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
