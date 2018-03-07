@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchField from "../components/SearchField";
 import "../App.css";
+import { isLoggedIn } from '../utils/AuthService';
 
 
 // Needed for onTouchTap
@@ -14,7 +15,7 @@ class Home extends Component {
     this.state = {
       open: false,
       searchLocation: "",
-      LoggedIn: ""
+      loggedIn: ""
     };
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -23,9 +24,11 @@ class Home extends Component {
 
   handleSearchLocationChange = event => {
     this.setState({ searchLocation: event.target.value });
+    console.log(`isLoggedIn ${isLoggedIn()}`);
   };
 
   handleFormSubmit = event => {
+    console.log(`isLoggedIn ${isLoggedIn()}`);
     // console.log("im in handleFormSubmit");
     // event.preventDefault();
     // if (!this.state.searchLocation) {
@@ -40,12 +43,14 @@ class Home extends Component {
   };
 
   handleRequestClose() {
+    console.log(`isLoggedIn ${isLoggedIn()}`);
     this.setState({
       open: false,
     });
   }
 
   handleTouchTap() {
+    console.log(`isLoggedIn ${isLoggedIn()}`);
     this.setState({
       open: true,
     });
