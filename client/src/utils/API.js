@@ -20,7 +20,7 @@ export default {
   // Saves a place to the database
   savePlace: function(savedPlacesData) {
     console.log("im in savePlace on the client side");
-    return axios.post("/api/savedplaces"  + savedPlacesData.brewery_id, savedPlacesData);
+    return axios.post("/api/savedplaces" , savedPlacesData);
   },
     
   deleteSavedPlace: function (id) {
@@ -52,7 +52,8 @@ export default {
   // },
 
   getApiPlaces: function(query) {
-    console.log("query: " + query);
+    console.log(`im in getApiPlaces: ${query}`)
+    console.log(`/api/apiplaces/${query}`)
    return axios.get("/api/apiplaces/" + query)
   }
 

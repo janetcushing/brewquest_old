@@ -16,11 +16,11 @@ const Breweries = require("../models/breweries.js");
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
-const APIKEY1 = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
+const APIKEY = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
 const APIKEY4 = "key=AIzaSyAl8-KwRAZXg-L9F_Quj7tU_z940kny4Z4";
 const APIKEY2 = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
 const APIKEY3 = "key=AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ";
-const APIKEY = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
+const APIKEY1 = "key=AIzaSyAD77b8Gz1k-yyWRd6ex7lyHuBhfnNAEoU";
 const RANKBY = "&rankby=distance"
 const KEYWORD = "&keyword=brewery"
 const FORMAT = "&format=json";
@@ -148,7 +148,7 @@ module.exports = {
   // api.  step 3, call the google places detail api
   //----------------------------------------------------------
   getApiData: (req, res) => {
-    console.log("Im in getBreweryData");
+    console.log("Im in getApiData");
     //first step, translate the search location to longitude and latitude
     loc = req.params.location;
     GEOCODER.geocode(loc)
