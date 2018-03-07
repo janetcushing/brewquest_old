@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 
 const ResultsCard = props =>
-
     <Card>
         <CardTitle title="Results" />
         <CardText>
@@ -27,18 +26,19 @@ const ResultsCard = props =>
 
                         {'Category: Brewery'}
                         <br />
-                        {'Price: ' + result.price_level}
+                        {/* {'Price: ' + result.price_level} */}
+                        {' Open Now?' + result.open_now}
                         {' Total Reviews: ' + result.num_reviews}
                         {/* {' Address: ' + result.full_address} */}
                         {' Address: ' + result.vicinity }
                         {result.phone}
                         {result.website}
-                        {result.details_key}
+                        {/* {result.details_key} */}
                         {/* {'Open Now?: ' + (result.open_now ? 'Yes' : 'No')} */}
                         <CardActions>
                             {
-                                // (props.loggedIn && result.saved) 
-                                ( result.saved)?
+                                (props.loggedIn && result.saved)? 
+                                // ( result.saved)?
                                     <FlatButton
                                         // primary={true}
                                         // href={result.web_url}
@@ -47,22 +47,22 @@ const ResultsCard = props =>
                                         value={result.details_key}
                                         label="Delete from Saved" />
                                     :
-                                    // (props.loggedIn && !result.saved)
+                                    (props.loggedIn && !result.saved) ?
                                     // (!result.saved) ?
                                         <FlatButton
                                             onClick={(event) => props.handlePlacesSave(event, result.details_key)}
                                             value={result.details_key}
                                             label="Save to My List" />
-                                        // :
-                                        // (!props.loggedIn && result.saved) ?
-                                            // <FlatButton
-                                            //     onClick={() => login()}
-                                            //     value={result.details_key}
-                                            //     label="Delete from Saved" />
-                                            // :
-                                            // <FlatButton
-                                            //     onClick={() => login()}
-                                            //     label="Save to My List" />
+                                        :
+                                        (!props.loggedIn && result.saved) ?
+                                            <FlatButton
+                                                onClick={() => login()}
+                                                value={result.details_key}
+                                                label="Delete from Saved" />
+                                            :
+                                            <FlatButton
+                                                onClick={() => login()}
+                                                label="Save to My List" />
 
                             }
 
