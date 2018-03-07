@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import SavedPlaces from "./pages/SavedPlaces";
+import PlaceDetail from "./pages/PlaceDetail";
 // import Dropdown from "./components/Dropdown";
 
 
@@ -21,6 +22,7 @@ const App = () =>
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />
         <Route exact path="/savedplaces" component={SavedPlaces} />
+        <Route exact path="/savedplaces/:id" component={PlaceDetail} />
       </div>
     </Router>
   </MuiThemeProvider>;

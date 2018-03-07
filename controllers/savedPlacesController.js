@@ -10,6 +10,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
+    console.log("got to controller for place detail page")
     db.Breweries
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
