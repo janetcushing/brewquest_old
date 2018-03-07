@@ -12,10 +12,6 @@ import PlaceDetail from "./pages/PlaceDetail";
 import { requireAuth } from './utils/AuthService';
 import Callback from './components/Callback';
 
-
-
-
-
 const App = () =>
   <MuiThemeProvider>
     <Router>
