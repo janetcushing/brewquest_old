@@ -18,6 +18,7 @@ const brewerySeed = [
     "longitude" : -70.923599,
     "place_id" : "ChIJFWvwevbj4okRAOUn-awHKuM",
     "rating" : 4.8,
+    "vicinity" : "12 Oakland St, Amesbury",
     "saved" : true,
     "full_address" : "12 Oakland St, Amesbury, MA 01913, USA",
     "phone" : "(978) 390-6540",
@@ -171,6 +172,7 @@ const brewerySeed = [
   "longitude" : -70.8185158,
   "place_id" : "ChIJDUFu746V4okRFJuVwzAg4jQ",
   "rating" : 4.7,
+  "vicinity" : "436 Shattuck Way, Newington",
   "saved" : true,
   "full_address" : "436 Shattuck Way, Newington, NH 03801, USA",
   "phone" : "(603) 570-2603",
@@ -323,6 +325,7 @@ const brewerySeed = [
   "longitude" : -70.971813,
   "place_id" : "ChIJt1oF-kPu4okRFGb0kfm30CA",
   "rating" : 4.8,
+  "vicinity" : "156 Epping Rd, Exeter",
   "saved" : true,
   "full_address" : "156 Epping Rd, Exeter, NH 03833, USA",
   "phone" : "(603) 418-7124",
@@ -465,6 +468,159 @@ const brewerySeed = [
   ],
   "been_there" : false,
   "weekday_text" : []
+},
+{
+    "details_key" : 5,
+    "brewery_id" : "9dd12b9137535c51ee442fdbb61ca8d19181c1cf",
+    "brewery_name" : "Earth Eagle Brewings",
+    "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+    "latitude" : 43.079052,
+    "longitude" : -70.759492,
+    "place_id" : "ChIJ87Wd-gu_4okR0cbn_YBXYoM",
+    "rating" : 4.7,
+    "vicinity" : "165 High St, Portsmouth",
+    "saved" : true,
+    "full_address" : "165 High St, Portsmouth, NH 03801, USA",
+    "phone" : "(603) 502-2244",
+    "num_reviews" : 5,
+    "website" : "http://eartheaglebrewings.com/",
+    "open_now" : false,
+    "photos" : [ 
+        {
+            "height" : 3024,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/115886611651670264121/photos\">Matthew Bacon</a>"
+            ],
+            "photo_reference" : "CmRaAAAAabqot-3-ECMG2mGYgSnac77ibKQCT7GcFy-UsAL7hh_SYv4ih7YQ8uyQ8OYgqjacaFHW3xRgNb-6ZwBSVDmdu06wmw6ZCGvsddyxafk6KjNwMc3cLd9DoELoNTWDD8gjEhBDK9rBGgWuff1LqOKQiGG3GhSlHM8o8MUVTnqOLDsAJfQMA7KWWg",
+            "width" : 4032
+        }, 
+        {
+            "height" : 4048,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/101786264550949034416/photos\">Tom Eldredge</a>"
+            ],
+            "photo_reference" : "CmRaAAAA9FOeP-zg_wcNGmARv2zYpTRVEPrU89m3OS6NDgyyVqzMV0odfHBMqOB3KheyEydmnhM5Du7zXV8lpRYnDTGp1wgSWMgdEuDVBeKxaNxdQc6rm35AocRuCIOXUE8uCNoiEhCOVpubZqQt_zuFmbrDHm3gGhTtI606Qm6OJRKLMz_C7_tOcOJ5Mw",
+            "width" : 3036
+        }, 
+        {
+            "height" : 2432,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/116856081158615446930/photos\">Harvey Bornstein</a>"
+            ],
+            "photo_reference" : "CmRaAAAATiTcJtfwla5J60gxoKUxbUY6wNW3wklx2x7-9poeqBEJVwiwo1i5A2RWkqqDh7My-tQk3ElJcieUvxkhY-eYYHaZTGOXmEy5xVDIy1i704wvvXlenycQLlf8r3JcAiZ5EhA1ePz_Z6IzIJrQZZgbC8vcGhQWhmZG9ZuG73JpsM1Jv027KWn4-w",
+            "width" : 4320
+        }, 
+        {
+            "height" : 3024,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/105409265342099614788/photos\">Benjamin Brown</a>"
+            ],
+            "photo_reference" : "CmRaAAAAN1P4S3lv9VRuO8rtE5xupp5272a8Oor0A_7th1-Wo2qQNR-k67mO0soHrQKLhJov__PUn10VGbwQZ2qu7nyDxCBBH_3rGPOYngnqIKXgHSuWhfSdVDv0i02SJvc9BVu9EhDjJ0gOcm63AgMludum3JV8GhQLMvpM_2Xpj047D1Fy_m--x0pd0g",
+            "width" : 4032
+        }, 
+        {
+            "height" : 3264,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/107753136370457218699/photos\">Bryan Peretto</a>"
+            ],
+            "photo_reference" : "CmRaAAAABrPBm0C80JSL9FvIbn315DMg_oZXtJhtLTUt1WOZ-m5JP07EUA-r0XV70MTcpcb_XyovghS4GV97tL1JwJqbyu9x1F6lQfqxGlUa4oNeMhi5GBKVKsbUV-AK7aScBZdYEhAt2MmWf2dntTKFIBrXA-HwGhRd_tCz_N7HWo1aYrV9R9UQfdoP3g",
+            "width" : 2448
+        }, 
+        {
+            "height" : 3264,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/117475803772172236382/photos\">Clint Trudeau</a>"
+            ],
+            "photo_reference" : "CmRaAAAAgkkR5-Ns0Pm5gHYRmuQ0ioZqbzvmW4H82PzzKa21wIBZpIoREtckIQWvuddChLsq4vh_rzuu34y3aigL3cP2DxPbINaij3coBwknEa2SsZAxxdTTmgTHNo5gDMv99Yi5EhAs_37RJDXEAbXAw_od1utoGhRUdvs67RS85QHdc8jbRnCXQhzL7Q",
+            "width" : 2448
+        }, 
+        {
+            "height" : 2988,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/105190280791436727097/photos\">Mars K</a>"
+            ],
+            "photo_reference" : "CmRaAAAAYYAoBjgamOdhVdXAwGNk7UWSEgrPcONwmC_yQVEzYAXjOju9F3l9AWi8xHlPdanWLsbIfH3fDBLm8rsCdRznrGk1dXy_MM0sOtZG9RK7g2s45wcfpRP1uZy21BRXpFOcEhB-qFW0CvmnPnNp1MPAkFRAGhSWHT-HkGHPdrD-7FYconobWE65Kg",
+            "width" : 5312
+        }, 
+        {
+            "height" : 1836,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/112542960003237915834/photos\">Tim Smith</a>"
+            ],
+            "photo_reference" : "CmRaAAAAgAvXj4AmlpGwBiJrKccDZsuhjdxXLN3nIUJm5mbMHrA9auX6s1P735w__4ZwxTzM52iL-uFnHXF4zxzQ8yzTI_pkMOP-f9OwyI6yfYCkyC-TdHuMnnsWmQP9v6lmbITIEhBxPj40626UIM4GUZRSSz8fGhRMKB-LwB8MvtWNhN0q-sgXby-tKA",
+            "width" : 3264
+        }, 
+        {
+            "height" : 3561,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/107162821238826729663/photos\">Ian Logan</a>"
+            ],
+            "photo_reference" : "CmRaAAAAAk9Lr9x9jopPaEr29w2cvMsX3zc2I5h3JZk754EibBgC7CptIl7A6gjOutkkyXKpuQ8-GV1qiCvmiEL7QFQ6z-4IuESw40u8wmYKRSRPmVvZGp3n4DGtbYSMICdfsTO4EhDnhmtR7fZN8xfJnpWFTYrAGhQX2RwkeTEr-VuqvdkiC-pu0o54wg",
+            "width" : 3088
+        }, 
+        {
+            "height" : 4032,
+            "html_attributions" : [ 
+                "<a href=\"https://maps.google.com/maps/contrib/114985727082953678866/photos\">Tillie Tillie</a>"
+            ],
+            "photo_reference" : "CmRaAAAApga_fzl86IjOzxNLupGHoaQoTbr3oORFcVtsZYWkrr_krS4XnCgdGzZGvW2VmoRfprM2KF6eW0pPmY-NprlXyv4YfKb0yu4UbJCPp9118K8FlnHDJLr1r2lvhRnK-1oVEhACZrxUaQth9F_hjPKUaDCFGhStg3PY2gr60pHi3VEm2xsKqnqI3g",
+            "width" : 3024
+        }
+    ],
+    "reviews" : [ 
+        {
+            "author_name" : "stephen gillissie",
+            "author_url" : "https://www.google.com/maps/contrib/104916549063860131324/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh6.googleusercontent.com/-HravIsUJrxI/AAAAAAAAAAI/AAAAAAAAASo/PGENv_mszl0/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+            "rating" : 5,
+            "relative_time_description" : "2 months ago",
+            "text" : "Super cool spot. Small (maybe 30 seats), low key, and cool design on the inside. There is a small food menu, I got the pretzel, which was really good. Most importantly the beer is great. The variety is nice from red ales to stouts. Definitely stop in if you’re in the area.",
+            "time" : 1515182051
+        }, 
+        {
+            "author_name" : "Meredith Raphelson",
+            "author_url" : "https://www.google.com/maps/contrib/108688585575141863769/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh6.googleusercontent.com/-YPiEmmw-O30/AAAAAAAAAAI/AAAAAAAAAas/7lgu4ph_Yrs/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+            "rating" : 4,
+            "relative_time_description" : "2 months ago",
+            "text" : "Visited while staying in Portsmouth for a few days. A cute small scale brewery that's really good. Definitely not a big name brewery, but their beer is just as good. Recommended to go her by hotel staff and it was great. Servers were super friendly. Visited in June 2017 and was kind of hot inside to sit, only downfall. However the beer cooled us down!",
+            "time" : 1514591265
+        }, 
+        {
+            "author_name" : "Scott Spencer",
+            "author_url" : "https://www.google.com/maps/contrib/104806655581197484392/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh5.googleusercontent.com/-wHEzx0nEI_w/AAAAAAAAAAI/AAAAAAAAAAA/AGi4gfzlr50meAbyMU6skP2W1oSuwcGd2Q/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+            "rating" : 5,
+            "relative_time_description" : "a month ago",
+            "text" : "So many choices for craft beer in the area, so I chose this more or less at random...glad I did. Wide variety of styles, including one I've never tried (gruit). The six beers I tasted were excellent. Creative menu (had a duck pastrami sandwich). Really nice vibe. Full bar, unlike many tasting rooms.",
+            "time" : 1515783172
+        }, 
+        {
+            "author_name" : "Ronald Dixon",
+            "author_url" : "https://www.google.com/maps/contrib/104026887887966944603/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh5.googleusercontent.com/-gxkyIBU_o58/AAAAAAAAAAI/AAAAAAAAAAA/AGi4gfwPwsVynYVLttyHEvf1wEWPwkRUSA/s128-c0x00000000-cc-rp-mo/photo.jpg",
+            "rating" : 5,
+            "relative_time_description" : "in the last week",
+            "text" : "Great place for unusual beers.  They always have a great guest tap list too!  Make sure to bring your appetite.  The food is fantastic!",
+            "time" : 1520379767
+        }, 
+        {
+            "author_name" : "Benjamin Brown",
+            "author_url" : "https://www.google.com/maps/contrib/105409265342099614788/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/-gaO-O3M6e8k/AAAAAAAAAAI/AAAAAAAACtI/3pC3fE787Yc/s128-c0x00000000-cc-rp-mo-ba5/photo.jpg",
+            "rating" : 5,
+            "relative_time_description" : "in the last week",
+            "text" : "My favorite place in town. It took a while to get a seat cause it was so busy, but it was worth it. The bar staff were really friendly and helpful, and knew their beer knowledge. I got a flight of their non-IPAs, and they were all delicious, and very different then your standard beer. It's like drinking some of the Dogfish Head experiments. Ghost Ship and Hibitchkiss, I don't think I'll ever have anything as unique again, and they were unique in a good way. The food was delicious as well, with a bowl of hearty chili crusted in cheese to warm me up on this winter day. The What the Duck sandwich, oh man, duck pastrami is sooo tender and flavorful, it's a must try. I really enjoyed my lunch here!",
+            "time" : 1520118740
+        }
+    ],
+    "been_there" : false,
+    "weekday_text" : []
 }
 ];
 

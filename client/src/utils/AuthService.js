@@ -22,6 +22,8 @@ export function login() {
       scope: SCOPE
     });
     console.log("is logged in " + isLoggedIn());
+    var token = localStorage.getItem(ID_TOKEN_KEY);
+    console.log("token: " + token);
   }
   
   export function logout() {

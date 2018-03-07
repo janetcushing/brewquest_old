@@ -7,26 +7,12 @@ const Schema = mongoose.Schema;
 // Using the Schema constructor, create a new ExampleSchema object
 // This is similar to a Sequelize model
 
-const BreweriesSchema = new Schema({
+const PlacesSchema = new Schema({
   been_there: {
     type: Boolean,
     default: false
   },
-  brewery_id: {
-    type: String,
-    trim: true
-  },
-  brewery_name: {
-    type: String,
-    trim: true,
-    required: "name is Required",
-    validate: [
-      function (input) {
-        return input.length >= 1;
-      },
-      "String should be longer."
-    ]
-  },
+ 
   details_key: {
     type: Number
   },
@@ -35,6 +21,10 @@ const BreweriesSchema = new Schema({
     trim: true
   },
   icon: {
+    type: String,
+    trim: true
+  },
+  id: {
     type: String,
     trim: true
   },
@@ -47,6 +37,17 @@ const BreweriesSchema = new Schema({
   },
   longitude: {
     type: Number
+  },
+  name: {
+    type: String,
+    trim: true,
+    required: "name is Required",
+    validate: [
+      function (input) {
+        return input.length >= 1;
+      },
+      "String should be longer."
+    ]
   },
   num_reviews: {
     type: Number
@@ -93,6 +94,6 @@ const BreweriesSchema = new Schema({
   
 });
 
-const Breweries = mongoose.model("Breweries", BreweriesSchema);
+const Places = mongoose.model("Places", PlacesSchema);
 
-module.exports = Breweries;
+module.exports = Places;

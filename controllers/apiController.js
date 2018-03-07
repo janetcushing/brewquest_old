@@ -49,6 +49,7 @@ const getPlacesApiData = (locn, res) => {
       // console.log(body);
       // console.log(response.next_page_token);
       // console.log(body.results[0]);
+      console.log(`root opening_hours: ${body.results.opening_hours}`);
       body.results.forEach(function (element, i) {
         let details = {
           "details_key": i,
@@ -66,11 +67,11 @@ const getPlacesApiData = (locn, res) => {
           "phone": "phone",
           "price_level": "price_level",
           "num_reviews": "num_reviews",
-          "website": "website" ,
-          "open_now":  false,
-        "photos":  [],
-        "reviews" : [],
-        "weekday_text":[]  
+          "website": "website",
+          "open_now": false,
+          "photos": [],
+          "reviews": [],
+          "weekday_text": []
         } //end of details json object
         placeDetails.push(details);
         // console.log(placeDetails);
@@ -110,7 +111,7 @@ const getPlacesDetailApiData = (placeDetails, res) => {
       .then(detailBody => {
         console.log(`came back from detail API successfully`);
         console.log(`name ${placeDetails[ii].brewery_name}`);
-        // console.log(`detailBody.result.opening_hours.open_now: ${detailBody.result.opening_hours.open_now}`);
+        console.log(`detail opening_hours: ${detailBody.result.opening_hours}`);
         console.log(detailBody.status);
         placeDetails[ii].full_address = detailBody.result.formatted_address;
         // placeDetails[ii].open_now = detailBody.result.opening_hours.open_now;
@@ -119,7 +120,7 @@ const getPlacesDetailApiData = (placeDetails, res) => {
         placeDetails[ii].price_level = detailBody.result.price_level;
         placeDetails[ii].num_reviews = detailBody.result.reviews.length;
         placeDetails[ii].reviews = detailBody.result.reviews;
-        placeDetails[ii].website =  detailBody.result.website;
+        placeDetails[ii].website = detailBody.result.website;
         placeDetails[ii].weekday_text = detailBody.result.weekday_text;
         console.log("1");
         // console.log(placeDetails[ii]);
@@ -162,33 +163,4 @@ module.exports = {
         res.send("location error from geocoder.geocode");
       });
   },
-
-
-
-  // insertNewBreweryIntoDatabase: (req, res) => {
-  //   console.log("Im in insertNewBreweryIntoDatabase");
-  //   console.log(req.body);
-  //   let currentBrewery = {
-  //     brewery_id: req.body.brewery_id,
-  //     brewery_name: req.body.brewery_name,
-  //     full_address: req.body.full_address,
-  //     icon: req.body.icon,
-  //     latitude: req.body.latitude,
-  //     longitude: req.body.longitude,
-  //     num_reviews: req.body.num_reviews,
-  //     phone: req.body.phone,
-  //     place_id: req.body.place_id,
-  //     price_level: req.body.price_level,
-  //     rating: req.body.rating,
-  //     website: req.body.website
-  //   };
-  //   Breweries.create(currentBrewery, function (err, data) {
-  //     if (err) {
-  //       console.log(`There was a DB error from insertNewBreweryIntoDatabase: ${err} `);
-  //       res.status(500).end();
-  //     } else {
-  //       res.send("success");
-  //     }
-  //   });
-  // }
 }
