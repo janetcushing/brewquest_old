@@ -20,14 +20,8 @@ export default {
   // Saves a place to the database
   savePlace: function(savedPlacesData) {
     console.log("im in savePlace on the client side");
-<<<<<<< HEAD
-    return axios.post("/api/savedplaces"  + savedPlacesData.brewery_id, savedPlacesData);
+    return axios.post("/api/savedplaces", savedPlacesData);
   },  
-=======
-    return axios.post("/api/savedplaces" , savedPlacesData);
-  },
-    
->>>>>>> 0119264ec831d42746d9b204661c4fbe8481936e
   deleteSavedPlace: function (id) {
     return axios.delete("/api/savedplaces/" + id);
   },
