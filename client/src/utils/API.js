@@ -21,16 +21,19 @@ export default {
   savePlace: function(savedPlacesData) {
     console.log("im in savePlace on the client side");
     return axios.post("/api/savedplaces"  + savedPlacesData.brewery_id, savedPlacesData);
+  },
     
   deleteSavedPlace: function (id) {
     return axios.delete("/api/savedplaces/" + id);
   },
+
   beenToPlace: function (id) {
     console.log("got to beentoplace in api.js")
     return axios.put("/api/savedplaces/" + id, {
       been_there: true
     })
   },
+
   haveNotBeenToPlace: function (id) {
     console.log("got to beentoplace in api.js")
     return axios.put("/api/savedplaces/" + id, {
