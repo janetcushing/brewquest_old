@@ -5,12 +5,14 @@ import { login } from '../../utils/AuthService';
 import { Link } from "react-router-dom";
 
 
+
 const ResultsCard = props =>
+
 
     <Card>
         <CardTitle title="Results" />
         <CardText>
-
+            {"props.loggedIn: " + props.loggedIn}
             {props.results.map(result =>
 
                 <Card key={result.details_key}>
@@ -27,43 +29,39 @@ const ResultsCard = props =>
 
                         {'Category: Brewery'}
                         <br />
-                        {'Price: ' + result.price_level}
+                        {/* {'Price: ' + result.price_level} */}
                         {' Total Reviews: ' + result.num_reviews}
+                        <br />
+                        {(result.open_now) ? 'Open Now' : 'Not Open Now'}
+                        <br />
                         {/* {' Address: ' + result.full_address} */}
-                        {' Address: ' + result.vicinity }
-                        {result.phone}
+                        {' Address: ' + result.vicinity}
+                        {' ' + result.phone}
+                        <br />
                         {result.website}
-                        {result.details_key}
-                        {/* {'Open Now?: ' + (result.open_now ? 'Yes' : 'No')} */}
+                        <br />
+                        {result.saved}
                         <CardActions>
                             {
-                                // (props.loggedIn && result.saved) 
-                                ( result.saved)?
+                                (!props.loggedIn) ?
                                     <FlatButton
-                                        // primary={true}
-                                        // href={result.web_url}
-                                        // target="_blank"
-                                        onClick={(event) => props.handlePlacesDelete(event, result.details_key)}
-                                        value={result.details_key}
-                                        label="Delete from Saved" />
+                                        onClick={() => login()}
+                                        label="Login to Save" />
                                     :
-                                    // (props.loggedIn && !result.saved)
-                                    // (!result.saved) ?
+                                    (result.saved) ?
+                                        <FlatButton
+                                            // primary={true}
+                                            // href={result.web_url}
+                                            // target="_blank"
+                                            onClick={(event) => props.handlePlacesDelete(event, result.details_key)}
+                                            value={result.details_key}
+                                            label="Delete from Saved" />
+                                        :
+                                        // (!result.saved) 
                                         <FlatButton
                                             onClick={(event) => props.handlePlacesSave(event, result.details_key)}
                                             value={result.details_key}
-                                            label="Save to My List" />
-                                        // :
-                                        // (!props.loggedIn && result.saved) ?
-                                            // <FlatButton
-                                            //     onClick={() => login()}
-                                            //     value={result.details_key}
-                                            //     label="Delete from Saved" />
-                                            // :
-                                            // <FlatButton
-                                            //     onClick={() => login()}
-                                            //     label="Save to My List" />
-
+                                            label="Save to my list" />
                             }
 
                             <FlatButton

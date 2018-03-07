@@ -8,7 +8,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Login from "../Login";
 import Logout from "../Logout";
 import { grey50, grey800 } from 'material-ui/styles/colors';
-import { login, logout, isLoggedIn } from '../../utils/AuthService';
+import { login, logout, isLoggedIn, getIdToken} from '../../utils/AuthService';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
     style: {
@@ -19,6 +20,8 @@ const styles = {
     }
 };
 
+// var token;
+
 export default class Nav extends React.Component {
 
     constructor(props) {
@@ -26,14 +29,21 @@ export default class Nav extends React.Component {
         this.state = { open: false };
     }
 
+// handleLogin = () => {
+//     console.log(`im in handleLogin`);
+//     login();
+    
+// }
+
     handleToggle = () => this.setState({ open: !this.state.open });
 
     handleClose = () => 
     {
+        console.log(`nav bar isLoggedIn ${isLoggedIn()}`);
        if (isLoggedIn()){
-        this.setState({ open: false, LoggedIn: true });
+        this.setState({ open: false, loggedIn: true });
        } else {
-        this.setState({ open: false, LoggedIn: false });
+        this.setState({ open: false, loggedIn: false });
        }
 }
 
@@ -48,9 +58,13 @@ export default class Nav extends React.Component {
                     iconElementLeft={<IconButton><img src="../../../images/logo.png" alt="logo" /></IconButton>}
                     iconElementRight={
                         <div>
-                           {
+                           {/* {
                            (isLoggedIn()) ? <Logout /> : <Login/>
-                           }
+                           } */}
+                           {
+                        (isLoggedIn()) ?  <FlatButton onClick={() => logout()}  label="Logout" />
+                            : (<FlatButton  onClick={() => login()} label="Login" />)
+                    }
                             <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
                         </div>
                     }
@@ -76,7 +90,7 @@ export default class Nav extends React.Component {
                         (isLoggedIn()) ? <MenuItem onClick={() => logout()}>Logout</MenuItem>
                             : (<button className="btn btn-info log" onClick={() => login()}>LogIn</button>)
                     }
-                     
+                    
                         
                     
                 </Drawer>

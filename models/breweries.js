@@ -79,7 +79,7 @@ const BreweriesSchema = new Schema({
     type: Boolean,
     default: true
   },
-  vidinity: {
+  vicinity: {
     type: String,
     trim: true
   },

@@ -5,13 +5,14 @@ import Col from "../components/Col";
 // import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";
 import { hasBeenThere } from "../utils/hasbeenthereapi";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SavedListItem, SavedList } from "../components/SavedPlacesList";
 import Clear from 'material-ui/svg-icons/content/clear';
 import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 import Check from 'material-ui/svg-icons/navigation/check';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
+import Info_outline from 'material-ui/svg-icons/action/info-outline'
 
 class SavedPlaces extends Component {
   state = {
@@ -52,6 +53,13 @@ class SavedPlaces extends Component {
       .catch(err => console.log(err));
   };
 
+  placeDetailPage = id => {
+    console.log("clicked placedetail on saved places page")
+    API.getSavedPlace(id)
+      .then(res => this.getSavedPlace())
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div>
@@ -75,8 +83,19 @@ class SavedPlaces extends Component {
                         <Clear onClick={() => this.deletePlace(result._id)} />
                         {
                           (result.been_there) ?
-                          <Check_box onClick={() => this.unCheckBeenThere(result._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(result._id)} />
+                            <Check_box onClick={() => this.unCheckBeenThere(result._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(result._id)} />
                         }
+                        <Link to={{
+                          pathname: '/savedplaces/' + result._id,
+                          state: { placedetail: result }
+                        }}>
+                          <Info_outline
+                            // label="Search"
+                            // buttonStyle={styles.buttonStyle}
+                            // onTouchTap={this.handleTouchTap}
+                            // onClick={(event) => props.handleFormSubmit(event)}
+                          />
+                        </Link>
                         )}
                         </CardActions>
                     </SavedListItem>

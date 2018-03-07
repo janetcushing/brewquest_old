@@ -5,8 +5,10 @@ export default {
   getSavedPlaces: function () {
     return axios.get("/api/savedplaces");
   },
-  // Gets the book with the given id
+  // Gets the brewery with the given id
   getSavedPlace: function (id) {
+    console.log("getting to api for place detail")
+    console.log(id)
     return axios.get("/api/savedplaces/" + id);
   },
   // Deletes the book with the given id
@@ -18,17 +20,25 @@ export default {
   // Saves a place to the database
   savePlace: function(savedPlacesData) {
     console.log("im in savePlace on the client side");
+<<<<<<< HEAD
     return axios.post("/api/savedplaces"  + savedPlacesData.brewery_id, savedPlacesData);
   },  
+=======
+    return axios.post("/api/savedplaces" , savedPlacesData);
+  },
+    
+>>>>>>> 0119264ec831d42746d9b204661c4fbe8481936e
   deleteSavedPlace: function (id) {
     return axios.delete("/api/savedplaces/" + id);
   },
+
   beenToPlace: function (id) {
     console.log("got to beentoplace in api.js")
     return axios.put("/api/savedplaces/" + id, {
       been_there: true
     })
   },
+
   haveNotBeenToPlace: function (id) {
     console.log("got to beentoplace in api.js")
     return axios.put("/api/savedplaces/" + id, {
@@ -47,15 +57,14 @@ export default {
   // },
 
   getApiPlaces: function(query) {
-    console.log("query: " + query);
+    console.log(`im in getApiPlaces: ${query}`)
+    console.log(`/api/apiplaces/${query}`)
    return axios.get("/api/apiplaces/" + query)
   }
 
-  // Saves a brewery to the database
   // saveBrewery: function(breweryData) {
   //   console.log("im in saveBrewery on the client side");
   //   return axios.post("/api/savebrewery/" + breweryData.brewery_name, breweryData);
   // }
-
 };
 

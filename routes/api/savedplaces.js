@@ -18,6 +18,7 @@ router
  router
  .route("/:breweryId")
  .get(savedPlacesController.findByBreweryId)
+ .post(savedPlacesController.create)
  .put(savedPlacesController.updateByBreweryId)
  .delete(savedPlacesController.removeByBreweryId);
 
