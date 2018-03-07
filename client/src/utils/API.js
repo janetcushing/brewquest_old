@@ -5,8 +5,10 @@ export default {
   getSavedPlaces: function () {
     return axios.get("/api/savedplaces");
   },
-  // Gets the book with the given id
+  // Gets the brewery with the given id
   getSavedPlace: function (id) {
+    console.log("getting to api for place detail")
+    console.log(id)
     return axios.get("/api/savedplaces/" + id);
   },
   // Deletes the book with the given id
@@ -51,11 +53,9 @@ export default {
    return axios.get("/api/apiplaces/" + query)
   }
 
-  // Saves a brewery to the database
   // saveBrewery: function(breweryData) {
   //   console.log("im in saveBrewery on the client side");
   //   return axios.post("/api/savebrewery/" + breweryData.brewery_name, breweryData);
   // }
-
 };
 
