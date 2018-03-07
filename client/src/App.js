@@ -24,7 +24,7 @@ const App = () =>
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />
         <Route exact path="/savedplaces" component={SavedPlaces} onEnter={requireAuth} />
-        <Route path="/callback" component={Callback} />cd
+        <Route path="/callback" component={Callback} />
       </div>
     </Router>
   </MuiThemeProvider>;

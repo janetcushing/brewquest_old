@@ -22,17 +22,30 @@ class Search extends Component {
   }
 
   componentWillMount() {
-    if (this.props.location.state) {
-      console.log(`isLoggedIn ${isLoggedIn()}`);
-      console.log(`this.state.loggedIn ${this.state.loggedIn}`);
-      this.setState({ searchLocation: this.props.location.state.searchLocation });
+    console.log(`in componentWillMount`);
+    console.log(`isLoggedIn ${isLoggedIn()}`);
+    this.setState({ 
+      loggedIn: isLoggedIn() 
+     });
+   console.log(`this.state.loggedIn ${this.state.loggedIn}`);
+    if (this.props.location.state) { 
+      this.setState({ 
+        searchLocation: this.props.location.state.searchLocation,
+       });
     }
   }
 
   componentDidMount() {
+    console.log(`in componentDidMount`);
+    console.log(`isLoggedIn ${isLoggedIn()}`);
+    this.setState({ 
+      loggedIn: isLoggedIn() 
+     });
+    console.log(`this.state.loggedIn ${this.state.loggedIn}`);
     if (this.props.location.state) {
       console.log(`isLoggedIn ${isLoggedIn()}`);
       console.log("current state: " + this.state.searchLocation);
+      console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
       this.searchApiPlaces(this.state.searchLocation);
     }
   }
@@ -41,6 +54,7 @@ class Search extends Component {
     console.log("Im in searchPlaces");
     console.log("/api/findbrewery/" + query);
     console.log(`isLoggedIn ${isLoggedIn()}`);
+    console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     API.getApiPlaces(query)
       .then(res => {
         if (res.data === "location error from geocoder.geocode") {
@@ -57,11 +71,13 @@ class Search extends Component {
 
   handleSearchLocationChange = event => {
     this.setState({ searchLocation: event.target.value });
+    console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
     console.log(`isLoggedIn ${isLoggedIn()}`);
+    console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     if (!this.state.searchLocation) {
       alert("Please add search criteria");
     } else {
@@ -77,6 +93,7 @@ class Search extends Component {
     console.log(`im in handlePlacesSave`);
     console.log("value", details_key);
     console.log(`isLoggedIn ${isLoggedIn()}`);
+    console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     // console.log("key", this.result.details_key);
     // let detailsToSave = {
     //   brewery_id: this.state.result[details_key].brewery_id,
@@ -100,6 +117,7 @@ class Search extends Component {
   handlePlacesDelete = (event, details_key) => {
     event.preventDefault();
     console.log(`isLoggedIn ${isLoggedIn()}`);
+    console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     console.log(`im in handlePlacesDelete`);
     console.log("value", details_key);
     // console.log("key", this.result.details_key);
@@ -138,6 +156,7 @@ class Search extends Component {
         <Container>
           <Row>
             <Col size="sm-12">
+            {"this.state.loggedIn: " + this.state.loggedIn}
               <SearchField
                 handleSearchLocationChange={this.handleSearchLocationChange}
                 handleFormSubmit={this.handleFormSubmit}

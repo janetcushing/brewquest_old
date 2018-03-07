@@ -5,11 +5,14 @@ import { login } from '../../utils/AuthService';
 import { Link } from "react-router-dom";
 
 
+
 const ResultsCard = props =>
+
+
     <Card>
         <CardTitle title="Results" />
         <CardText>
-
+{"props.loggedIn: " + props.loggedIn}
             {props.results.map(result =>
 
                 <Card key={result.details_key}>
