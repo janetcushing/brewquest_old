@@ -87,30 +87,22 @@ class Search extends Component {
   };
 
 
+  loadSavedPlaces = () => {
+    API.getSavedPlaces()
+      .then(res =>
+        this.setState({ results: res.data })
+      )
+      .catch(err => console.log(err));
+  };
 
   handlePlacesSave = (event, details_key) => {
     event.preventDefault();
     console.log(`im in handlePlacesSave`);
-    console.log("value", details_key);
-    console.log(`isLoggedIn ${isLoggedIn()}`);
-    console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
-    // console.log("key", this.result.details_key);
-    // let detailsToSave = {
-    //   brewery_id: this.state.result[details_key].brewery_id,
-    //   brewery_name: this.state.result[details_key].brewery_name,
-    //   full_address: this.state.result[details_key].full_address,
-    //   icon: this.state.result[details_key].icon,
-    //   latitude: this.state.result[details_key].lat,
-    //   longitude: this.state.result[details_key].lng,
-    //   num_reviews: this.state.result[details_key].num_reviews,
-    //   phone: this.state.result[details_key].phone,
-    //   place_id: this.state.result[details_key].place_id,
-    //   price_level: this.state.result[details_key].price_level,
-    //   rating: this.state.result[details_key].rating,
-    //   website: this.state.result[details_key].website
-    // }
+    this.state.result[details_key].saved = true;
+    // this.setState({ result[details_key].saved: true });
     console.log(this.state.result[details_key]);
-    API.savePlace(this.state.result[details_key]);
+    API.savePlace(this.state.result[details_key])
+    .then(res => this.loadSavedPlaces());
     console.log("saved the Result");
   };
 
@@ -120,27 +112,17 @@ class Search extends Component {
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     console.log(`im in handlePlacesDelete`);
     console.log("value", details_key);
-    // console.log("key", this.result.details_key);
+    this.state.result[details_key].saved = false;
     let breweryId = {
       brewery_id: this.state.results[details_key].brewery_id,
     }
     console.log(breweryId);
-    API.deleteSavedPlaceByBreweryId(breweryId);
+    API.deleteSavedPlaceByBreweryId(breweryId)
+    .then(res => {
+      this.loadSavedPlaces();
     console.log(`deleting  ${breweryId}`);
-  };
-
-
-
-  // removeFromResult = (i) => {
-  //   console.log(`im in removeFromResult`);
-  //   let results = this.state.result
-  //   results.splice(i,1);
-  //   this.setState({
-  //     result: results
-  //   });
-  // }
-
-
+    });
+  }
 
   render() {
 
