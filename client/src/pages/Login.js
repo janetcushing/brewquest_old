@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 // import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MyAwesomeReactComponent from '../components/MyAwesomeReactComponent';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
-import { deepOrange500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Auth from "../components/Auth/Auth.js";
+import { isLoggedIn } from '../utils/AuthService';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -38,8 +36,15 @@ class Login extends Component {
   }
 
   handleRequestClose() {
+    if (isLoggedIn()){
+      this.setState({
+        open: false,
+        loggedIn: true
+      });
+    } else 
     this.setState({
       open: false,
+      loggedIn: false
     });
   }
 
@@ -50,7 +55,7 @@ class Login extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isLoggedIn } = this.props.isLoggedIn;
 
     return (
       <div>
@@ -67,7 +72,7 @@ class Login extends Component {
               Home
               </Button>
             {
-              !isAuthenticated() && (
+              !isLoggedIn() && (
                 <Button
                   id="qsLoginBtn"
                   bsStyle="primary"
@@ -79,7 +84,7 @@ class Login extends Component {
               )
             }
             {
-              isAuthenticated() && (
+              isLoggedIn() && (
                 <Button
                   id="qsLogoutBtn"
                   bsStyle="primary"

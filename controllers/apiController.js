@@ -33,7 +33,7 @@ const OPTIONS = {
   formatter: null
 };
 const GEOCODER = NodeGeocoder(OPTIONS);
-const breweryDetails = [];
+const placeDetails = [];
 
 //---------------------------------------------------------- 
 // call the google places api and kick off the function
@@ -60,25 +60,29 @@ const getPlacesApiData = (locn, res) => {
           "place_id": element.place_id,
           "rating": element.rating,
           "vicinity": element.vicinity,
-          "buttonClicked": false,
-          //these will be populated from the detail api
+          "saved": false,
+          // //these will be populated from the detail api
           "full_address": "full_address",
           "phone": "phone",
           "price_level": "price_level",
           "num_reviews": "num_reviews",
-          "website": "website"  
+          "website": "website" ,
+          "open_now":  false,
+        "photos":  [],
+        "reviews" : [],
+        "weekday_text":[]  
         } //end of details json object
-        breweryDetails.push(details);
-        // console.log(breweryDetails);
+        placeDetails.push(details);
+        // console.log(placeDetails);
       });
       // //third step call the google places detail api
-      getPlacesDetailApiData(breweryDetails, res);
+      getPlacesDetailApiData(placeDetails, res);
       console.log("back from getPlacesDetailApiData");
-      // console.log("send the breweryDetails here");
+      // console.log("send the placeDetails here");
 
     })
     .catch(error => {
-      console.log("Error returned from getBreweryData");
+      console.log("Error returned from getPlacesApiData");
       console.log(error);
     });
 }
@@ -96,26 +100,32 @@ const getPlacesApiData = (locn, res) => {
 // INVALID_REQUEST generally indicates that the query (placeid) is missing.
 // NOT_FOUND indicates that the referenced location (placeid) was not found in the Places database.
 //----------------------------------------------------------
-const getPlacesDetailApiData = (breweryDetails, res) => {
+const getPlacesDetailApiData = (placeDetails, res) => {
   console.log("Im in getPlacesDetailApiData");
-  for (let ii = 0; ii < breweryDetails.length; ii++) {
-    let place = "&place_id=" + breweryDetails[ii].place_id;
+  for (let ii = 0; ii < placeDetails.length; ii++) {
+    let place = "&place_id=" + placeDetails[ii].place_id;
     console.log(DETAILURL + APIKEY + place);
     rp(DETAILURL + APIKEY + place)
       .then(detailResponse => JSON.parse(detailResponse))
       .then(detailBody => {
         console.log(`came back from detail API successfully`);
+        console.log(`name ${placeDetails[ii].brewery_name}`);
+        // console.log(`detailBody.result.opening_hours.open_now: ${detailBody.result.opening_hours.open_now}`);
         console.log(detailBody.status);
-        breweryDetails[ii].full_address = detailBody.result.formatted_address;
-        breweryDetails[ii].phone = detailBody.result.formatted_phone_number;
-        // breweryDetails[ii].price_level = detailResponse.data.result.price_level;
-        breweryDetails[ii].num_reviews = detailBody.result.reviews.length;
-        breweryDetails[ii].website = detailBody.result.website;
+        placeDetails[ii].full_address = detailBody.result.formatted_address;
+        // placeDetails[ii].open_now = detailBody.result.opening_hours.open_now;
+        placeDetails[ii].phone = detailBody.result.formatted_phone_number;
+        placeDetails[ii].photos = detailBody.result.photos;
+        placeDetails[ii].price_level = detailBody.result.price_level;
+        placeDetails[ii].num_reviews = detailBody.result.reviews.length;
+        placeDetails[ii].reviews = detailBody.result.reviews;
+        placeDetails[ii].website =  detailBody.result.website;
+        placeDetails[ii].weekday_text = detailBody.result.weekday_text;
         console.log("1");
-        // console.log(breweryDetails[ii]);
-        if (ii == breweryDetails.length - 1) {
+        // console.log(placeDetails[ii]);
+        if (ii == placeDetails.length - 1) {
           res.send({
-            breweryDetails
+            placeDetails
           });
         }
       }).catch(error => {
@@ -137,7 +147,7 @@ module.exports = {
   // into latitude and longitude.  step2, call the google places
   // api.  step 3, call the google places detail api
   //----------------------------------------------------------
-  getBreweryData: (req, res) => {
+  getApiData: (req, res) => {
     console.log("Im in getBreweryData");
     //first step, translate the search location to longitude and latitude
     loc = req.params.location;
