@@ -52,7 +52,7 @@ class Search extends Component {
 
   searchApiPlaces = query => {
     console.log("Im in searchPlaces");
-    console.log("/api/findbrewery/" + query);
+    console.log("/api/apiplaces" + query);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     API.getApiPlaces(query)

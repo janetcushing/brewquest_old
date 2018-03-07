@@ -148,7 +148,7 @@ module.exports = {
   // api.  step 3, call the google places detail api
   //----------------------------------------------------------
   getApiData: (req, res) => {
-    console.log("Im in getBreweryData");
+    console.log("Im in getApiData");
     //first step, translate the search location to longitude and latitude
     loc = req.params.location;
     GEOCODER.geocode(loc)
