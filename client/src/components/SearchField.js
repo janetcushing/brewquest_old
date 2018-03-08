@@ -28,17 +28,17 @@ const SearchField = props => (
             value={props.searchLocation}
             onChange={props.handleSearchLocationChange}
         />
-        <Link to={{
+        {/* <Link to={{
             pathname: '/search',
             state: { searchLocation: props.searchLocation }
-        }}>
+        }}> */}
             <RaisedButton
                 label="Search"
                 buttonStyle={styles.buttonStyle}
                 onTouchTap={this.handleTouchTap}
                 onClick={(event) => props.handleFormSubmit(event)}
             />
-        </Link>
+        {/* </Link> */}
     </div>
 );
 
