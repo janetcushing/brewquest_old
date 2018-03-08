@@ -60,6 +60,7 @@ class Search extends Component {
         if (res.data === "location error from geocoder.geocode") {
           alert("Please enter a valid location");
         } else {
+          console.log(res.data.placeDetails);
           this.setState({
             result: res.data.placeDetails
           });

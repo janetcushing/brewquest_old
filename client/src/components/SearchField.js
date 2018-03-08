@@ -11,6 +11,9 @@ const styles = {
     buttonStyle: {
         backgroundColor: grey50,
         labelColor: grey900,
+    },
+    inputStyle: {
+        color: blue50
     }
 };
 
@@ -21,7 +24,8 @@ const SearchField = props => (
             name="SearchforPlaces"
             hintText="Search for Places Here"
             hintStyle={styles.hintStyle}
-            // value={props.searchLocation}
+            inputStyle={styles.inputStyle}
+            value={props.searchLocation}
             onChange={props.handleSearchLocationChange}
         />
         <Link to={{
