@@ -74,7 +74,10 @@ class Home extends Component {
             <br />
 
             <div id="search-field-div">
-              <SearchField />
+              <SearchField 
+              handleSearchLocationChange={this.handleSearchLocationChange}
+              handleFormSubmit={this.handleFormSubmit}
+              searchLocation={this.state.searchLocation} />
             </div>
           </div>
         </div>
