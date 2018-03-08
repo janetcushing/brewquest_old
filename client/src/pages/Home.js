@@ -25,10 +25,6 @@ class Home extends Component {
     this.handleTouchTap = this.handleTouchTap.bind(this);
   }
 
-componentDidMount() {
-  console.log("redirect state: " + this.state.redirect)
-}
-
   handleSearchLocationChange = event => {
     this.setState({ searchLocation: event.target.value });
     console.log(`isLoggedIn ${isLoggedIn()}`);
