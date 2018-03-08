@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import Login from "../Login";
@@ -14,9 +14,12 @@ import FlatButton from 'material-ui/FlatButton';
 const styles = {
     style: {
         background: grey800,
-    }, 
+    },
     iconStyle: {
         iconStyle: grey50,
+    },
+    logoStyle: {
+        width: '100px'
     }
 };
 
@@ -37,6 +40,7 @@ export default class Nav extends React.Component {
 
     handleToggle = () => this.setState({ open: !this.state.open });
 
+
     handleClose = () => 
     {
         console.log(`nav bar isLoggedIn ${isLoggedIn()}`);
@@ -50,26 +54,19 @@ export default class Nav extends React.Component {
     render() {
         return (
 
-            <div>
-                <AppBar
-                    title={<span style={styles.title}>Brew Quest</span>}
-                    style={styles.style}
-                    // showMenuIconButton={false}
-                    iconElementLeft={<IconButton><img src="../../../images/logo.png" alt="logo" /></IconButton>}
-                    iconElementRight={
-                        <div>
-                           {/* {
-                           (isLoggedIn()) ? <Logout /> : <Login/>
-                           } */}
-                           {
-                        (isLoggedIn()) ?  <FlatButton onClick={() => logout()}  label="Logout" />
-                            : (<FlatButton  onClick={() => login()} label="Login" />)
+            <div id="navStyle">
+                <div id="logoDiv">
+                    <img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} />
+                </div>
+
+                <div id="navBtns">
+                    {
+                        (isLoggedIn()) ? <FlatButton onClick={() => logout()} label="Logout" />
+                            : (<FlatButton onClick={() => login()} label="Login" />)
                     }
-                            <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
-                        </div>
-                    }
-                >
-                </AppBar>
+                    <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
+                </div>
+
                 <Drawer
                     openSecondary={true}
                     docked={false}
@@ -83,17 +80,20 @@ export default class Nav extends React.Component {
                     {
                         (isLoggedIn()) ? <Link to="/savedplaces">
                             <MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem>
-                        </Link> :  <Link to="/login"> </Link> 
+
+                        </Link> : <Link to="/login"> </Link>
+
                     }
 
                     {
                         (isLoggedIn()) ? <MenuItem onClick={() => logout()}>Logout</MenuItem>
                             : (<button className="btn btn-info log" onClick={() => login()}>LogIn</button>)
                     }
-                    
-                        
+
                     
                 </Drawer>
+
+                {/* <img src={require(`../../images/logo.png`)}/> */}
             </div>
         );
     }

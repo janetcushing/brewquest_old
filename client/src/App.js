@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Navpills from "./components/Navpills";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import SavedPlaces from "./pages/SavedPlaces";
@@ -23,6 +24,7 @@ const App = () =>
         <Route exact path="/savedplaces/:id" component={PlaceDetail} />
         <Route exact path="/savedplaces" component={SavedPlaces} onEnter={requireAuth} />
         <Route path="/callback" component={Callback} />
+        <Footer/>
       </div>
     </Router>
   </MuiThemeProvider>;

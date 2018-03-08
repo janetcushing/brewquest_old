@@ -1,3 +1,8 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -25,7 +30,7 @@
 /* Home Page Background Image */
 
 #home-page-background {
-  background-image: url("images/bar.jpg");
+  background-image: url("images/bar2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -36,6 +41,11 @@
 }
 
 /* Home Page Background Text and Search Field Styling */
+
+#searchPlacesDiv {
+  left:60%;
+  position: relative;
+}
 
 #title-div {
   float: right;
@@ -81,15 +91,32 @@
 
 #footer {
   position: absolute;
+  bottom: 0;
   width: 100%;
   height: 30px;
-  background-color: #757575;
+  line-height: 30px;
+  background-color: #FAFAFA;
   text-align: center;
   vertical-align: 30px;
 }
 
+#footerText {
+  margin: 0px
+}
+
+#navStyle {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SearchField from "../components/SearchField";
+import Nav from "../components/Nav";
 import "../App.css";
 import { isLoggedIn } from '../utils/AuthService';
 
@@ -62,11 +63,19 @@ class Home extends Component {
 
       <div>
         <div id="home-page-background">
-          <div id="title-div">
-            <h2 id="beer-text">Where can I find a really good beer?</h2>
+          <div>
+            {/* <Nav /> */}
           </div>
-          <div id="search-field-div">
-            <SearchField/>
+          <div id="searchPlacesDiv">
+            <div id="title-div">
+              <h2 id="beer-text">Where can I find a really good beer?</h2>
+            </div>
+
+            <br />
+
+            <div id="search-field-div">
+              <SearchField />
+            </div>
           </div>
         </div>
         <div id="secondary-info">
@@ -82,9 +91,6 @@ class Home extends Component {
             <h2>Rate Places</h2>
             <p>Rate the places you visit and see others' reviews.</p>
           </div>
-        </div>
-        <div id="footer">
-          <p>Brew Quest</p>
         </div>
       </div>
     );
