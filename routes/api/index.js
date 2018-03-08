@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const savedPlacesRoutes = require("./savedplaces");
-const findBrewery = require("./findbrewery");
-const saveBrewery = require("./savebrewery");
+const apiPlaces = require("./apiplaces");
 
-// Book routes
+
+// Database routes - Places/Breweries table
+
 router.use("/savedplaces", savedPlacesRoutes);
-router.use("/savebrewery", saveBrewery);
-router.use("/findbrewery", findBrewery);
+
+// API routes - to get places data
+router.use("/apiplaces", apiPlaces);
 
 module.exports = router;

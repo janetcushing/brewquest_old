@@ -8,6 +8,10 @@ const Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 
 const BreweriesSchema = new Schema({
+  been_there: {
+    type: Boolean,
+    default: false
+  },
   brewery_id: {
     type: String,
     trim: true
@@ -23,6 +27,9 @@ const BreweriesSchema = new Schema({
       "String should be longer."
     ]
   },
+  details_key: {
+    type: Number
+  },
   full_address: {
     type: String,
     trim: true
@@ -36,30 +43,43 @@ const BreweriesSchema = new Schema({
     default: Date.now
   },
   latitude: {
-    type: String,
-    trim: true
+    type: Number
   },
   longitude: {
-    type: String,
-    trim: true
+    type: Number
   },
   num_reviews: {
-    type: String,
-    trim: true
+    type: Number
+  },
+  open_now: {
+    type: Boolean,
+    default: false
   },
   phone: {
     type: String,
     trim: true
+  },
+  photos: {
+    type: Array
   },
   place_id: {
     type: String,
     trim: true
   },
   price_level: {
-    type: String,
-    trim: true
+    type: Number
   },
   rating: {
+    type: Number
+  },
+  reviews: {
+    type: Array
+  },
+  saved: {
+    type: Boolean,
+    default: true
+  },
+  vicinity: {
     type: String,
     trim: true
   },
@@ -67,11 +87,10 @@ const BreweriesSchema = new Schema({
     type: String,
     trim: true
   },
-  been_there: {
-    type: Boolean,
-    trim: true,
-    default: false
+  weekday_text: {
+    type: Array
   }
+  
 });
 
 const Breweries = mongoose.model("Breweries", BreweriesSchema);
