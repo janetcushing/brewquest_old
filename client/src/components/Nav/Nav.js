@@ -2,22 +2,24 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import Login from "../Login";
+import Logout from "../Logout";
 import { grey50, grey800 } from 'material-ui/styles/colors';
+import { login, logout, isLoggedIn } from '../../utils/AuthService';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
     style: {
         background: grey800,
-    }, 
+    },
     iconStyle: {
         iconStyle: grey50,
     },
     logoStyle: {
         width: '100px'
-
     }
 };
 
@@ -30,25 +32,31 @@ export default class Nav extends React.Component {
 
     handleToggle = () => this.setState({ open: !this.state.open });
 
-    handleClose = () => this.setState({ open: false });
+    handleClose = () => {
+        console.log(`nav bar isLoggedIn ${isLoggedIn()}`);
+        if (isLoggedIn()) {
+            this.setState({ open: false, loggedIn: true });
+        } else {
+            this.setState({ open: false, loggedIn: false });
+        }
+    }
 
     render() {
         return (
 
-            <div>
-                <AppBar
-                    title={<span style={styles.title}>Brew Quest</span>}
-                    style={styles.style}
-                    // showMenuIconButton={false}
-                    iconElementLeft={<img src={require(`../../images/logo.png`)} style={styles.logoStyle}/>}
-                    iconElementRight={
-                        <div>
-                            <Login />
-                            <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
-                        </div>
+            <div id="navStyle">
+                <div id="logoDiv">
+                    <img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} />
+                </div>
+
+                <div id="navBtns">
+                    {
+                        (isLoggedIn()) ? <FlatButton onClick={() => logout()} label="Logout" />
+                            : (<FlatButton onClick={() => login()} label="Login" />)
                     }
-                >
-                </AppBar>
+                    <IconButton onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
+                </div>
+
                 <Drawer
                     openSecondary={true}
                     docked={false}
@@ -59,8 +67,16 @@ export default class Nav extends React.Component {
                     <Link to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Places</MenuItem></Link>
                     <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link>
-                    <Link to="/savedplaces"><MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem></Link>
-                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    {
+                        (isLoggedIn()) ? <Link to="/savedplaces">
+                            <MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem>
+                        </Link> : <Link to="/login"> </Link>
+                    }
+
+                    {
+                        (isLoggedIn()) ? <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                            : (<button className="btn btn-info log" onClick={() => login()}>LogIn</button>)
+                    }
                 </Drawer>
 
                 {/* <img src={require(`../../images/logo.png`)}/> */}

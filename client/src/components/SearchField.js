@@ -21,9 +21,9 @@ const SearchField = props => (
             name="SearchforPlaces"
             hintText="Search for Places Here"
             hintStyle={styles.hintStyle}
-            value={props.searchLocation}
+            // value={props.searchLocation}
             onChange={props.handleSearchLocationChange}
-        /><br />
+        />
         <Link to={{
             pathname: '/search',
             state: { searchLocation: props.searchLocation }
