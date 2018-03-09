@@ -11,6 +11,9 @@ const styles = {
     buttonStyle: {
         backgroundColor: grey50,
         labelColor: grey900,
+    },
+    inputStyle: {
+        color: blue50
     }
 };
 
@@ -21,20 +24,21 @@ const SearchField = props => (
             name="SearchforPlaces"
             hintText="Search for Places Here"
             hintStyle={styles.hintStyle}
+            inputStyle={styles.inputStyle}
             value={props.searchLocation}
             onChange={props.handleSearchLocationChange}
-        /><br />
-        <Link to={{
+        />
+        {/* <Link to={{
             pathname: '/search',
             state: { searchLocation: props.searchLocation }
-        }}>
+        }}> */}
             <RaisedButton
                 label="Search"
                 buttonStyle={styles.buttonStyle}
                 onTouchTap={this.handleTouchTap}
                 onClick={(event) => props.handleFormSubmit(event)}
             />
-        </Link>
+        {/* </Link> */}
     </div>
 );
 

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router';
 import SearchField from "../components/SearchField";
-import "../App.css";
+import Nav from "../components/Nav";
 import { isLoggedIn } from '../utils/AuthService';
+import "../App.css";
 
 
 // Needed for onTouchTap
@@ -14,6 +16,7 @@ class Home extends Component {
 
     this.state = {
       open: false,
+      redirect: false,
       searchLocation: "",
       loggedIn: ""
     };
@@ -28,18 +31,14 @@ class Home extends Component {
   };
 
   handleFormSubmit = event => {
+    event.preventDefault();
     console.log(`isLoggedIn ${isLoggedIn()}`);
     // console.log("im in handleFormSubmit");
-    // event.preventDefault();
-    // if (!this.state.searchLocation) {
-    //   alert("Please add search criteria");
-    // }
-    // console.log(this.state.searchLocation);
-    // this.setState({
-    //   searchLocation: this.state.searchLocation
-    // });
-    // console.log("I just set the state");
-    // this.searchPlaces(this.state.searchLocation);
+    if (!this.state.searchLocation) {
+      alert("Please add search criteria");
+    } else {
+      this.setState({ redirect: true });
+    }
   };
 
   handleRequestClose() {
@@ -57,16 +56,30 @@ class Home extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={{
+        pathname: '/search',
+        state: { searchLocation: this.state.searchLocation }
+      }} />;
+    }
 
     return (
 
       <div>
         <div id="home-page-background">
-          <div id="title-div">
-            <h2 id="beer-text">Where can I find a really good beer?</h2>
-          </div>
-          <div id="search-field-div">
-            <SearchField/>
+          <div id="searchPlacesDiv">
+            <div id="title-div">
+              <h2 id="beer-text">Where can I find a really good beer?</h2>
+            </div>
+
+            <br />
+
+            <div id="search-field-div">
+              <SearchField
+                handleSearchLocationChange={this.handleSearchLocationChange}
+                handleFormSubmit={this.handleFormSubmit}
+                searchLocation={this.state.searchLocation} />
+            </div>
           </div>
         </div>
         <div id="secondary-info">
@@ -82,9 +95,6 @@ class Home extends Component {
             <h2>Rate Places</h2>
             <p>Rate the places you visit and see others' reviews.</p>
           </div>
-        </div>
-        <div id="footer">
-          <p>Brew Quest</p>
         </div>
       </div>
     );
