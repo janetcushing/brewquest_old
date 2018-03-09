@@ -8,7 +8,7 @@ export default {
   // Gets the brewery with the given id
   getSavedPlace: function (id) {
     console.log("getting to api for place detail")
-    console.log(id)
+    console.log("get saved place in API.js ID: " + id)
     return axios.get("/api/savedplaces/" + id);
   },
   // Deletes the book with the given id
