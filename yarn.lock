@@ -91,6 +91,10 @@ array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
 
+array-merge-by-key@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/array-merge-by-key/-/array-merge-by-key-1.0.1.tgz#f5478881dcd0d25a48b598227cb49e709d81224e"
+
 array-unique@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
