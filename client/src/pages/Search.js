@@ -128,7 +128,7 @@ class Search extends Component {
   render() {
 
     return (
-      <div>
+      <div id="search-page-background">
         <Container>
           <Row>
             <Col size="sm-12">
@@ -136,10 +136,11 @@ class Search extends Component {
             </Col>
           </Row>
         </Container>
+        <div class="main-container">
         <Container>
           <Row>
             <Col size="sm-12">
-            {"this.state.loggedIn: " + this.state.loggedIn}
+            {/* {"this.state.loggedIn: " + this.state.loggedIn} */}
               <SearchField
                 handleSearchLocationChange={this.handleSearchLocationChange}
                 handleFormSubmit={this.handleFormSubmit}
@@ -149,7 +150,7 @@ class Search extends Component {
           </Row>
         </Container>
 
-        <Container>
+        <Container id="results-card-container">
           <Row>
             <Col size="sm-12">
               <ResultsCard
@@ -161,6 +162,7 @@ class Search extends Component {
             </Col>
           </Row>
         </Container>
+        </div>
       </div>
     );
   }

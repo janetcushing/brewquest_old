@@ -70,7 +70,7 @@ export default class Nav extends React.Component {
                         <IconButton iconStyle={styles.iconStyle} onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
                     </div>
 
-                    <Drawer
+                    <Drawer id="drawer-container"
                         openSecondary={true}
                         docked={false}
                         width={200}
