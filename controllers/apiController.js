@@ -56,13 +56,10 @@ module.exports = {
       .then(function (locResponse) {
         let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
         //second step, call the google places api
-        getPlacesApiData(locn, res);
-        // .then(done => {
-        // setTimeout(function () {
-          sendPlaceDetailstoClient(holdplacesBody, holdDetailBody, holdDbBody, res);
-        // }, 3000);
-
-        // })
+        getPlacesData(locn, res);
+        setTimeout(function () {
+          sendToClient(holdplacesBody, holdDetailBody, holdDbBody, res);
+        }, 500);
       }).catch(function (err) {
         console.log(err);
         res.send("location error from geocoder.geocode");
@@ -75,8 +72,7 @@ module.exports = {
 // call the google places api and kick off the function
 // that calls the google places detail api
 //----------------------------------------------------------
-const getPlacesApiData = (locn, res) => {
-  console.log("Im in getPlacesApiData");
+const getPlacesData = (locn, res) => {
   console.log("url: " + BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD);
   rp(BASEURL + APIKEY + LOCATION + locn + RANKBY + KEYWORD)
     .then(response => JSON.parse(response))
@@ -92,7 +88,7 @@ const getPlacesApiData = (locn, res) => {
       holdplacesBody = body.results;
     })
     .catch(error => {
-      console.log("Error returned from getPlacesApiData");
+      console.log("Error returned from getPlacesData");
       console.log(error);
       res.status(500).send("A Server Error Occurred");
     });
@@ -112,7 +108,6 @@ const getPlacesApiData = (locn, res) => {
 // NOT_FOUND indicates that the referenced location (placeid) was not found in the Places database.
 //----------------------------------------------------------
 const getPlacesDetailApiData = (body) => {
-  console.log("Im in getPlacesDetailApiData");
   for (let ii = 0; ii < body.results.length; ii++) {
     let place = "&place_id=" + body.results[ii].place_id;
     console.log(DETAILURL + APIKEY + place);
@@ -130,13 +125,12 @@ const getPlacesDetailApiData = (body) => {
         console.log(error);
         res.status(500).send("A Server Error Occurred");
       });
-  } // end of for loop
-} // end of getPlacesDetailApiData
+  }
+}
 
 
 
 const getSavedPlacesIndicator = (body) => {
-  console.log("in get savedplacesindicator ")
   for (let iii = 0; iii < body.results.length; iii++) {
     db.Breweries
       .find().where('place_id').equals(body.results[iii].place_id)
@@ -164,14 +158,21 @@ const getSavedPlacesIndicator = (body) => {
 
 
 
-const sendPlaceDetailstoClient = (holdplacesBody, holdDetailBody, holdDbBody, res) => {
+const sendToClient = (holdplacesBody, holdDetailBody, holdDbBody, res) => {
+  console.log("in sendToClient");
   let result = mergeByKey("place_id", holdplacesBody, holdDetailBody, holdDbBody);
   let placeDetails = result.map((element, i) => {
     let open_now = false;
     let weekday_text = [];
+    let num_reviews = 0;
+    let reviews = [];
     if (element.opening_hours) {
       open_now = element.opening_hours.open_now;
       weekday_text = element.opening_hours.weekday_text;
+    }
+    if (element.reviews) {
+      reviews = element.reviews;
+      num_reviews = element.reviews.length;
     }
     let details = {
       "details_key": i,
@@ -187,11 +188,11 @@ const sendPlaceDetailstoClient = (holdplacesBody, holdDetailBody, holdDbBody, re
       "full_address": element.formatted_address,
       "phone": element.formatted_phone_number,
       "price_level": element.price_level,
-      "num_reviews": element.reviews.length,
+      "num_reviews": num_reviews,
       "website": element.website,
       "open_now": open_now,
       "photos": element.photos,
-      "reviews": element.reviews,
+      "reviews": reviews,
       "weekday_text": weekday_text
     }
     return details;
@@ -200,5 +201,5 @@ const sendPlaceDetailstoClient = (holdplacesBody, holdDetailBody, holdDbBody, re
     res.send({
       placeDetails
     });
-  }, 3000);
+  }, 500);
 }
