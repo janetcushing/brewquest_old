@@ -1,24 +1,26 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
-import Check from 'material-ui/svg-icons/navigation/check';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+// import Check from 'material-ui/svg-icons/navigation/check';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
-import Info_outline from 'material-ui/svg-icons/action/info-outline'
+// import Info_outline from 'material-ui/svg-icons/action/info-outline'
 
 class Detail extends Component {
     state = {
         results: [],
-        detail: []
+        detail: [],
+        been_there: null
     };
 
     componentWillMount() {
         if (this.props.location.state) {
-            this.setState({ detail: this.props.location.state.placedetail }
-            );
+            this.setState({ detail: this.props.location.state.placedetail })
+            this.setState({ been_there: this.props.location.state.placedetail.been_there })
+            ;
         }
     }
 
@@ -27,25 +29,44 @@ class Detail extends Component {
     componentDidMount() {
         console.log(this.props.location.state)
         console.log("this is" + this.state.detail)
+        // this.loadSavedPlace();
+        console.log(this.state.been_there)
     }
+
+    // loadSavedPlace = () => {
+    //     API.getSavedPlace()
+    //       .then(res =>
+    //         this.setState({ detail: this.props.location.state.placedetail }),
+    //         console.log("saved places", this.state.detail)
+    //       )
+    //       .catch(err => console.log(err));
+    //   };
+
+    // updateBeenThere = () => {
+    //     this.setState({ been_there: })
+    // }
 
     deletePlace = id => {
         API.deleteSavedPlace(id)
-            .then(res => this.loadSavedPlaces())
-            .catch(err => console.log(err));
-    };
+          // .then(res => this.loadSavedPlaces())
+          // .catch(err => console.log(err));
+          .then(res => window.location.href = '/savedplaces')
+          .catch(console.log('oops, there it is!'))
+      };
 
     checkBeenThere = id => {
+        console.log(id)
         console.log("in checkbeenthere on saved places page")
         API.beenToPlace(id)
-            .then(res => this.getSavedPlace())
+            .then(res => this.setState ({ been_there: true }))
             .catch(err => console.log(err));
+            console.log("this is this.state.been_there: " + this.state.been_there)
     };
 
     unCheckBeenThere = id => {
         console.log("in uncheckbeenthere on saved places page")
         API.haveNotBeenToPlace(id)
-            .then(res => this.getSavedPlace())
+            .then(res => this.setState ({ been_there: false }))
             .catch(err => console.log(err));
     };
 
@@ -58,7 +79,7 @@ class Detail extends Component {
                     <CardActions>
                         <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
                         {
-                            (this.state.detail.been_there) ?
+                            (this.state.been_there) ?
                                 <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
                         }
                         )}

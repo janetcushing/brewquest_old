@@ -131,62 +131,43 @@ class Search extends Component {
 
   render() {
 
-    return ( <
-      div >
-      <
-      Container >
-      <
-      Row >
-      <
-      Col size = "sm-12" > { /* <AppbarRow /> */ } <
-      /Col> <
-      /Row> <
-      /Container> <
-      Container >
-      <
-      Row >
-      <
-      Col size = "sm-12" > {
-        "this.state.loggedIn: " + this.state.loggedIn
-      } <
-      SearchField handleSearchLocationChange = {
-        this.handleSearchLocationChange
-      }
-      handleFormSubmit = {
-        this.handleFormSubmit
-      }
-      searchLocation = {
-        this.state.searchLocation
-      }
-      /> <
-      /Col> <
-      /Row> <
-      /Container>
+    return (
+      <div id="search-page-background">
+        <Container>
+          <Row>
+            <Col size="sm-12">
+              {/* <AppbarRow /> */}
+            </Col>
+          </Row>
+        </Container>
+        <div class="main-container">
+        <Container>
+          <Row>
+            <Col size="sm-12">
+            {/* {"this.state.loggedIn: " + this.state.loggedIn} */}
+              <SearchField
+                handleSearchLocationChange={this.handleSearchLocationChange}
+                handleFormSubmit={this.handleFormSubmit}
+                searchLocation={this.state.searchLocation}
+              />
+            </Col>
+          </Row>
+        </Container>
 
-      <
-      Container >
-      <
-      Row >
-      <
-      Col size = "sm-12" >
-      <
-      ResultsCard results = {
-        this.state.result
-      }
-      handlePlacesSave = {
-        this.handlePlacesSave
-      }
-      handlePlacesDelete = {
-        this.handlePlacesDelete
-      }
-      loggedIn = {
-        this.state.loggedIn
-      }
-      /> <
-      /Col> <
-      /Row> <
-      /Container> <
-      /div>
+        <Container id="results-card-container">
+          <Row>
+            <Col size="sm-12">
+              <ResultsCard
+                results={this.state.result}
+                handlePlacesSave={this.handlePlacesSave}
+                handlePlacesDelete={this.handlePlacesDelete}
+                loggedIn={this.state.loggedIn}
+              />
+            </Col>
+          </Row>
+        </Container>
+        </div>
+      </div>
     );
   }
 }

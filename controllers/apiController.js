@@ -46,7 +46,7 @@ const getPlacesApiData = (locn, res) => {
     .then(response => JSON.parse(response))
     .then(body => {
       console.log(`came back successfully`);
-      console.log(body);
+      // console.log(body);
       // console.log(response.next_page_token);
       // console.log(body.results[0]);
       console.log(`root opening_hours: ${body.results.opening_hours}`);

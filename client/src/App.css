@@ -1,3 +1,9 @@
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: #424242;
+}
+
 .App {
   text-align: center;
 }
@@ -22,20 +28,38 @@
   font-size: large;
 }
 
+/* Grey Background */
+
+.grey-background {
+  background-color: #424242;
+}
+
+/* Main Container with Upper Margin */
+
+.main-container {
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+
 /* Home Page Background Image */
 
 #home-page-background {
-  background-image: url("images/bar.jpg");
-  background-repeat: no-repeat;
+  background-image: url("images/bar2.jpg");
+  background-repeat: repeat;
   background-size: cover;
   background-attachment: fixed;
-  height: 85vh;
+  height: 72vh;
   display: flex;
   align-items: center;
   margin: 0px;
 }
 
 /* Home Page Background Text and Search Field Styling */
+
+#searchPlacesDiv {
+  left: 60%;
+  position: relative;
+}
 
 #title-div {
   float: right;
@@ -45,6 +69,7 @@
 #search-field-div {
   float: right;
   position: relative;
+  z-index: 1;
 }
 
 #beer-text {
@@ -59,6 +84,8 @@
   background-color: #212121;
   text-align: center;
   color: #FAFAFA;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #save-places-home {
@@ -68,6 +95,8 @@
   background-color: #424242;
   text-align: center;
   color: #FAFAFA;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #rate-places-home {
@@ -77,19 +106,180 @@
   background-color: #212121;
   text-align: center;
   color: #FAFAFA;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
+/* Footer and Nav Styling */
+
 #footer {
-  position: absolute;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 30px;
-  background-color: #757575;
+  line-height: 30px;
+  background-color: #FAFAFA;
   text-align: center;
   vertical-align: 30px;
 }
 
+#footerText {
+  margin: 0px
+}
+
+#logoDiv {
+  z-index: 10;
+  position: fixed;
+  padding: 16px 20px;
+}
+
+#navBar {
+  overflow: hidden;
+  position: fixed;
+  /* Set the navbar to fixed position */
+  top: 0;
+  /* Position the navbar at the top of the page */
+  width: 100%;
+  /* Full width */
+}
+
+#navBtns {
+  float: right;
+}
+
+#drawer-container {
+  z-index: 20;
+}
+
+/* Search Page Styling */
+
+#search-page-background {
+  background-image: url("images/craft-beer.jpg");
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  align-items: center;
+  margin: 0px;
+}
+
+#results-card-container {
+  margin-bottom: 30px;
+}
+
+/* Saved Page Styling */
+
+#card-action-div {
+  float: right;
+  padding: 0px;
+  margin-top: 16px;
+}
+
+#saved-page-background {
+  background-image: url("images/now-brewing.jpg");
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  align-items: center;
+  margin: 0px;
+}
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 1300px) {
+  #searchPlacesDiv {
+    left: 57%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  #searchPlacesDiv {
+    left: 55%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  #searchPlacesDiv {
+    left: 52%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  #searchPlacesDiv {
+    left: 50%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  #searchPlacesDiv {
+    left: 46%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  #searchPlacesDiv {
+    left: 42%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 890px) {
+  #searchPlacesDiv {
+    left: 35%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  #searchPlacesDiv {
+    left: 30%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #searchPlacesDiv {
+    left: 18%;
+    position: relative;
+  }
+
+  #title-div {
+    text-align: center;
+  }
+  
+  #search-field-div {
+    float: none;
+    text-align: center;
+  }
+  
+  #find-beer-home,
+  #save-places-home,
+  #rate-places-home {
+    float: left;
+    width: 100%;
+    height: 115px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #searchPlacesDiv {
+    left: 25%;
+    position: relative;
+  }
 }
