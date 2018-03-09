@@ -62,7 +62,7 @@ class SavedPlaces extends Component {
 
   render() {
     return (
-      <div>
+      <div id="saved-page-background">
         <Container>
           <Row>
             <Col size="sm-12">
@@ -70,34 +70,46 @@ class SavedPlaces extends Component {
             </Col>
           </Row>
         </Container>
+        <div class="main-container">
         <Container>
           {this.state.results.length ? (
             <SavedList>
               {this.state.results.map(result => {
                 return (
                   <Card>
+                    
                     <SavedListItem key={result._id}>
-                      <CardTitle title={result.brewery_name} subtitle={result.full_address} />
-                      {/* <a href={result.website}>{result.brewery_name}</a> */}
-                      <CardActions>
-                        <Clear onClick={() => this.deletePlace(result._id)} />
-                        {
-                          (result.been_there) ?
-                            <Check_box onClick={() => this.unCheckBeenThere(result._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(result._id)} />
-                        }
-                        <Link to={{
-                          pathname: '/savedplaces/' + result._id,
-                          state: { placedetail: result }
-                        }}>
-                          <Info_outline
-                          // label="Search"
-                          // buttonStyle={styles.buttonStyle}
-                          // onTouchTap={this.handleTouchTap}
-                          // onClick={(event) => props.handleFormSubmit(event)}
-                          />
-                        </Link>
-                        )}
+                    <Row>
+                      <Col size="sm-8">
+                      <div id="card-title-div">
+                        <CardTitle title={result.brewery_name} subtitle={"Rating: " + result.rating} />
+                        {/* <a href={result.website}>{result.brewery_name}</a> */}
+                      </div>
+                      </Col>
+                      <Col size="sm-4">
+                      <div id="card-action-div" class="main-container">
+                        <CardActions>
+                          <Clear onClick={() => this.deletePlace(result._id)} />
+                          {
+                            (result.been_there) ?
+                              <Check_box onClick={() => this.unCheckBeenThere(result._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(result._id)} />
+                          }
+                          <Link to={{
+                            pathname: '/savedplaces/' + result._id,
+                            state: { placedetail: result }
+                          }}>
+                            <Info_outline
+                            // label="Search"
+                            // buttonStyle={styles.buttonStyle}
+                            // onTouchTap={this.handleTouchTap}
+                            // onClick={(event) => props.handleFormSubmit(event)}
+                            />
+                          </Link>
+                          )}
                         </CardActions>
+                      </div>
+                      </Col>
+                      </Row>
                     </SavedListItem>
                   </Card>
                 );
@@ -107,6 +119,7 @@ class SavedPlaces extends Component {
               <h3>No Saved Breweries Yet</h3>
             )}
         </Container>
+        </div>
       </div>
     );
   }
