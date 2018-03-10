@@ -50,7 +50,7 @@ module.exports = {
   },
   findByBreweryId: function(req, res) {
     db.Breweries
-      .find({"brewery_id": req.params.id})
+      .find({"brewery_id": req.params.brewery_id})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -62,7 +62,7 @@ module.exports = {
   },
   removeByBreweryId: function(req, res) {
     db.Breweries
-      .find({ brewery_id: req.params.breweryId })
+      .find({ brewery_id: req.params.brewery_id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
