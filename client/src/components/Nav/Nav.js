@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
-// import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import Login from "../Login";
@@ -57,7 +56,7 @@ export default class Nav extends React.Component {
         return (
             <div>
                 <div id="logoDiv">
-                    <img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} />
+                    <a href="/"><img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} /></a>
                 </div>
 
                 <div id="navBar">
@@ -67,7 +66,7 @@ export default class Nav extends React.Component {
                             (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={() => logout()} label="Logout" />
                                 : (<FlatButton labelStyle={styles.labelStyle} onClick={() => login()} label="Login" />)
                         }
-                        <IconButton iconStyle={styles.iconStyle} onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></IconButton>
+                        <FlatButton iconStyle={styles.iconStyle} onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></FlatButton>
                     </div>
 
                     <Drawer id="drawer-container"
@@ -79,10 +78,10 @@ export default class Nav extends React.Component {
                     >
                         <Link to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
                         <Link to="/search"><MenuItem onClick={this.handleClose}>Search Places</MenuItem></Link>
-                        <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link>
+                        {/* <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link> */}
                         {
                             (isLoggedIn()) ? <Link to="/savedplaces">
-                                <MenuItem onClick={this.handleClose}>My Places &amp; Beers</MenuItem>
+                                <MenuItem onClick={this.handleClose}>My Saved Places</MenuItem>
 
                             </Link> : <Link to="/login"> </Link>
 
@@ -90,7 +89,7 @@ export default class Nav extends React.Component {
 
                         {
                             (isLoggedIn()) ? <MenuItem onClick={() => logout()}>Logout</MenuItem>
-                                : (<button className="btn btn-info log" onClick={() => login()}>LogIn</button>)
+                                : (<MenuItem onClick={() => login()}>Login</MenuItem>)
                         }
 
 
