@@ -84,19 +84,19 @@ class Detail extends Component {
                             <Row>
                                 <Col size="sm-12">
                                     {/* Lauren add GENERAL INFORMATION component under here */}
-                                    <PlaceDetailGeneralInformation 
-                                    
+                                    <PlaceDetailGeneralInformation
+
                                     />
 
                                     {/* Lauren add HOURS component under here */}
                                     <PlaceDetailHours
-                                        // hours={this.state.detail.weekday_text}
+                                    // hours={this.state.detail.weekday_text}
                                     />
 
 
                                     {/* James add NOTES component under here */}
 
-                                <PlaceDetailNotes/>
+                                    <PlaceDetailNotes />
 
 
                                     {/* Add REVIEWS component under here */}
