@@ -17,7 +17,6 @@ const App = () =>
   <MuiThemeProvider>
     <Router>
       <div>
-        {/* <Navpills /> */}
         <Nav />
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />

@@ -8,7 +8,8 @@ import { hasBeenThere } from "../utils/hasbeenthereapi";
 import { Link } from "react-router-dom";
 import { SavedListItem, SavedList } from "../components/SavedPlacesList";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle } from 'material-ui/Card';
+import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
+import Check from 'material-ui/svg-icons/navigation/check';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
 import Info_outline from 'material-ui/svg-icons/action/info-outline'
@@ -76,6 +77,7 @@ class SavedPlaces extends Component {
               {this.state.results.map(result => {
                 return (
                   <Card>
+                    
                     <SavedListItem key={result._id}>
                     <Row>
                       <Col size="sm-8">
@@ -86,7 +88,7 @@ class SavedPlaces extends Component {
                       </Col>
                       <Col size="sm-4">
                       <div id="card-action-div" class="main-container">
-                        <CardActions>
+                        <CardActions id="card-actions">
                           <Clear onClick={() => this.deletePlace(result._id)} />
                           {
                             (result.been_there) ?
