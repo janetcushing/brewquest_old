@@ -99,10 +99,6 @@ class SavedPlaces extends Component {
                             state: { placedetail: result }
                           }}>
                             <Info_outline
-                            // label="Search"
-                            // buttonStyle={styles.buttonStyle}
-                            // onTouchTap={this.handleTouchTap}
-                            // onClick={(event) => props.handleFormSubmit(event)}
                             />
                           </Link>
                           )}
