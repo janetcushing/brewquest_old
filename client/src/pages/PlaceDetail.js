@@ -56,13 +56,6 @@ class Detail extends Component {
     render() {
         return (
             <div id="saved-detail-page-background">
-                <Container>
-                    <Row>
-                        <Col size="sm-12">
-                            {/* <AppbarRow /> */}
-                        </Col>
-                    </Row>
-                </Container>
                 <div class="main-container">
                     <Container>
                         <Card key={this.state.detail._id}>
