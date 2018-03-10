@@ -2,10 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
-import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
-import Login from "../Login";
-import Logout from "../Logout";
 import { grey50, grey800 } from 'material-ui/styles/colors';
 import { login, logout, isLoggedIn, getIdToken } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
@@ -14,15 +11,14 @@ const styles = {
     style: {
         background: grey800,
     },
-    iconStyle: {
-        color: grey50,
-    },
     labelStyle: {
         color: grey50,
     },
-    logoStyle: {
-        width: '100px'
-    }
+    smallIcon: {
+        width: 36,
+        height: 36,
+        color: grey50
+      }
 };
 
 // var token;
@@ -66,7 +62,7 @@ export default class Nav extends React.Component {
                             (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={() => logout()} label="Logout" />
                                 : (<FlatButton labelStyle={styles.labelStyle} onClick={() => login()} label="Login" />)
                         }
-                        <FlatButton iconStyle={styles.iconStyle} onClick={this.handleToggle}><NavigationMenu style={styles.iconStyle} /></FlatButton>
+                        <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle}/>
                     </div>
 
                     <Drawer id="drawer-container"
