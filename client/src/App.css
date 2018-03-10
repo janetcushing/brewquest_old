@@ -1,7 +1,6 @@
 html {
   position: relative;
   min-height: 100%;
-  background-color: #424242;
 }
 
 .App {
@@ -28,23 +27,17 @@ html {
   font-size: large;
 }
 
-/* Grey Background */
-
-.grey-background {
-  background-color: #424242;
-}
-
 /* Main Container with Upper Margin */
 
 .main-container {
-  margin-top: 100px;
+  margin-top: 120px;
   margin-bottom: 40px;
 }
 
 /* Home Page Background Image */
 
 #home-page-background {
-  background-image: url("images/bar2.jpg");
+  background-image: url("images/bar.jpg");
   background-repeat: repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -54,7 +47,7 @@ html {
   margin: 0px;
 }
 
-/* Home Page Background Text and Search Field Styling */
+/* Home Page Background Text, Search Field Styling, and Content Styling */
 
 #searchPlacesDiv {
   left: 60%;
@@ -86,28 +79,38 @@ html {
   color: #FAFAFA;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #save-places-home {
   float: left;
-  width: 33.3%;
+  width: 33.2%;
   height: 250px;
   background-color: #424242;
   text-align: center;
   color: #FAFAFA;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #rate-places-home {
   float: left;
-  width: 33.3%;
+  width: 33.4%;
   height: 250px;
   background-color: #212121;
   text-align: center;
   color: #FAFAFA;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.home-page-icon {
+  margin-top: 20px;
 }
 
 /* Footer and Nav Styling */
@@ -128,7 +131,6 @@ html {
 }
 
 #logoDiv {
-  z-index: 10;
   position: fixed;
   padding: 16px 20px;
 }
@@ -141,30 +143,38 @@ html {
   /* Position the navbar at the top of the page */
   width: 100%;
   /* Full width */
+  z-index: 100;
+  height: 100px;
 }
 
 #navBtns {
   float: right;
-}
-
-#drawer-container {
-  z-index: 20;
+  margin-top: 35px;
 }
 
 /* Search Page Styling */
-
 #search-page-background {
   background-image: url("images/craft-beer.jpg");
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
   height: 100vh;
   align-items: center;
   margin: 0px;
+  overflow: auto;
+}
+
+#card-title {
+  font-size: 28px;
 }
 
 #results-card-container {
   margin-bottom: 30px;
+}
+
+.save-button {
+  float: right;
 }
 
 /* Saved Page Styling */
@@ -183,17 +193,12 @@ html {
   height: 100vh;
   align-items: center;
   margin: 0px;
+  overflow: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h3 {
+  color: #FAFAFA;
 }
-
 
 /* Saved Places Detail Page */
 
@@ -204,7 +209,7 @@ html {
 }
 
 #saved-detail-page-background {
-  background-image: url("images/now-brewing.jpg");
+  background-image: url("images/neon.jpg");
   background-repeat: repeat-y;
   background-size: cover;
   background-attachment: fixed;
@@ -212,6 +217,15 @@ html {
   align-items: center;
   margin: 0px;
   overflow: auto;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* MEDIA QUERIES */
@@ -292,14 +306,35 @@ html {
   #rate-places-home {
     float: left;
     width: 100%;
-    height: 115px;
+    height: 195px;
     text-align: center;
   }
 }
 
 @media only screen and (max-width: 650px) {
   #searchPlacesDiv {
-    left: 25%;
+    left: 15%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #searchPlacesDiv {
+    left: 13%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #searchPlacesDiv {
+    left: 10%;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #searchPlacesDiv {
+    left: 7%;
     position: relative;
   }
 }
