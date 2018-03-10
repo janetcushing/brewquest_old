@@ -89,12 +89,7 @@ class SavedPlaces extends Component {
                           pathname: '/savedplaces/' + result._id,
                           state: { placedetail: result }
                         }}>
-                          <Info_outline
-                          // label="Search"
-                          // buttonStyle={styles.buttonStyle}
-                          // onTouchTap={this.handleTouchTap}
-                          // onClick={(event) => props.handleFormSubmit(event)}
-                          />
+                          <Info_outline />
                         </Link>
                         )}
                         </CardActions>
