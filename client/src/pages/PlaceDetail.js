@@ -66,17 +66,27 @@ class Detail extends Component {
                                     </div>
                                 </Col>
                                 <Col size="sm-4">
-                      <div id="card-action-div" class="main-container">
-                                <CardActions>
-                                    <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
-                                    {
-                                        (this.state.been_there) ?
-                                            <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
-                                    }
-                                    )}
-                        </CardActions>
-                        </div>
-                        </Col>
+                                    <div id="card-action-div" class="main-container">
+                                        <CardActions>
+                                            <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
+                                            {
+                                                (this.state.been_there) ?
+                                                    <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
+                                            }
+                                            )}
+                                        </CardActions>
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
+                                {/* Lauren add GENERAL INFORMATION component under here */}
+
+                                {/* Lauren add HOURS component under here */}
+
+                                {/* James add NOTES component under here */}
+
+                                {/* Add REVIEWS component under here */}
+                                
                             </Row>
                         </Card>
                     </Container>
