@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 
-const NotesCard = props =>
+const PlaceDetailNotes = props =>
 
 
     <Card>
@@ -65,4 +65,4 @@ const NotesCard = props =>
         </CardText>
     </Card>
 
-export default NotesCard;
+export default PlaceDetailNotes;
