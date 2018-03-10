@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
+import NotesCard from "../components/NotesCard";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
 import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
@@ -83,7 +84,7 @@ class Detail extends Component {
 
                                 {/* Lauren add HOURS component under here */}
 
-                                {/* James add NOTES component under here */}
+                                <NotesCard/>
 
                                 {/* Add REVIEWS component under here */}
                                 
