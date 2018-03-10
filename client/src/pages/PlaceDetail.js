@@ -8,6 +8,8 @@ import Clear from 'material-ui/svg-icons/content/clear';
 import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
+import PlaceDetailHours from "../components/PlaceDetailHours";
+import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
 // import Snackbar from 'material-ui/Snackbar';
 // import RaisedButton from 'material-ui/RaisedButton';
 
@@ -67,7 +69,7 @@ class Detail extends Component {
                                     </div>
                                 </Col>
                                 <Col size="sm-4">
-                                    <div id="card-action-div" class="main-container">
+                                    <div id="card-action-div" className="main-container">
                                         <CardActions>
                                             <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
                                             {
@@ -80,14 +82,26 @@ class Detail extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                {/* Lauren add GENERAL INFORMATION component under here */}
+                                <Col size="sm-12">
+                                    {/* Lauren add GENERAL INFORMATION component under here */}
+                                    <PlaceDetailGeneralInformation 
+                                    
+                                    />
 
-                                {/* Lauren add HOURS component under here */}
+                                    {/* Lauren add HOURS component under here */}
+                                    <PlaceDetailHours
+                                        // hours={this.state.detail.weekday_text}
+                                    />
+
+
+                                    {/* James add NOTES component under here */}
 
                                 <NotesCard/>
 
-                                {/* Add REVIEWS component under here */}
-                                
+
+                                    {/* Add REVIEWS component under here */}
+
+                                </Col>
                             </Row>
                         </Card>
                     </Container>
