@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
-// import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 // import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
 
@@ -10,29 +11,29 @@ const Notes = props =>
 
 
     <Card>
-        <CardTitle title="My Notes" />
-        <CardText>
 
-                <Card key={result.details_key}>
-
-                    <CardHeader
-                        avatar={result.icon}
-                        actAsExpander={true}
-                        showExpandableButton={true}
-                        title={result.brewery_name}
-                        subtitle={'Rating: ' + result.rating} />
+        <CardHeader
+            actAsExpander={true}
+            showExpandableButton={true}
+            title="My Notes" />
 
 
-                    <CardText expandable={true}>
+        <CardText expandable={true}>
 
-                        {'Insert Note Input field here'}
-                        <br />
+            <TextField
+                hintText="Enter a Note Here"
+                multiLine={true}
+                rows={2}
+                rowsMax={4}
+            /><br />
 
-                        {'Insert Saved Notes Here'}
-                        <br />
+            <CardActions>
 
-                        <CardActions>
-                            {/* {
+                <FlatButton
+                    label="Add a Note" />
+
+
+                {/* {
                                 (!props.loggedIn) ?
                                     <FlatButton
                                         onClick={() => login()}
@@ -54,22 +55,12 @@ const Notes = props =>
                                             label="Save to my list" />
                             } */}
 
-                            <FlatButton
-                                // secondary={true}
-                                // onClick={() => props.handleArticleSave({
-                                //     title: result.headline.main,
-                                //     snippet: result.snippet,
-                                //     date: result.pub_date,
-                                //     url: result.web_url
-                                // })}
-                                label="Add a Note" />
 
-                        </CardActions>
-                    </CardText>
-                </Card>
-            )}
-        </ CardText>
+            </CardActions>
 
-    </Card>;
+            {/* Add Individual Note Components here */}
+
+        </CardText>
+    </Card>
 
 export default Notes;
