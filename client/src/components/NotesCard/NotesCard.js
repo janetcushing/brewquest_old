@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 
-const Notes = props =>
+const NotesCard = props =>
 
 
     <Card>
@@ -22,10 +22,12 @@ const Notes = props =>
 
             <TextField
                 hintText="Enter a Note Here"
+                // floatingLabelText="Enter a Note Here"
                 multiLine={true}
-                rows={2}
+                fullWidth={true}
+                rows={1}
                 rowsMax={4}
-            /><br />
+            />
 
             <CardActions>
 
@@ -63,4 +65,4 @@ const Notes = props =>
         </CardText>
     </Card>
 
-export default Notes;
+export default NotesCard;
