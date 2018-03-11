@@ -80,13 +80,18 @@ class SavedPlaces extends Component {
                     
                     <SavedListItem key={result._id}>
                     <Row>
-                      <Col size="sm-8">
+                    <Link to={{
+                            pathname: '/savedplaces/' + result._id,
+                            state: { placedetail: result }
+                          }}>
+                      <Col size="sm-10">
                       <div id="card-title-div">
                         <CardTitle title={result.brewery_name} subtitle={"Rating: " + result.rating} />
                         {/* <a href={result.website}>{result.brewery_name}</a> */}
                       </div>
                       </Col>
-                      <Col size="sm-4">
+                      </Link>
+                      <Col size="sm-2">
                       <div id="card-action-div" class="main-container">
                         <CardActions id="card-actions">
                           <Clear onClick={() => this.deletePlace(result._id)} />
@@ -94,19 +99,20 @@ class SavedPlaces extends Component {
                             (result.been_there) ?
                               <Check_box onClick={() => this.unCheckBeenThere(result._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(result._id)} />
                           }
-                          <Link to={{
+                          {/* <Link to={{
                             pathname: '/savedplaces/' + result._id,
                             state: { placedetail: result }
-                          }}>
-                            <Info_outline
-                            />
-                          </Link>
+                          }}> */}
+                            {/* <Info_outline
+                            /> */}
+                          
                           )}
                         </CardActions>
                       </div>
                       </Col>
                       </Row>
                     </SavedListItem>
+                    {/* </Link> */}
                   </Card>
                 );
               })}
