@@ -43,27 +43,26 @@ module.exports = {
   },
   remove: function(req, res) {
     db.Breweries
-      .findById(req.params.id)
-      .then(dbModel => dbModel.remove())
+      .findById(req.params.id).remove()
+      // .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByBreweryId: function(req, res) {
     db.Breweries
-      .find({"brewery_id": req.params.brewery_id})
+      .find({"brewery_id": req.params.breweryId})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   updateByBreweryId: function(req, res) {
     db.Breweries
-      .findOneAndUpdate({ brewery_id: req.params.brewery_id }, req.body)
+      .findOneAndUpdate({ brewery_id: req.params.breweryId }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   removeByBreweryId: function(req, res) {
     db.Breweries
-      .find({ brewery_id: req.params.brewery_id })
-      .then(dbModel => dbModel.remove())
+      .find().where('brewery_id').equals(req.params.breweryId).remove()
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

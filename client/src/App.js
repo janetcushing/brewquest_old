@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Navpills from "./components/Navpills";
 import Nav from "./components/Nav";
@@ -12,6 +12,14 @@ import PlaceDetail from "./pages/PlaceDetail";
 // import Dropdown from "./components/Dropdown";
 import { requireAuth } from './utils/AuthService';
 import Callback from './components/Callback';
+
+const session = {
+  token: localStorage.getItem('token'),
+  refreshToken: localStorage.getItem('refreshToken'),
+  name: localStorage.getItem('name'),
+  email: localStorage.getItem('email')
+};
+console.log(session);
 
 const App = () =>
   <MuiThemeProvider>

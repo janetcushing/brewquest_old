@@ -56,7 +56,6 @@ class Search extends Component {
 
   searchApiPlaces = query => {
     console.log("Im in searchPlaces");
-    console.log("/api/apiplaces" + query);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     API.getApiPlaces(query)
@@ -96,49 +95,47 @@ class Search extends Component {
     }
   };
 
-  refreshPage = () => {
-    window.location.reload();
-  }
-
 
   handlePlacesSave = (event, details_key) => {
     event.preventDefault();
     console.log(`im in handlePlacesSave`);
-    // this.state.result[details_key].saved = true;
-    // this.setState({ result[details_key].saved: true });
-    console.log(this.state.result[details_key]);
+    let holdResult = this.state.result;
+    holdResult[details_key].saved = true;
+    this.setState({
+      result: holdResult
+    });
     API.savePlace(this.state.result[details_key])
-      .then(res => this.refreshPage());
+      .then(res =>
+        this.searchApiPlaces(this.state.searchLocation));
   };
 
   handlePlacesDelete = (event, details_key) => {
     event.preventDefault();
+    console.log(`im in handlePlacesDelete`);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
-    console.log(`im in handlePlacesDelete`);
-    console.log("value", details_key);
-    // this.state.result[details_key].saved = false;
-    let breweryId = {
-      brewery_id: this.state.results[details_key].brewery_id,
-    }
-    console.log(breweryId);
+    let holdResult = this.state.result;
+    holdResult[details_key].saved = false;
+    this.setState({
+      result: holdResult
+    });
+    let breweryId = this.state.result[details_key].brewery_id;
     API.deleteSavedPlaceByBreweryId(breweryId)
       .then(res => {
-        this.refreshPage();
-        console.log(`deleting  ${breweryId}`);
-      });
-  }
+        this.searchApiPlaces(this.state.searchLocation);
+  });
+}
 
-  render() {
+render() {
 
-    return (
-      <div id="search-page-background">
-        <div class="main-container">
+  return (
+    <div id="search-page-background">
+      <div class="main-container">
         <Container>
           <Row>
             <Col size="sm-12">
-            {/* {"this.state.loggedIn: " + this.state.loggedIn} */}
-              <SearchField 
+              {/* {"this.state.loggedIn: " + this.state.loggedIn} */}
+              <SearchField
                 handleSearchLocationChange={this.handleSearchLocationChange}
                 handleFormSubmit={this.handleFormSubmit}
                 searchLocation={this.state.searchLocation}
@@ -159,10 +156,10 @@ class Search extends Component {
             </Col>
           </Row>
         </Container>
-        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 export default Search;

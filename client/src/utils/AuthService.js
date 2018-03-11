@@ -25,7 +25,15 @@ export function login() {
     });
     console.log("is logged in " + isLoggedIn());
     var token = localStorage.getItem(ID_TOKEN_KEY);
+    var refreshToken = localStorage.getItem('refreshToken');
+    var userName = localStorage.getItem('name');
+    var userEmail = localStorage.getItem('email');
+    var userNickName = localStorage.getItem('nickname');
     console.log("token: " + token);
+    console.log("refreshToken: " + refreshToken);
+    console.log("userName: " + userName);
+    console.log("userEmail: " + userEmail);
+    console.log("userNickName: " + userNickName);
   }
   
   export function logout() {
@@ -34,6 +42,7 @@ export function login() {
     clearAccessToken();
     // browserHistory.push('/');
     console.log("is logged in " + isLoggedIn());
+    window.location.href = window.location.origin;
   }
   
   export function requireAuth(nextState, replace) {

@@ -11,11 +11,9 @@ export default {
     console.log("get saved place in API.js ID: " + id)
     return axios.get("/api/savedplaces/" + id);
   },
-  // Deletes the book with the given id
-
+  // Deletes the place with the given id
   deleteSavedPlaceByBreweryId: function(breweryId) {
-    console.log("im in deleteSavedPlace brewery_id: " + breweryId);
-    return axios.delete("/api/savedplaces/" + breweryId);
+    return axios.delete("/api/savedplace/" + breweryId);
   },
   // Saves a place to the database
   savePlace: function(savedPlacesData) {

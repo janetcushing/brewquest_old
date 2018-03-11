@@ -19,6 +19,14 @@ const styles = {
   },
 };
 
+const session = {
+  token: localStorage.getItem('token'),
+  refreshToken: localStorage.getItem('refreshToken'),
+  name: localStorage.getItem('name'),
+  email: localStorage.getItem('email')
+};
+console.log(session);
+
 class Home extends Component {
   constructor(props, context) {
     super(props, context);

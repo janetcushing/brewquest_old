@@ -13,14 +13,6 @@ router
   .put(savedPlacesController.update)
   .delete(savedPlacesController.remove);
 
-  
- // Matches with "/api/savedplaces/:brewery_id"
- router
- .route("/:breweryId")
- .get(savedPlacesController.findByBreweryId)
- .post(savedPlacesController.create)
- .put(savedPlacesController.updateByBreweryId)
- .delete(savedPlacesController.removeByBreweryId);
 
 
 module.exports = router;

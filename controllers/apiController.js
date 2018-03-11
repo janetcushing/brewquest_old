@@ -18,10 +18,10 @@ const mergeByKey = require("array-merge-by-key");
 const BASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 const DETAILURL = "https://maps.googleapis.com/maps/api/place/details/json?";
 
-const APIKEY = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
+const APIKEY1 = "key=AIzaSyDYtDI3eM0ZwVpsw9o4jHcq0NYijbQSwv4";
 const APIKEY2 = "key=AIzaSyAl8-KwRAZXg-L9F_Quj7tU_z940kny4Z4";
 const APIKEY3 = "key=AIzaSyD3M_Gp0DQ5LWxbr1ur4GMKvSDLpfnR_ro";
-const APIKEY4 = "key=AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ";
+const APIKEY = "key=AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ";
 const APIKEY5 = "key=AIzaSyDNDkZwKnTtNOn9MYrd8RRPI4TTqN48PVg";
 const APIKEY6 = "key=AIzaSyDXD-agq64RPzmIcjnxmmbSXip3fAGmJj0";
 
@@ -33,8 +33,8 @@ const LOCATION = "&location="
 const OPTIONS = {
   provider: 'google',
   httpAdapter: 'https',
-  apiKey: 'AIzaSyBLS6w0pAJbyX6HKRve7eKo2sWMjBOJKSo',
-  // apiKey: 'AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ',
+  // apiKey: 'AIzaSyBLS6w0pAJbyX6HKRve7eKo2sWMjBOJKSo',
+  apiKey: 'AIzaSyCBumUHvERt5G6PSGrvs9MQHRbbHdS7BlQ',
   formatter: null
 };
 const GEOCODER = NodeGeocoder(OPTIONS);
