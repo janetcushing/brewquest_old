@@ -133,19 +133,12 @@ class Search extends Component {
 
     return (
       <div id="search-page-background">
-        <Container>
-          <Row>
-            <Col size="sm-12">
-              {/* <AppbarRow /> */}
-            </Col>
-          </Row>
-        </Container>
         <div class="main-container">
         <Container>
           <Row>
             <Col size="sm-12">
             {/* {"this.state.loggedIn: " + this.state.loggedIn} */}
-              <SearchField
+              <SearchField 
                 handleSearchLocationChange={this.handleSearchLocationChange}
                 handleFormSubmit={this.handleFormSubmit}
                 searchLocation={this.state.searchLocation}

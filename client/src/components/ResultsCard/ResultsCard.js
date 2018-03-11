@@ -5,7 +5,6 @@ import { login } from '../../utils/AuthService';
 import { Link } from "react-router-dom";
 
 
-
 const ResultsCard = props =>
 
 
@@ -40,7 +39,7 @@ const ResultsCard = props =>
                         <br />
                         {' Phone: ' + result.phone}
                         <br />
-                        {' Website: ' + result.website}
+                        <a href={result.website} target="_new_tab">{' Website: ' + result.website}</a>
                         <br />
                         {result.saved}
 
