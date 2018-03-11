@@ -56,7 +56,6 @@ class Search extends Component {
 
   searchApiPlaces = query => {
     console.log("Im in searchPlaces");
-    console.log("/api/apiplaces" + query);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     API.getApiPlaces(query)
@@ -96,16 +95,10 @@ class Search extends Component {
     }
   };
 
-  //  refreshPage = () => {
-  //     window.location.reload();
-  //   } 
-
 
   handlePlacesSave = (event, details_key) => {
     event.preventDefault();
     console.log(`im in handlePlacesSave`);
-    // this.state.result[details_key].saved = true;
-    // this.setState({ result[details_key].saved: true });
     let holdResult = this.state.result;
     holdResult[details_key].saved = true;
     this.setState({
@@ -121,20 +114,15 @@ class Search extends Component {
     console.log(`im in handlePlacesDelete`);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
-    console.log("value", details_key);
-    // this.state.result[details_key].saved = false;
     let holdResult = this.state.result;
     holdResult[details_key].saved = false;
     this.setState({
       result: holdResult
     });
-    console.log(this.state.result[0]);
     let breweryId = this.state.result[details_key].brewery_id;
-    console.log(breweryId);
     API.deleteSavedPlaceByBreweryId(breweryId)
       .then(res => {
         this.searchApiPlaces(this.state.searchLocation);
-    console.log(`deleting  ${breweryId}`)
   });
 }
 

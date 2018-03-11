@@ -2,7 +2,7 @@ const router = require("express").Router();
 const savedPlacesController = require("../../controllers/savedPlacesController");
 
 
- // Matches with "/api/savedplace/:brewery_id"
+ // Matches with "/api/savedplace/brewery_id"     //
  router
  .route("/:breweryId")
  .get(savedPlacesController.findByBreweryId)

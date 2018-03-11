@@ -61,12 +61,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   removeByBreweryId: function(req, res) {
-    console.log("im on th client side in removeByBreweryId");
-    console.log(req.params.breweryId);
     db.Breweries
-      // .find({ brewery_id: req.params.breweryId })
       .find().where('brewery_id').equals(req.params.breweryId).remove()
-      // .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
