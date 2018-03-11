@@ -10,8 +10,20 @@ const PlaceGeneralInformation = props =>
                     actAsExpander={true}
                     showExpandableButton={true}/>
                     <CardText expandable={true}>
-                    {/* {props.brewery_name} */}
-                    General Information Goes Here
+                    <ul>
+                        <p>
+                    Address: {props.full_address}
+                    </p>
+                    <p>
+                    Total Reviews: {props.num_reviews}
+                    </p>
+                    <p>
+                    Phone: {props.phone}
+                    </p>
+                    <p>
+                    Website: {props.website}
+                    </p>
+                    </ul>
                     </CardText>
                 </Card>
                 

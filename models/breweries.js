@@ -89,6 +89,9 @@ const BreweriesSchema = new Schema({
   },
   weekday_text: {
     type: Array
+  },
+  url: {
+    type: String
   }
   
 });

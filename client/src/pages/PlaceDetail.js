@@ -8,6 +8,7 @@ import Clear from 'material-ui/svg-icons/content/clear';
 import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
+import Place from 'material-ui/svg-icons/maps/place'
 import PlaceDetailHours from "../components/PlaceDetailHours";
 import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
 // import Snackbar from 'material-ui/Snackbar';
@@ -56,6 +57,10 @@ class Detail extends Component {
             .catch(err => console.log(err));
     };
 
+    // loadMap = id => {
+
+    // }
+
     render() {
         return (
             <div id="saved-detail-page-background">
@@ -71,12 +76,16 @@ class Detail extends Component {
                                 <Col size="sm-4">
                                     <div id="card-action-div" className="main-container">
                                         <CardActions>
-                                            <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
                                             {
                                                 (this.state.been_there) ?
                                                     <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
                                             }
                                             )}
+
+                                            <a href={this.state.detail.url} target="blank" >
+                                            <Place />
+                                            </a>
+                                            <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
                                         </CardActions>
                                     </div>
                                 </Col>
@@ -85,17 +94,25 @@ class Detail extends Component {
                                 <Col size="sm-12">
                                     {/* Lauren add GENERAL INFORMATION component under here */}
                                     <PlaceDetailGeneralInformation
-
+                                    full_address={this.state.detail.full_address}
+                                    num_reviews={this.state.detail.num_reviews}
+                                    phone={this.state.detail.phone}
+                                    website={this.state.detail.website}
                                     />
 
                                     {/* Lauren add HOURS component under here */}
                                     <PlaceDetailHours
-                                    // hours={this.state.detail.weekday_text}
+                                    SundayHours={this.state.detail.weekday_text[6]}
+                                    MondayHours={this.state.detail.weekday_text[0]}
+                                    TuesdayHours={this.state.detail.weekday_text[1]}
+                                    WednesdayHours={this.state.detail.weekday_text[2]}
+                                    ThursdayHours={this.state.detail.weekday_text[3]}
+                                    FridayHours={this.state.detail.weekday_text[4]}
+                                    SaturdayHours={this.state.detail.weekday_text[5]}
                                     />
 
 
                                     {/* James add NOTES component under here */}
-
                                     <PlaceDetailNotes />
 
 

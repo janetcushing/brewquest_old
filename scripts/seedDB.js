@@ -157,6 +157,7 @@ const brewerySeed = [{
                 "time": 1517719920
             }
         ],
+        "url": "https://maps.google.com/?cid=3810643628520741652",
         "been_there": false,
         "weekday_text": [
             "Monday: Closed",
@@ -316,6 +317,7 @@ const brewerySeed = [{
                 "time": 1516496931
             }
         ],
+        "url": "https://maps.google.com/?cid=3810643628520741652",
         "been_there": false,
         "weekday_text": [
             "Monday: Closed",
@@ -475,6 +477,7 @@ const brewerySeed = [{
                 "time": 1506382171
             }
         ],
+        "url": "https://maps.google.com/?cid=3810643628520741652",
         "been_there": false,
         "weekday_text": [
             "Monday: Closed",
@@ -634,6 +637,7 @@ const brewerySeed = [{
                 "time": 1520118740
             }
         ],
+        "url": "https://maps.google.com/?cid=3810643628520741652",
         "been_there": false,
         "weekday_text": [
             "Monday: Closed",

@@ -11,7 +11,29 @@ const PlaceDetailHours = props =>
                     showExpandableButton={true}/>
                     <CardText expandable={true}>
                         {/* Need hours from JSON object to put in here */}
-                    Hours go here
+                        <ul>
+                            <p>
+                        {props.SundayHours}
+                        </p>
+                        <p>
+                        {props.MondayHours}
+                        </p>
+                        <p>
+                        {props.TuesdayHours}
+                        </p>
+                        <p>
+                        {props.WednesdayHours}
+                        </p>
+                        <p>
+                        {props.ThursdayHours}
+                        </p>
+                        <p>
+                        {props.FridayHours}
+                        </p>
+                        <p>
+                        {props.SaturdayHours}
+                        </p>
+                        </ul>
                     </CardText>
                 </Card>
                 
