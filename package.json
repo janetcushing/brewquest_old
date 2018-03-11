@@ -22,14 +22,12 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
-    "is-valid-zip": "^0.0.3",
     "mongojs": "^2.5.0",
     "mongoose": "^5.0.7",
     "node-geocoder": "^3.22.0",
     "node-where": "^1.1.0",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2",
-    "zipcodes": "^6.0.0"
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
