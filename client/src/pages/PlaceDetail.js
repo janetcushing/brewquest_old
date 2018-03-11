@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import Container from "../components/Container";
+import Row from "../components/Row";
+import Col from "../components/Col";
+import PlaceDetailNotes from "../components/PlaceDetailNotes";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
-// import Check from 'material-ui/svg-icons/navigation/check';
+import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
-// import Info_outline from 'material-ui/svg-icons/action/info-outline'
+import PlaceDetailHours from "../components/PlaceDetailHours";
+import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
+// import Snackbar from 'material-ui/Snackbar';
+// import RaisedButton from 'material-ui/RaisedButton';
 
 class Detail extends Component {
     state = {
@@ -20,78 +24,89 @@ class Detail extends Component {
         if (this.props.location.state) {
             this.setState({ detail: this.props.location.state.placedetail })
             this.setState({ been_there: this.props.location.state.placedetail.been_there })
-            ;
+                ;
         }
     }
 
-    // When this component mounts, grab the book with the _id of this.props.match.params.id
-    // e.g. localhost:3000/books/599dcb67f0f16317844583fc
     componentDidMount() {
         console.log(this.props.location.state)
         console.log("this is" + this.state.detail)
-        // this.loadSavedPlace();
         console.log(this.state.been_there)
     }
 
-    // loadSavedPlace = () => {
-    //     API.getSavedPlace()
-    //       .then(res =>
-    //         this.setState({ detail: this.props.location.state.placedetail }),
-    //         console.log("saved places", this.state.detail)
-    //       )
-    //       .catch(err => console.log(err));
-    //   };
-
-    // updateBeenThere = () => {
-    //     this.setState({ been_there: })
-    // }
-
     deletePlace = id => {
         API.deleteSavedPlace(id)
-          // .then(res => this.loadSavedPlaces())
-          // .catch(err => console.log(err));
-          .then(res => window.location.href = '/savedplaces')
-          .catch(console.log('oops, there it is!'))
-      };
+            .then(res => window.location.href = '/savedplaces')
+            .catch(console.log('oops, there it is!'))
+    };
 
     checkBeenThere = id => {
         console.log(id)
         console.log("in checkbeenthere on saved places page")
         API.beenToPlace(id)
-            .then(res => this.setState ({ been_there: true }))
+            .then(res => this.setState({ been_there: true }))
             .catch(err => console.log(err));
-            console.log("this is this.state.been_there: " + this.state.been_there)
+        console.log("this is this.state.been_there: " + this.state.been_there)
     };
 
     unCheckBeenThere = id => {
         console.log("in uncheckbeenthere on saved places page")
         API.haveNotBeenToPlace(id)
-            .then(res => this.setState ({ been_there: false }))
+            .then(res => this.setState({ been_there: false }))
             .catch(err => console.log(err));
     };
 
     render() {
         return (
-            <Container fluid>
-                <Card key={this.state.detail._id}>
-                    <a href={this.state.detail.website}><CardTitle title={this.state.detail.brewery_name}  /></a>
-                    <CardTitle subtitle={this.state.detail.full_address} />
-                    <CardActions>
-                        <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
-                        {
-                            (this.state.been_there) ?
-                                <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
-                        }
-                        )}
-                        </CardActions>
-                    <CardText>
-                        Phone: {this.state.detail.phone}
-                    </CardText>
-                    <CardText>
-                        Price Level: {this.state.detail.price_level}
-                    </CardText>
-                </Card>
-            </Container>
+            <div id="saved-detail-page-background">
+                <div class="main-container">
+                    <Container>
+                        <Card key={this.state.detail._id}>
+                            <Row>
+                                <Col size="sm-8">
+                                    <div id="card-title-div">
+                                        <CardTitle title={this.state.detail.brewery_name} />
+                                    </div>
+                                </Col>
+                                <Col size="sm-4">
+                                    <div id="card-action-div" className="main-container">
+                                        <CardActions>
+                                            <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
+                                            {
+                                                (this.state.been_there) ?
+                                                    <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
+                                            }
+                                            )}
+                                        </CardActions>
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col size="sm-12">
+                                    {/* Lauren add GENERAL INFORMATION component under here */}
+                                    <PlaceDetailGeneralInformation
+
+                                    />
+
+                                    {/* Lauren add HOURS component under here */}
+                                    <PlaceDetailHours
+                                    // hours={this.state.detail.weekday_text}
+                                    />
+
+
+                                    {/* James add NOTES component under here */}
+
+                                    <PlaceDetailNotes />
+
+
+                                    {/* Add REVIEWS component under here */}
+
+                                </Col>
+                            </Row>
+                        </Card>
+                    </Container>
+                </div>
+            </div>
         );
     }
 }

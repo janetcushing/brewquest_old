@@ -88,7 +88,7 @@ class SavedPlaces extends Component {
                       </Col>
                       <Col size="sm-4">
                       <div id="card-action-div" class="main-container">
-                        <CardActions>
+                        <CardActions id="card-actions">
                           <Clear onClick={() => this.deletePlace(result._id)} />
                           {
                             (result.been_there) ?
@@ -99,10 +99,6 @@ class SavedPlaces extends Component {
                             state: { placedetail: result }
                           }}>
                             <Info_outline
-                            // label="Search"
-                            // buttonStyle={styles.buttonStyle}
-                            // onTouchTap={this.handleTouchTap}
-                            // onClick={(event) => props.handleFormSubmit(event)}
                             />
                           </Link>
                           )}
@@ -116,7 +112,7 @@ class SavedPlaces extends Component {
               })}
             </SavedList>
           ) : (
-              <h3>No Saved Breweries Yet</h3>
+              <h2>No Saved Breweries Yet</h2>
             )}
         </Container>
         </div>
