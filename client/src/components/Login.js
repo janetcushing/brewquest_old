@@ -3,7 +3,8 @@ import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 // import Dialog from 'material-ui/Dialog';
 import {grey50} from 'material-ui/styles/colors';
-import { login } from '../utils/AuthService';
+import { login, isLoggedIn, getIdToken, decodeToken } from '../utils/AuthService';
+
 
 const styles = {
     labelStyle: {
@@ -23,10 +24,37 @@ const styles = {
       };
     }
   
+    handleLogin = () => {
+      console.log(`im in handleLogin`);
+      login();
+      // if (isLoggedIn()) {
+        //   this.setState({ loggedIn: true });
+        //   let token = getIdToken();
+        //   console.log(token);
+        // let user = decodeToken(token);
+        // console.log(user);
+        // this.setState({ user: user });
+        // console.log("im about to API.saveUser");
+        // console.log(this.state.user);
+
+        // setTimeout(function () {
+        // API.saveUser(this.state.user)
+        //     .then(res => {
+        //         console.log("user added");
+        //     })
+        //     .catch(err => console.log(err));
+        // }, 10000);
+         
+      // } else { this.setState({ loggedIn: false }); }
+
+  }
+
     handleRequestClose() {
       this.setState({
         open: false,
       });
+      
+        
     }
   
     handleTouchTap() {
@@ -37,29 +65,15 @@ const styles = {
     }
   
     render() {
-      // const standardActions = (
-      //   <div>
-      //     <Tabs></Tabs>
-      //     <FlatButton
-      //       label="Ok"
-      //       primary={true}
-      //       onTouchTap={this.handleRequestClose}
-      //     />
-      //   </div>
-      // );
+     
   
       return (
         <div>
-            {/* <Dialog
-              open={this.state.open}
-              actions={standardActions}
-              onRequestClose={this.handleRequestClose}
-            >
-            </Dialog> */}
             <FlatButton
               label="Login" 
               onTouchTap={this.handleTouchTap}
               labelStyle={styles.labelStyle}
+              onClick={this.handleLogin}
             />
           </div>
       );

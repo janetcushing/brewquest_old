@@ -21,7 +21,8 @@ class Search extends Component {
       searchLocation: "",
       loggedIn: "",
       result: [],
-      saved: []
+      saved: [], 
+      user: {}
     };
   }
 

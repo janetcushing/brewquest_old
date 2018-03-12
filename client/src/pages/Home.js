@@ -19,13 +19,7 @@ const styles = {
   },
 };
 
-const session = {
-  token: localStorage.getItem('token'),
-  refreshToken: localStorage.getItem('refreshToken'),
-  name: localStorage.getItem('name'),
-  email: localStorage.getItem('email')
-};
-console.log(session);
+
 
 class Home extends Component {
   constructor(props, context) {
@@ -35,7 +29,8 @@ class Home extends Component {
       open: false,
       redirect: false,
       searchLocation: "",
-      loggedIn: ""
+      loggedIn: "",
+      user:{}
     };
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -120,7 +115,4 @@ class Home extends Component {
     );
   }
 }
-
 export default Home;
-
-

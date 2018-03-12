@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -13,13 +14,7 @@ import PlaceDetail from "./pages/PlaceDetail";
 import { requireAuth } from './utils/AuthService';
 import Callback from './components/Callback';
 
-const session = {
-  token: localStorage.getItem('token'),
-  refreshToken: localStorage.getItem('refreshToken'),
-  name: localStorage.getItem('name'),
-  email: localStorage.getItem('email')
-};
-console.log(session);
+
 
 const App = () =>
   <MuiThemeProvider>
@@ -37,4 +32,3 @@ const App = () =>
   </MuiThemeProvider>;
 
 export default App;
-

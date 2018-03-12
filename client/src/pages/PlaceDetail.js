@@ -19,6 +19,7 @@ class Detail extends Component {
         results: [],
         detail: [],
         been_there: null,
+        user:{},
         noteInput: "",
         savedNotes: []
     };
