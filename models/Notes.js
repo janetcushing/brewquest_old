@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const NoteSchema = new Schema({
+const NotesSchema = new Schema({
+    brewery_id: {
+        type: String,
+        required: true
+    },
     body: {
         type: String,
         maxlength: 5000
@@ -12,7 +16,7 @@ const NoteSchema = new Schema({
     }
   });
   
- const Note = mongoose.model("Note", NoteSchema);
+ const Notes = mongoose.model("Notes", NotesSchema);
   
-  module.exports = Note;
+  module.exports = Notes;
   

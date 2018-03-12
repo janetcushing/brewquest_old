@@ -1,4 +1,6 @@
 module.exports = {
     Breweries: require("./breweries"),
-    UserStore: require("./UserStore")
+    UserStore: require("./UserStore"),
+    Notes: require("./Notes")
+
 };

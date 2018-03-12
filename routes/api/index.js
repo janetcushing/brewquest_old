@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const savedPlacesRoutes = require("./savedplaces");
 const savedPlaceRoutes = require("./savedplace");
+const savedNotesRoutes = require("./savednotes");
 const apiPlaces = require("./apiplaces");
 const user = require("./user");
 
@@ -9,10 +10,14 @@ const user = require("./user");
 router.use("/savedplaces", savedPlacesRoutes);
 router.use("/savedplace", savedPlaceRoutes);
 
+
+// Database routes - Notes table     //
+router.use("/savednotes", savedNotesRoutes);
+
 // API route - to get Google api places data
 router.use("/apiplaces", apiPlaces);
 
-// User route - to get user data
+// Database Routes - User table
 router.use("/user", user);
 
 module.exports = router;

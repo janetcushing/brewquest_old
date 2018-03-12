@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ReviewSchema = new Schema({
+const ReviewsSchema = new Schema({
+    brewery_id: {
+        type: String,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,
@@ -18,6 +22,6 @@ const ReviewSchema = new Schema({
     }
 });
 
-const Review = mongoose.model("Review", ReviewSchema);
+const Reviews = mongoose.model("Reviews", ReviewsSchema);
 
-module.exports = Review;
+module.exports = Reviews;
