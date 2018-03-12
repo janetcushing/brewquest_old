@@ -42,34 +42,38 @@ export default {
   // savePlace: function(savedPlacesData) {
   //   return axios.post("/api/savedplaces", savedPlacesData.been_there);
   // },
-  
+
 
   getApiPlaces: function (query) {
     console.log(`im in getApiPlaces: ${query}`)
     console.log(`/api/apiplaces/${query}`)
-   return axios.get("/api/apiplaces/" + query)
+    return axios.get("/api/apiplaces/" + query)
   },
   // Saves a user to the database
-  saveUser: function(userData) {
+  saveUser: function (userData) {
     console.log("im in saveUser on the client side");
     console.log(`userData ${JSON.stringify(userData)}`);
     return axios.post("/api/user/", userData);
-  },  
+  },
   // Looks for a user to the database
-  findUser: function(name) {
+  findUser: function (name) {
     console.log("im in findUser on the client side");
     console.log(`userName ${name}`);
     console.log("/api/user/" + name);
     return axios.get("/api/user/" + name);
-  
+
   },
 
   saveNote: function (savedNoteData) {
     return axios.post("/api/savednotes", savedNoteData);
   },
 
-  deleteSavedNote: function (id) {
-    return axios.delete("/api/savednotes/" + id);
+  deleteSavedNote: function (noteId) {
+    return axios.delete("/api/savednotes/", {
+      params: {
+        id: noteId
+      }
+    });
   },
 
   getSavedNotes: function (breweryId) {

@@ -51,14 +51,14 @@ const PlaceDetailNotes = props =>
                     <CardText>
 
                         {note.body}
-                        <br/>
+                        <br />
                         {note.date}
 
                     </CardText>
 
                     <CardActions>
 
-                        <Clear />
+                        <Clear onClick={() => props.handleDeleteNote(note._id)} />
 
                     </CardActions>
 
