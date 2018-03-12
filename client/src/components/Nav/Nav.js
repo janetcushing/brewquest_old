@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { grey50, grey800 } from 'material-ui/styles/colors';
-import { login, logout, isLoggedIn, getIdToken } from '../../utils/AuthService';
+// import { login, logout, isLoggedIn, getIdToken, decodeToken, clearIdToken, clearAccessToken } from '../../utils/AuthService';
+import { login, logout, isLoggedIn, clearIdToken, clearAccessToken } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
+import API from "../../utils/API";
 
 const styles = {
     style: {
@@ -18,23 +20,54 @@ const styles = {
         width: 36,
         height: 36,
         color: grey50
-      }
+    }
 };
 
-// var token;
 
-export default class Nav extends React.Component {
+ class Nav extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { open: false };
     }
 
-    // handleLogin = () => {
-    //     console.log(`im in handleLogin`);
-    //     login();
+    handleLogin = () => {
+        console.log(`im in handleLogin`);
+        login();
+        // if (isLoggedIn()) {
+            this.setState({ loggedIn: true });
+           
+           
+        // } else { this.setState({ loggedIn: false }); }
 
+    }
+
+    // componentWillUnmount(){
+    //     console.log("in componentWillUnmount");
+ // let token = getIdToken();
+//  let token = localStorage.getItem('id_token')
+//  debugger
+//  console.log(token);
+//  let user = decodeToken(token);
+//  console.log(user);
+//  this.setState({ user: user });
+//  console.log("im about to API.saveUser");
+//  console.log(this.state.user);
+//  setTimeout(function () {
+//  API.saveUser(this.state.user)
+//      .then(res => {
+//          console.log("user added");
+//      })
+//      .catch(err => console.log(err));
+//  }, 10000);
     // }
+
+    handleLogout = () => {
+        logout();
+        console.log("i just logged out");
+        clearIdToken();
+        clearAccessToken();
+      }
 
     handleToggle = () => this.setState({ open: !this.state.open });
 
@@ -59,10 +92,10 @@ export default class Nav extends React.Component {
 
                     <div id="navBtns">
                         {
-                            (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={() => logout()} label="Logout" />
-                                : (<FlatButton labelStyle={styles.labelStyle} onClick={() => login()} label="Login" />)
+                            (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
+                                : (<FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogin} label="Login" />)
                         }
-                        <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle}/>
+                        <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
                     </div>
 
                     <Drawer id="drawer-container"
@@ -97,3 +130,5 @@ export default class Nav extends React.Component {
         );
     }
 }
+
+export default Nav;

@@ -42,17 +42,26 @@ export default {
   // savePlace: function(savedPlacesData) {
   //   return axios.post("/api/savedplaces", savedPlacesData.been_there);
   // },
-  // search: function(query) {
-  //   console.log("im in search on the client side");
-  //   console.log(BASEURL + APIKEY + FORMAT + POSTAL + query);
-  //   return axios.fetch(BASEURL + APIKEY + FORMAT + POSTAL + query);
-  // },
+  
 
   getApiPlaces: function(query) {
     console.log(`im in getApiPlaces: ${query}`)
     console.log(`/api/apiplaces/${query}`)
    return axios.get("/api/apiplaces/" + query)
-  }
+  },
+  // Saves a user to the database
+  saveUser: function(userData) {
+    console.log("im in saveUser on the client side");
+    console.log(`userData ${JSON.stringify(userData)}`);
+    return axios.post("/api/user/", userData);
+  },  
+  // Looks for a user to the database
+  findUser: function(name) {
+    console.log("im in findUser on the client side");
+    console.log(`userName ${name}`);
+    console.log("/api/user/" + name);
+    return axios.get("/api/user/" + name);
+  }  
 
   // saveBrewery: function(breweryData) {
   //   console.log("im in saveBrewery on the client side");

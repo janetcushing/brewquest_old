@@ -18,7 +18,8 @@ class Detail extends Component {
     state = {
         results: [],
         detail: [],
-        been_there: null
+        been_there: null,
+        user:{}
     };
 
     componentWillMount() {

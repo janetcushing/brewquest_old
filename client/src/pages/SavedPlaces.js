@@ -16,7 +16,8 @@ import Info_outline from 'material-ui/svg-icons/action/info-outline'
 
 class SavedPlaces extends Component {
   state = {
-    results: []
+    results: [],
+    user:{}
   };
 
   componentDidMount() {

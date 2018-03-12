@@ -29,7 +29,8 @@ class Home extends Component {
       open: false,
       redirect: false,
       searchLocation: "",
-      loggedIn: ""
+      loggedIn: "",
+      user:{}
     };
 
     this.handleRequestClose = this.handleRequestClose.bind(this);

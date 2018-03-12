@@ -14,13 +14,7 @@ import PlaceDetail from "./pages/PlaceDetail";
 import { requireAuth } from './utils/AuthService';
 import Callback from './components/Callback';
 
-const session = {
-  token: localStorage.getItem('token'),
-  refreshToken: localStorage.getItem('refreshToken'),
-  name: localStorage.getItem('name'),
-  email: localStorage.getItem('email')
-};
-console.log(session);
+
 
 const App = () =>
   <MuiThemeProvider>

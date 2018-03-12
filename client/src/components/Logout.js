@@ -1,7 +1,7 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import { grey50 } from 'material-ui/styles/colors';
-import { logout, isLoggedIn } from '../utils/AuthService';
+import { logout, isLoggedIn,  clearIdToken, clearAccessToken } from '../utils/AuthService';
 
 const styles = {
   labelStyle: {
@@ -21,6 +21,12 @@ class Logout extends React.Component {
     };
   }
 
+  handleLogout = () => {
+    logout();
+    console.log("i just logged out");
+    handleRequestClose();
+  }
+
   handleRequestClose() {
     if (isLoggedIn()) {
       this.setState({
@@ -28,6 +34,8 @@ class Logout extends React.Component {
         loggedIn: true
       });
     } else
+    clearIdToken();
+    clearAccessToken();
       this.setState({
         open: false,
         loggedIn: false
@@ -50,13 +58,14 @@ class Logout extends React.Component {
   }
 
   render() {
-
+const
     return (
       <div>
         <FlatButton
           label="Logout"
           onTouchTap={this.handleTouchTap}
           labelStyle={styles.labelStyle}
+          onClick={this.handleLogout}
         />
       </div>
     );
