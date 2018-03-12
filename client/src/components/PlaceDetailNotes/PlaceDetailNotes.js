@@ -27,63 +27,44 @@ const PlaceDetailNotes = props =>
 
             <TextField
                 hintText="Enter a Note Here"
-                // floatingLabelText="Enter a Note Here"
                 multiLine={true}
                 fullWidth={true}
                 rows={1}
                 rowsMax={4}
+                value={props.noteInput}
+                onChange={props.handleNoteInputChange}
             />
 
             <CardActions>
 
                 <FlatButton
+                    onClick={(event) => props.handleSaveNote(event)}
                     label="Add a Note" />
-
-
-                {/* {
-                                (!props.loggedIn) ?
-                                    <FlatButton
-                                        onClick={() => login()}
-                                        label="Login to Save" />
-                                    :
-                                    (result.saved) ?
-                                        <FlatButton
-                                            // primary={true}
-                                            // href={result.web_url}
-                                            // target="_blank"
-                                            onClick={(event) => props.handlePlacesDelete(event, result.details_key)}
-                                            value={result.details_key}
-                                            label="Delete from Saved" />
-                                        :
-                                        // (!result.saved) 
-                                        <FlatButton
-                                            onClick={(event) => props.handlePlacesSave(event, result.details_key)}
-                                            value={result.details_key}
-                                            label="Save to my list" />
-                            } */}
-
 
             </CardActions>
 
-            <Card >
-                {/* <Card key={result.details_key}> */}
+            {props.savedNotes.map(note =>
 
 
-                <CardText>
+                <Card key={note._id}>
 
-                    {/* INSERT NOTE HERE */}
-                    {"Note Text Goes Here"}
+                    <CardText>
 
-                </CardText>
+                        {note.body}
+                        <br/>
+                        {note.date}
 
-                <CardActions>
+                    </CardText>
 
-                    {/* <Clear onClick={() => this.deletePlace(result._id)} /> */}
-                    <Clear />
+                    <CardActions>
 
-                </CardActions>
+                        <Clear />
 
-            </Card>
+                    </CardActions>
+
+                </Card>
+
+            )}
 
         </CardText>
     </Card>

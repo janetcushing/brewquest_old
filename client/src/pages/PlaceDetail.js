@@ -18,21 +18,25 @@ class Detail extends Component {
     state = {
         results: [],
         detail: [],
-        been_there: null
+        been_there: null,
+        noteInput: "",
+        savedNotes: []
     };
 
     componentWillMount() {
         if (this.props.location.state) {
             this.setState({ detail: this.props.location.state.placedetail })
             this.setState({ been_there: this.props.location.state.placedetail.been_there })
-                ;
         }
+
+        
     }
 
     componentDidMount() {
         console.log(this.props.location.state)
         console.log("this is" + this.state.detail)
         console.log(this.state.been_there)
+        this.loadSavedNotes(this.state.detail._id);
     }
 
     deletePlace = id => {
@@ -54,6 +58,41 @@ class Detail extends Component {
         console.log("in uncheckbeenthere on saved places page")
         API.haveNotBeenToPlace(id)
             .then(res => this.setState({ been_there: false }))
+            .catch(err => console.log(err));
+    };
+
+    handleNoteInputChange = event => {
+        this.setState({
+            noteInput: event.target.value
+        });
+    };
+
+    handleSaveNote = event => {
+        event.preventDefault();
+
+        if (!this.state.noteInput) {
+            alert("Please add a note");
+        } else {
+            let savedNoteData = {
+                brewery_id: this.state.detail._id,
+                body: this.state.noteInput
+            }
+            console.log(savedNoteData)
+            API.saveNote(savedNoteData)
+                .then(res =>
+                    console.log("Saved a note"));
+                    this.loadSavedNotes(this.state.detail._id);
+        }
+    };
+
+    handleDeleteNote = id => { };
+
+    loadSavedNotes = id => {
+        console.log("Loading notes for this brewery: " + id)
+        API.getSavedNotes(id)
+            .then(res =>
+                this.setState({ savedNotes: res.data })
+            )
             .catch(err => console.log(err));
     };
 
@@ -83,7 +122,7 @@ class Detail extends Component {
                                             )}
 
                                             <a href={this.state.detail.url} target="blank" >
-                                            <Place />
+                                                <Place />
                                             </a>
                                             <Clear onClick={() => this.deletePlace(this.state.detail._id)} />
                                         </CardActions>
@@ -94,27 +133,31 @@ class Detail extends Component {
                                 <Col size="sm-12">
                                     {/* Lauren add GENERAL INFORMATION component under here */}
                                     <PlaceDetailGeneralInformation
-                                    full_address={this.state.detail.full_address}
-                                    num_reviews={this.state.detail.num_reviews}
-                                    phone={this.state.detail.phone}
-                                    website={this.state.detail.website}
+                                        full_address={this.state.detail.full_address}
+                                        num_reviews={this.state.detail.num_reviews}
+                                        phone={this.state.detail.phone}
+                                        website={this.state.detail.website}
                                     />
 
                                     {/* Lauren add HOURS component under here */}
                                     <PlaceDetailHours
-                                    SundayHours={this.state.detail.weekday_text[6]}
-                                    MondayHours={this.state.detail.weekday_text[0]}
-                                    TuesdayHours={this.state.detail.weekday_text[1]}
-                                    WednesdayHours={this.state.detail.weekday_text[2]}
-                                    ThursdayHours={this.state.detail.weekday_text[3]}
-                                    FridayHours={this.state.detail.weekday_text[4]}
-                                    SaturdayHours={this.state.detail.weekday_text[5]}
+                                        SundayHours={this.state.detail.weekday_text[6]}
+                                        MondayHours={this.state.detail.weekday_text[0]}
+                                        TuesdayHours={this.state.detail.weekday_text[1]}
+                                        WednesdayHours={this.state.detail.weekday_text[2]}
+                                        ThursdayHours={this.state.detail.weekday_text[3]}
+                                        FridayHours={this.state.detail.weekday_text[4]}
+                                        SaturdayHours={this.state.detail.weekday_text[5]}
                                     />
 
 
                                     {/* James add NOTES component under here */}
-                                    <PlaceDetailNotes />
-
+                                    <PlaceDetailNotes
+                                        handleNoteInputChange={this.handleNoteInputChange}
+                                        handleSaveNote={this.handleSaveNote}
+                                        noteInput={this.state.noteInput}
+                                        savedNotes={this.state.savedNotes}
+                                    />
 
                                     {/* Add REVIEWS component under here */}
 
