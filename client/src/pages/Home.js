@@ -98,17 +98,17 @@ class Home extends Component {
           <div id="find-beer-home">
             <LocalDrink class="home-page-icon" style={styles.smallIcon} />
             <h2>Find Beer</h2>
-            <p>Search for places you can go to get a really good beer!</p>
+            <h4>Search for places you can go to get a really good beer!</h4>
           </div>
           <div id="save-places-home">
             <CheckCircle class="home-page-icon" style={styles.smallIcon} />
             <h2>Save Places</h2>
-            <p>Save places you want to check out to your saved list!</p>
+            <h4>Save places you want to check out to your saved list!</h4>
           </div>
           <div id="rate-places-home">
             <ThumbUp class="home-page-icon" style={styles.smallIcon} />
             <h2>Rate Places</h2>
-            <p>Rate the places you visit and see others' reviews.</p>
+            <h4>Rate the places you visit and see others' reviews.</h4>
           </div>
         </div>
       </div>

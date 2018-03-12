@@ -10,9 +10,9 @@ const ResultsCard = props =>
 
     <Card>
         <CardTitle title="Results"
-        id="card-title" />
+            className="raleway-text" />
         <CardText>
-            {"props.loggedIn: " + props.loggedIn}
+            {/* {"props.loggedIn: " + props.loggedIn} */}
             {props.results.map(result =>
 
                 <Card key={result.details_key}>
@@ -23,9 +23,11 @@ const ResultsCard = props =>
                         showExpandableButton={true}
                         title={result.brewery_name}
                         subtitle={'Rating: ' + result.rating}
+                        className="raleway-text"
                     />
 
-                    <CardText expandable={true}>
+                    <CardText expandable={true}
+                        className="raleway-text">
 
                         {'Category: Brewery'}
                         <br />
@@ -49,7 +51,7 @@ const ResultsCard = props =>
                                     <FlatButton
                                         onClick={() => login()}
                                         label="Login to Save"
-                                        class="save-button" />
+                                        className="save-button" />
 
                                     :
                                     (result.saved) ?
@@ -60,14 +62,14 @@ const ResultsCard = props =>
                                             onClick={(event) => props.handlePlacesDelete(event, result.details_key)}
                                             value={result.details_key}
                                             label="Delete from Saved"
-                                            class="save-button" />
+                                            className="save-button" />
                                         :
                                         // (!result.saved) 
                                         <FlatButton
                                             onClick={(event) => props.handlePlacesSave(event, result.details_key)}
                                             value={result.details_key}
                                             label="Save to my list"
-                                            class="save-button" />
+                                            className="save-button" />
                             }
 
                             {/* <FlatButton
