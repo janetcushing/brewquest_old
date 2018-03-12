@@ -17,24 +17,17 @@ var auth = new auth0.WebAuth({
 });
 
 export function login() {
-    auth.authorize({
-      responseType: 'token id_token',
-      redirectUri: REDIRECT,
-      audience: AUDIENCE,
-      scope: SCOPE
-    });
-    console.log("is logged in " + isLoggedIn());
-    var token = localStorage.getItem(ID_TOKEN_KEY);
-    var refreshToken = localStorage.getItem('refreshToken');
-    var userName = localStorage.getItem('name');
-    var userEmail = localStorage.getItem('email');
-    var userNickName = localStorage.getItem('nickname');
-    console.log("token: " + token);
-    console.log("refreshToken: " + refreshToken);
-    console.log("userName: " + userName);
-    console.log("userEmail: " + userEmail);
-    console.log("userNickName: " + userNickName);
-  }
+  auth.authorize({
+    responseType: 'token id_token',
+    redirectUri: REDIRECT,
+    audience: AUDIENCE,
+    scope: SCOPE
+  });
+  console.log("is logged in " + isLoggedIn());
+  var token = localStorage.getItem(ID_TOKEN_KEY);
+  console.log("token: " + token);
+  // decodeToken(token);
+}
   
   export function logout() {
     console.log("im in logout()");
@@ -108,3 +101,8 @@ export function setIdToken() {
     const expirationDate = getTokenExpirationDate(token);
     return expirationDate < new Date();
   }
+
+  // export function decodeToken(token) {
+  //   var decoded = decode(token);
+  //   console.log((decoded));
+  // }
