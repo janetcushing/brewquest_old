@@ -3,6 +3,11 @@ html {
   min-height: 100%;
 }
 
+body, 
+.raleway-text {
+  font-family: 'Raleway', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -66,8 +71,9 @@ html {
 }
 
 #beer-text {
-  font-size: 30px;
+  font-size: 40px;
   color: white;
+  font-family: 'Lobster', cursive;
 }
 
 #find-beer-home {
@@ -107,6 +113,10 @@ html {
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+h2 {
+  font-family: 'Lobster Two', cursive;
 }
 
 .home-page-icon {
@@ -160,7 +170,6 @@ html {
   cursor: pointer;
   margin-left: 10px;
   margin-right: 20px;
-  padding-top: 10px;
 }
 
 /* Search Page Styling */
@@ -177,7 +186,8 @@ html {
 }
 
 #card-title {
-  font-size: 28px;
+  font-size: 35px !important;
+  font-family: 'Lobster Two', cursive;
 }
 
 #results-card-container {
@@ -189,6 +199,11 @@ html {
 }
 
 /* Saved Page Styling */
+
+#card-title-div {
+  font-size: 35px;
+  font-family: 'Raleway', sans-serif;
+}
 
 #card-action-div {
   float: right;

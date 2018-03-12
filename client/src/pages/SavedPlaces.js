@@ -119,7 +119,7 @@ class SavedPlaces extends Component {
               })}
             </SavedList>
           ) : (
-              <h2>No Saved Breweries Yet</h2>
+              <h2 class="raleway-text">No Saved Breweries Yet</h2>
             )}
         </Container>
         </div>
