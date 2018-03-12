@@ -19,7 +19,7 @@ class Detail extends Component {
         results: [],
         detail: [],
         been_there: null,
-        user:{},
+        user: {},
         noteInput: "",
         savedNotes: []
     };
@@ -30,7 +30,7 @@ class Detail extends Component {
             this.setState({ been_there: this.props.location.state.placedetail.been_there })
         }
 
-        
+
     }
 
     componentDidMount() {
@@ -78,28 +78,27 @@ class Detail extends Component {
                 brewery_id: this.state.detail._id,
                 body: this.state.noteInput
             }
-            console.log(savedNoteData)
             API.saveNote(savedNoteData)
                 .then(res =>
                     console.log("Saved a note"));
-                    this.loadSavedNotes(this.state.detail._id);
+            this.loadSavedNotes(this.state.detail._id);
         }
     };
 
-    handleDeleteNote = id => { };
+    handleDeleteNote = id => {
+        API.deleteSavedNote(id)
+            .then(res => 
+                this.loadSavedNotes(this.state.detail._id))
+        .catch (err => console.log(err));
+    };
 
     loadSavedNotes = id => {
-        console.log("Loading notes for this brewery: " + id)
         API.getSavedNotes(id)
             .then(res =>
                 this.setState({ savedNotes: res.data })
             )
             .catch(err => console.log(err));
     };
-
-    // loadMap = id => {
-
-    // }
 
     render() {
         return (
@@ -156,6 +155,7 @@ class Detail extends Component {
                                     <PlaceDetailNotes
                                         handleNoteInputChange={this.handleNoteInputChange}
                                         handleSaveNote={this.handleSaveNote}
+                                        handleDeleteNote={this.handleDeleteNote}
                                         noteInput={this.state.noteInput}
                                         savedNotes={this.state.savedNotes}
                                     />
