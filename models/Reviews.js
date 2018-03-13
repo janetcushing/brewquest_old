@@ -19,6 +19,18 @@ const ReviewsSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    name: {
+        type: String
+    },
+    given_name: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    aud: {
+        type: String
     }
 });
 

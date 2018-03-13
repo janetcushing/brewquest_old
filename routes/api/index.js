@@ -3,8 +3,8 @@ const savedPlacesRoutes = require("./savedplaces");
 const savedPlaceRoutes = require("./savedplace");
 const savedNotesRoutes = require("./savednotes");
 const savedReviewsRoutes = require("./savedreviews");
-const apiPlaces = require("./apiplaces");
-const user = require("./user");
+const apiPlacesRoute = require("./apiplaces");
+const userRoute = require("./user");
 
 
 // Database routes - Places/Breweries table     //
@@ -19,9 +19,9 @@ router.use("/savednotes", savedNotesRoutes);
 router.use("/savedreviews", savedReviewsRoutes);
 
 // API route - to get Google api places data
-router.use("/apiplaces", apiPlaces);
+router.use("/apiplaces", apiPlacesRoute);
 
 // Database Routes - User table
-router.use("/user", user);
+router.use("/user", userRoute);
 
 module.exports = router;
