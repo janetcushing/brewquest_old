@@ -86,7 +86,9 @@ class Detail extends Component {
             let savedNoteData = {
                 brewery_id: this.state.detail._id,
                 body: this.state.noteInput,
-                user_aud: this.state.user.aud
+                aud: this.state.user.aud,
+                given_name: this.state.user.name,
+                name: this.state.user.name
             }
             API.saveNote(savedNoteData)
                 .then(res =>
@@ -123,6 +125,15 @@ class Detail extends Component {
 
         console.log(this.state.reviewInput);
         console.log(this.state.ratingInput);
+        /* James, not sure which name you want to include on the reviews table.  I
+        added console logs here so you could pick which one you want.  the aud is a 
+        unique id that we can use to join to the user table but to avoid the join, 
+        figured we could just put the name on the review table.
+        */
+        console.log(this.state.user.name);
+        console.log(this.state.user.nickname);
+        console.log(this.state.user.given_name);
+        console.log(this.state.user.aud);
         // if (!this.state.noteInput) {
         //     alert("Please add a note");
         // } else {
@@ -193,7 +204,8 @@ class Detail extends Component {
                                         full_address={this.state.detail.full_address}
                                         num_reviews={this.state.detail.num_reviews}
                                         phone={this.state.detail.phone}
-                                        website={this.state.detail.website}
+                                        // website={this.state.detail.website}
+                                        website={<a href={this.state.detail.website} target="_new_tab">{this.state.detail.website}</a>}
                                     />
 
                                     {/* Lauren add HOURS component under here */}

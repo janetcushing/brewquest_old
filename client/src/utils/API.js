@@ -45,25 +45,19 @@ export default {
 
 
   getApiPlaces: function (query) {
-    console.log(`im in getApiPlaces: ${query}`)
-    console.log(`/api/apiplaces/${query}`)
     return axios.get("/api/apiplaces/" + query)
   },
   // Saves a user to the database
   saveUser: function (userData) {
-    console.log("im in saveUser on the client side");
-    console.log(`userData ${JSON.stringify(userData)}`);
     return axios.post("/api/user/", userData);
   },
   // Looks for a user to the database
   findUser: function (aud) {
-    console.log("im in findUser on the client side");
-    console.log(`userSub ${aud}`);
-    console.log("/api/user/" + aud);
     return axios.get("/api/user/" + aud);
   },
 
   saveNote: function (savedNoteData) {
+    console.log("in saveNote on the client side");
     return axios.post("/api/savednotes", savedNoteData);
   },
 
