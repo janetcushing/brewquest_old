@@ -82,5 +82,25 @@ export default {
         id: breweryId
       }
     });
+  },
+
+  saveReview: function (savedReviewData) {
+    // return axios.post("/api/savednotes", savedNoteData);
+  },
+
+  // deleteSavedReview: function (noteId) {
+  //   return axios.delete("/api/savednotes/", {
+  //     params: {
+  //       id: noteId
+  //     }
+  //   });
+  // },
+
+  getSavedReviews: function (breweryId) {
+    // return axios.get("/api/savednotes", {
+    //   params: {
+    //     id: breweryId
+    //   }
+    // });
   }
 };
