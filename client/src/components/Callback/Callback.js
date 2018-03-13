@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setAccessToken, setIdToken, decodeToken, getTokenExpirationDate } from '../../utils/AuthService';
+import { setIdToken, decodeToken, getTokenExpirationDate } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loggedIn: false,
+      redirect: true,
+      user: {}
+    };
   }
 
   componentDidMount() {
     console.log("im in callback componentDidMount");
-    let accessToken = setAccessToken();
+    // let accessToken = setAccessToken();
     let token = setIdToken();
     console.log(token);
     // let token = localStorage.getItem('id_token')
@@ -22,30 +27,27 @@ class Callback extends Component {
     let user = decodeToken(token);
     console.log(user);
     this.setState({ user: user });
-
+    this.setState({ loggedIn: true });
+debugger
     console.log("this.state.user:");
     console.log(this.state.user);
     console.log(user);
     
     console.log("im about to API.findUser");
-    console.log(user.name);
+    console.log(user.aud);
     debugger
-    let userName = user.name;
-    API.findUser(userName)
+    let userAud = user.aud;
+    API.findUser(userAud)
       .then(res => {
         console.log(`res: `);
         console.log(res);
-        debugger
-        if (res.name) {
-          
+        if (res.aud) { 
           console.log("user is there");
         } else {
           console.log("user is not there");
           console.log("im about to API.saveUser");
-          debugger
           API.saveUser(user)
             .then(resp => {
-              debugger
               console.log(resp);
               console.log("user added");
             })
@@ -53,9 +55,10 @@ class Callback extends Component {
         }
 
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
 
-    window.location.href = "/";
+    // window.location.href = "/";
+    window.location.href = window.location.origin;
   }
 
   render() {
@@ -72,7 +75,16 @@ class Callback extends Component {
       backgroundColor: 'white',
     }
 
+    // if (this.state.redirect) {
+      // return
+    // }
+
     return (
+
+      // <Redirect to={{
+      //   pathname: '/',
+      //   state: {user: this.state.user, loggedIn: true }
+      // }} />
 
       <div style={style}>
         <img src={loading} alt="loading" />

@@ -56,12 +56,11 @@ export default {
     return axios.post("/api/user/", userData);
   },
   // Looks for a user to the database
-  findUser: function (name) {
+  findUser: function (aud) {
     console.log("im in findUser on the client side");
-    console.log(`userName ${name}`);
-    console.log("/api/user/" + name);
-    return axios.get("/api/user/" + name);
-
+    console.log(`userSub ${aud}`);
+    console.log("/api/user/" + aud);
+    return axios.get("/api/user/" + aud);
   },
 
   saveNote: function (savedNoteData) {

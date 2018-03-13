@@ -1,12 +1,14 @@
 import React from "react";
-import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
+import { Card, CardActions, 
+    // CardTitle, 
+    CardText, CardHeader } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import Clear from 'material-ui/svg-icons/content/clear';
-import Container from "../Container";
-import Row from "../Row";
-import Col from "../Col";
-import SavedNotes from "../SavedNotes";
+// import Container from "../Container";
+// import Row from "../Row";
+// import Col from "../Col";
+// import SavedNotes from "../SavedNotes";
 // import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
 

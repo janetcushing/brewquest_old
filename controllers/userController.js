@@ -31,17 +31,17 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
-  findByName: function (req, res) {
-    console.log("got to user controller findByName ");
+  findByAud: function (req, res) {
+    console.log("got to user controller findByAud ");
     db.UserStore
-      .find({name: req.params.name})
+      .find({sub: req.params.aud})
       .then(dbModel => {
-        console.log("back from findByName");
+        console.log("back from findByAud");
         console.log(dbModel);
-        if (dbModel.name) {
-          console.log(`User found ${dbModel.name}`);
+        if (dbModel[0].aud) {
+          console.log(`User found ${dbModel[0].aud}`);
         }
-        res.json(dbModel)
+        res.json(dbModel[0])
       })
       .catch(err => res.status(422).json(err));
   }

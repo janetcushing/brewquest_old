@@ -5,10 +5,12 @@ const userController = require("../../controllers/userController");
  // Matches with "/api/user/     
  router
  .route("/")
- .get(userController.findByName)
  .post(userController.create);
-//  .put(userController.update)
-//  .delete(userController.remove);
 
+
+// Matches with "/api/user/:aud"
+router
+  .route("/:aud")
+  .get(userController.findByAud);
 
 module.exports = router;
