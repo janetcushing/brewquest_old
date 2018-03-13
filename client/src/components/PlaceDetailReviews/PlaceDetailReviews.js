@@ -32,11 +32,11 @@ const PlaceDetailReviews = props =>
                 value={props.ratingInput}
                 onChange={props.handleRatingInputChange}
             >
-                <MenuItem value={1} primaryText="The Worst" />
-                <MenuItem value={2} primaryText="Bad" />
-                <MenuItem value={3} primaryText="Not Bad" />
-                <MenuItem value={4} primaryText="Good" />
                 <MenuItem value={5} primaryText="Very Good" />
+                <MenuItem value={4} primaryText="Good" />
+                <MenuItem value={3} primaryText="Not Bad" />
+                <MenuItem value={2} primaryText="Bad" />
+                <MenuItem value={1} primaryText="The Worst" />
             </SelectField>
 
             <TextField
@@ -52,7 +52,7 @@ const PlaceDetailReviews = props =>
             <CardActions>
 
                 <FlatButton
-                    // onClick={(event) => props.handleSaveNote(event)}
+                    onClick={(event) => props.handleSaveReview(event)}
                     label="Add Review" />
 
             </CardActions>

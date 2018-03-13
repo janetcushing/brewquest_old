@@ -21,8 +21,9 @@ class Detail extends Component {
         detail: [],
         been_there: null,
         user: {},
-        noteInput: "",
         savedNotes: [],
+        savedReviews: [],
+        noteInput: "",
         ratingInput: "",
         reviewInput: ""
     };
@@ -111,6 +112,39 @@ class Detail extends Component {
         });
     };
 
+    handleSaveReview = event => {
+        event.preventDefault();
+
+        console.log(this.state.reviewInput);
+        console.log(this.state.ratingInput);
+        // if (!this.state.noteInput) {
+        //     alert("Please add a note");
+        // } else {
+        //     let savedNoteData = {
+        //         brewery_id: this.state.detail._id,
+        //         body: this.state.noteInput
+        //     }
+        //     API.saveNote(savedNoteData)
+        //         .then(res =>
+        //             console.log("Saved a note"));
+        //     this.loadSavedNotes(this.state.detail._id);
+        // }
+    };
+
+    // handleDeleteReview = id => {
+    //     API.deleteSavedReview(id)
+    //         .then(res =>
+    //             this.loadSavedReviews(this.state.detail._id))
+    //         .catch(err => console.log(err));
+    // };
+
+    loadSavedReviews = id => {
+        API.getSavedReviews(id)
+            .then(res =>
+                this.setState({ savedReviews: res.data })
+            )
+            .catch(err => console.log(err));
+    };
 
     render() {
         return (
@@ -178,6 +212,7 @@ class Detail extends Component {
                                         reviewInput={this.state.reviewInput}
                                         handleRatingInputChange={this.handleRatingInputChange}
                                         handleReviewInputChange={this.handleReviewInputChange}
+                                        handleSaveReview={this.handleSaveReview}
                                     />
 
                                 </Col>
