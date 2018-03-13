@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setIdToken, decodeToken, getTokenExpirationDate } from '../../utils/AuthService';
+import { setIdToken, decodeToken, getTokenExpirationDate, clearIdToken, clearAccessToken } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
@@ -10,7 +10,7 @@ class Callback extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      redirect: true,
+      redirect: false,
       user: {}
     };
   }
@@ -28,11 +28,11 @@ class Callback extends Component {
     console.log(user);
     this.setState({ user: user });
     this.setState({ loggedIn: true });
-debugger
+    debugger
     console.log("this.state.user:");
     console.log(this.state.user);
     console.log(user);
-    
+
     console.log("im about to API.findUser");
     console.log(user.aud);
     debugger
@@ -41,7 +41,7 @@ debugger
       .then(res => {
         console.log(`res: `);
         console.log(res);
-        if (res.aud) { 
+        if (res.aud) {
           console.log("user is there");
         } else {
           console.log("user is not there");
@@ -55,10 +55,15 @@ debugger
         }
 
       })
-      // .catch(err => console.log(err));
+      console.log("clearing tokens");
+      // setUser(user) ;
+      clearIdToken();
+      clearAccessToken();
+      this.setState({ redirect: true });
+    // .catch(err => console.log(err));
 
     // window.location.href = "/";
-    window.location.href = window.location.origin;
+    // window.location.href = window.location.origin;
   }
 
   render() {
@@ -75,20 +80,23 @@ debugger
       backgroundColor: 'white',
     }
 
-    // if (this.state.redirect) {
-      // return
-    // }
+    if (this.state.redirect) {
+    return <Redirect to={{
+      pathname: '/',
+      state: {
+        user: this.state.user,
+        loggedIn: this.state.loggedIn
+      }
+    }} />;
+}
+
 
     return (
-
-      // <Redirect to={{
-      //   pathname: '/',
-      //   state: {user: this.state.user, loggedIn: true }
-      // }} />
-
-      <div style={style}>
-        <img src={loading} alt="loading" />
-      </div>
+     
+        <div style={style}>
+          <img src={loading} alt="loading" />
+        </div>
+      
     )
   }
 }

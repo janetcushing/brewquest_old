@@ -1,4 +1,4 @@
-// import React, { Component } from 'react';
+/// import React, { Component } from 'react';
 import React from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
@@ -35,6 +35,35 @@ class Nav extends React.Component {
         };
     }
 
+    componentWillMount() {
+        console.log(`in Nav componentWillMount`);
+        // console.log(this.props.location.state);
+    this.setState({
+        loggedIn: true,
+        user: {
+          "given_name" : "Harry",
+          "family_name" : "Cushing",
+          "nickname" : "janet.cushing",
+          "name" : "Janet Cushing",
+          "picture" : "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+          "locale" : "en",
+          "updated_at" : "2018-03-13T15:13:01.357Z",
+          "iss" : "https://beer-quest.auth0.com/",
+          "sub" : "google-oauth2|116410805633322351871",
+          "aud" : "hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia",
+          "iat" : "1520953981",
+          "exp" : "1520989981",
+          "at_hash" : "AqO_Oj5NVnKf1FfQmn3r5w",
+          "nonce" : "OAGqPoR~tjXGnofJ8K1ngbCEkHXAoJet"
+      }
+      });
+
+      console.log("Hello " + (this.state.user.given_name));
+    }
+
+
+
+
     handleLogin = () => {
         console.log(`im in handleLogin`);
         try {
@@ -44,7 +73,12 @@ class Nav extends React.Component {
             alert("There was an error logging in");
         } finally {
             if (isLoggedIn()) {
+                // let userName = getUserName();
+                // let userAud = getUserAud();
+                // let userData = {given_name: userName, aud: userAud};
                 this.setState({ loggedIn: true });
+                // this.setState({ user: userData });
+
             } else { this.setState({ loggedIn: false }); }
         }
     }
@@ -56,6 +90,7 @@ class Nav extends React.Component {
             console.log("i just logged out");
             clearIdToken();
             clearAccessToken();
+            // clearUser();
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging out");
@@ -71,7 +106,8 @@ class Nav extends React.Component {
 
         handleClose = () => {
             console.log(`nav bar isLoggedIn ${isLoggedIn()}`);
-            if (isLoggedIn()) {
+            // if (isLoggedIn()) {
+                if (this.state.loggedIn){
                 this.setState({ open: false, loggedIn: true });
             } else {
                 this.setState({ open: false, loggedIn: false });
@@ -89,7 +125,8 @@ class Nav extends React.Component {
 
                         <div id="navBtns">
                             {
-                                (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
+                                // (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
+                                (this.state.loggedIn) ? <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
                                     : (<FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogin} label="Login" />)
                             }
                             <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
@@ -116,7 +153,8 @@ class Nav extends React.Component {
                             </Link>
                             {/* <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link> */}
                             {
-                                (isLoggedIn()) ?
+                                // (isLoggedIn()) ?
+                                (this.state.loggedIn) ?
                                     <Link to={{
                                         pathname: "/savedplaces",
                                         state: { user: this.state.user, loggedIn: this.state.loggedIn }
@@ -130,8 +168,11 @@ class Nav extends React.Component {
                             }
 
                             {
-                                (isLoggedIn()) ? <MenuItem onClick={() => logout()}>Logout</MenuItem>
-                                    : (<MenuItem onClick={() => login()}>Login</MenuItem>)
+                                // (isLoggedIn()) ? 
+                                (this.state.loggedIn) ?
+                                <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                                    : 
+                                    (<MenuItem onClick={() => login()}>Login</MenuItem>)
                             }
 
 

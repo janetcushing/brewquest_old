@@ -31,9 +31,12 @@ class Detail extends Component {
     };
 
     componentWillMount() {
+        console.log("im in placeDetails componentWillMount ");
         if (this.props.location.state) {
+            console.log("ive got state ");
             this.setState({ detail: this.props.location.state.placedetail })
             this.setState({ been_there: this.props.location.state.placedetail.been_there })
+            this.setState({ user: this.props.location.state.user })
         }
 
 
@@ -82,7 +85,8 @@ class Detail extends Component {
         } else {
             let savedNoteData = {
                 brewery_id: this.state.detail._id,
-                body: this.state.noteInput
+                body: this.state.noteInput,
+                user_aud: this.state.user.aud
             }
             API.saveNote(savedNoteData)
                 .then(res =>
@@ -149,9 +153,14 @@ class Detail extends Component {
     };
 
     render() {
+       
+
         return (
             <div id="saved-detail-page-background">
                 <div class="main-container">
+                <div>
+            <p id="beer-text">Hello {this.state.user.given_name}</p>
+        </div>
                     <Container>
                         <Card key={this.state.detail._id}>
                             <Row>

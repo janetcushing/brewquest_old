@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route
   // , Link, Redirect
  } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import Navpills from "./components/Navpills";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";

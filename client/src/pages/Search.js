@@ -27,17 +27,19 @@ class Search extends Component {
   }
 
   componentWillMount() {
-    console.log(`in componentWillMount`);
-    console.log(`isLoggedIn ${isLoggedIn()}`);
-    this.setState({
-      loggedIn: isLoggedIn()
-    });
-    console.log(`this.state.loggedIn ${this.state.loggedIn}`);
+    console.log(`in search componentWillMount`);
+    // console.log(`state: ${JSON.stringify(this.state)}`);
+    // this.setState({
+    //   loggedIn: isLoggedIn()
+    // });
     if (this.props.location.state) {
       this.setState({
         searchLocation: this.props.location.state.searchLocation,
+        user: this.props.location.state.user,
+        loggedIn: this.props.location.state.loggedIn
       });
     }
+    console.log(`state: ${JSON.stringify(this.state)}`);
   }
 
   componentDidMount() {
@@ -132,6 +134,9 @@ render() {
   return (
     <div id="search-page-background">
       <div class="main-container">
+      <div>
+            <p id="beer-text">Hello {this.state.user.given_name}</p>
+        </div>
         <Container>
           <Row>
             <Col size="sm-12">
