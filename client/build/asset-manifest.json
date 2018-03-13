@@ -1,8 +1,13 @@
 {
   "main.css": "static/css/main.69edf5dc.css",
   "main.css.map": "static/css/main.69edf5dc.css.map",
+<<<<<<< HEAD
   "main.js": "static/js/main.e9277072.js",
   "main.js.map": "static/js/main.e9277072.js.map",
+=======
+  "main.js": "static/js/main.0eacb852.js",
+  "main.js.map": "static/js/main.0eacb852.js.map",
+>>>>>>> 10a1c401431d78db0e7731744e38152d6b1ef53b
   "static/media/bar.jpg": "static/media/bar.a66b4e9e.jpg",
   "static/media/craft-beer.jpg": "static/media/craft-beer.c5c3f47b.jpg",
   "static/media/loading.svg": "static/media/loading.c5590569.svg",
