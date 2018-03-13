@@ -59,10 +59,7 @@ const UserStoreSchema = new Schema({
   },
   nonce: {
     type: String
-  },
-  savedPlaces: {
-    type: Array
-  } 
+  }
 });
 
 const UserStore = mongoose.model("UserStore", UserStoreSchema);

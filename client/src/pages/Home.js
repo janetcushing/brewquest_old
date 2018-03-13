@@ -29,12 +29,25 @@ class Home extends Component {
       open: false,
       redirect: false,
       searchLocation: "",
-      loggedIn: "",
-      user:{}
+      loggedIn: false,
+      user: {}
     };
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.handleTouchTap = this.handleTouchTap.bind(this);
+  }
+
+  componentWillMount() {
+    console.log(`in Home componentWillMount`);
+    console.log(this.props.location.state);
+    if (this.props.location.state) {
+      console.log(this.props.location.state);
+      this.setState({
+        loggedIn: this.props.location.state.loggedIn,
+        user: this.props.location.state.user
+      });
+    }
+    console.log("Hello " + JSON.stringify(this.state.user));
   }
 
   handleSearchLocationChange = event => {
@@ -71,7 +84,12 @@ class Home extends Component {
     if (this.state.redirect) {
       return <Redirect to={{
         pathname: '/search',
-        state: { searchLocation: this.state.searchLocation }
+        state: {
+          searchLocation: this.state.searchLocation,
+          user: this.state.user,
+          loggedIn: this.state.loggedIn
+        }
+
       }} />;
     }
 
@@ -85,7 +103,9 @@ class Home extends Component {
             </div>
 
             <br />
-
+            <div>
+              <p id="beer-text">Hello {this.state.user.given_name}</p>
+            </div>
             <div id="search-field-div">
               <SearchField
                 handleSearchLocationChange={this.handleSearchLocationChange}
@@ -96,19 +116,19 @@ class Home extends Component {
         </div>
         <div id="secondary-info">
           <div id="find-beer-home">
-            <LocalDrink class="home-page-icon" style={styles.smallIcon} />
+            <LocalDrink className="home-page-icon" style={styles.smallIcon} />
             <h2>Find Beer</h2>
-            <h4>Search for places you can go to get a really good beer!</h4>
+            <p>Search for places you can go to get a really good beer!</p>
           </div>
           <div id="save-places-home">
-            <CheckCircle class="home-page-icon" style={styles.smallIcon} />
+            <CheckCircle className="home-page-icon" style={styles.smallIcon} />
             <h2>Save Places</h2>
-            <h4>Save places you want to check out to your saved list!</h4>
+            <p>Save places you want to check out to your saved list!</p>
           </div>
           <div id="rate-places-home">
-            <ThumbUp class="home-page-icon" style={styles.smallIcon} />
+            <ThumbUp className="home-page-icon" style={styles.smallIcon} />
             <h2>Rate Places</h2>
-            <h4>Rate the places you visit and see others' reviews.</h4>
+            <p>Rate the places you visit and see others' reviews.</p>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 
 
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route
+  // , Link, Redirect
+ } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Navpills from "./components/Navpills";
 import Nav from "./components/Nav";

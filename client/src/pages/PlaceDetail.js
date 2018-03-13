@@ -4,7 +4,9 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
+import { Card, CardActions, CardTitle
+    // , CardText, CardMedia 
+} from 'material-ui/Card';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
 import Place from 'material-ui/svg-icons/maps/place'
