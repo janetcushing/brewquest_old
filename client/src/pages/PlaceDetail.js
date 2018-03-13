@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
-import PlaceDetailNotes from "../components/PlaceDetailNotes";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
 import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
@@ -11,6 +10,8 @@ import Check_box from 'material-ui/svg-icons/toggle/check-box'
 import Place from 'material-ui/svg-icons/maps/place'
 import PlaceDetailHours from "../components/PlaceDetailHours";
 import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
+import PlaceDetailNotes from "../components/PlaceDetailNotes";
+import PlaceDetailReviews from "../components/PlaceDetailReviews";
 // import Snackbar from 'material-ui/Snackbar';
 // import RaisedButton from 'material-ui/RaisedButton';
 
@@ -21,7 +22,9 @@ class Detail extends Component {
         been_there: null,
         user: {},
         noteInput: "",
-        savedNotes: []
+        savedNotes: [],
+        ratingInput: "",
+        reviewInput: ""
     };
 
     componentWillMount() {
@@ -87,9 +90,9 @@ class Detail extends Component {
 
     handleDeleteNote = id => {
         API.deleteSavedNote(id)
-            .then(res => 
+            .then(res =>
                 this.loadSavedNotes(this.state.detail._id))
-        .catch (err => console.log(err));
+            .catch(err => console.log(err));
     };
 
     loadSavedNotes = id => {
@@ -99,6 +102,15 @@ class Detail extends Component {
             )
             .catch(err => console.log(err));
     };
+
+    handleRatingInputChange = (event, index, ratingInput) => this.setState({ ratingInput });
+
+    handleReviewInputChange = event => {
+        this.setState({
+            reviewInput: event.target.value
+        });
+    };
+
 
     render() {
         return (
@@ -161,6 +173,12 @@ class Detail extends Component {
                                     />
 
                                     {/* Add REVIEWS component under here */}
+                                    <PlaceDetailReviews
+                                        ratingInput={this.state.ratingInput}
+                                        reviewInput={this.state.reviewInput}
+                                        handleRatingInputChange={this.handleRatingInputChange}
+                                        handleReviewInputChange={this.handleReviewInputChange}
+                                    />
 
                                 </Col>
                             </Row>
