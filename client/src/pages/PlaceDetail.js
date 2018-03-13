@@ -4,7 +4,8 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle
+import {
+    Card, CardActions, CardTitle
     // , CardText, CardMedia 
 } from 'material-ui/Card';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
@@ -87,7 +88,6 @@ class Detail extends Component {
                 brewery_id: this.state.detail._id,
                 body: this.state.noteInput,
                 aud: this.state.user.aud,
-                given_name: this.state.user.name,
                 name: this.state.user.name
             }
             API.saveNote(savedNoteData)
@@ -125,14 +125,7 @@ class Detail extends Component {
 
         console.log(this.state.reviewInput);
         console.log(this.state.ratingInput);
-        /* James, not sure which name you want to include on the reviews table.  I
-        added console logs here so you could pick which one you want.  the aud is a 
-        unique id that we can use to join to the user table but to avoid the join, 
-        figured we could just put the name on the review table.
-        */
         console.log(this.state.user.name);
-        console.log(this.state.user.nickname);
-        console.log(this.state.user.given_name);
         console.log(this.state.user.aud);
         // if (!this.state.noteInput) {
         //     alert("Please add a note");
@@ -164,14 +157,14 @@ class Detail extends Component {
     };
 
     render() {
-       
+
 
         return (
             <div id="saved-detail-page-background">
                 <div class="main-container">
-                <div>
-            <p id="beer-text">Hello {this.state.user.given_name}</p>
-        </div>
+                    {/* <div>
+            <p id="beer-text">Hello {this.state.user.name}</p>
+        </div> */}
                     <Container>
                         <Card key={this.state.detail._id}>
                             <Row>
