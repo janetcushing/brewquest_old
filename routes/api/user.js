@@ -11,6 +11,7 @@ const userController = require("../../controllers/userController");
 // Matches with "/api/user/:aud"
 router
   .route("/:aud")
-  .get(userController.findByAud);
+  .get(userController.findByAud)
+  .put(userController.update);
 
 module.exports = router;

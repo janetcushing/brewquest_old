@@ -57,6 +57,7 @@ module.exports = {
     loc = req.params.location;
     GEOCODER.geocode(loc)
       .then(function (locResponse) {
+        console.log(locResponse);
         let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
         //second step, call the google places api
         getPlacesHeaderData(locn, res)

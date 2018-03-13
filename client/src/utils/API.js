@@ -55,6 +55,11 @@ export default {
   findUser: function (aud) {
     return axios.get("/api/user/" + aud);
   },
+    // Looks for a user to the database
+    updateUser: function (aud, loggedIn) {
+      console.log("in client API updateUSER");
+      return axios.put("/api/user/" + aud, loggedIn);
+    },
 
   saveNote: function (savedNoteData) {
     console.log("in saveNote on the client side");
