@@ -18,9 +18,6 @@ const NotesSchema = new Schema({
         type: String,
         required: true
     },
-    given_name: {
-        type: String
-    },
     name: {
         type: String
     }

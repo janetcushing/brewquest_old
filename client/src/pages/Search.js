@@ -134,9 +134,9 @@ render() {
   return (
     <div id="search-page-background">
       <div class="main-container">
-      <div>
-            <p id="beer-text">Hello {this.state.user.given_name}</p>
-        </div>
+      {/* <div>
+            <p id="beer-text">Hello {this.state.user.name}</p>
+        </div> */}
         <Container>
           <Row>
             <Col size="sm-12">
