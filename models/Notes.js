@@ -13,7 +13,11 @@ const NotesSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    user_aud: {
+        type: String,
+        required: true
+    },
   });
   
  const Notes = mongoose.model("Notes", NotesSchema);
