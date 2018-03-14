@@ -34,8 +34,9 @@ export function login() {
 
 export function logout() {
   console.log("im in logout()");
-  clearIdToken();
-  clearAccessToken();
+  // clearIdToken();
+  // clearAccessToken();
+  clearUser();
   // browserHistory.push('/');
   console.log("is logged in " + isLoggedIn());
   window.location.href = window.location.origin;
