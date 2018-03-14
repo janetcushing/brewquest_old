@@ -53,7 +53,8 @@ class Detail extends Component {
             aud: this.state.user.aud,
         };
 
-        this.loadSavedNotes(initialLoadData.brewery_id);
+        this.loadSavedNotes(initialLoadData);
+        // this.loadSavedNotes(initialLoadData.brewery_id);
         this.loadSavedReviews(initialLoadData);
     }
 
@@ -94,25 +95,31 @@ class Detail extends Component {
             let savedNoteData = {
                 brewery_id: this.state.detail._id,
                 body: this.state.noteInput,
-                aud: this.state.user.aud,
-                name: this.state.user.name
+                aud: this.state.user.aud
             }
             API.saveNote(savedNoteData)
                 .then(res =>
-                    console.log("Saved a note"));
-            this.loadSavedNotes(this.state.detail._id);
+                    this.loadSavedNotes(savedNoteData))
+                .then(
+                    this.setState({ noteInput: "" })
+                );
         }
     };
 
     handleDeleteNote = id => {
+        let initialLoadData = {
+            brewery_id: this.state.detail._id,
+            aud: this.state.user.aud,
+        };
+
         API.deleteSavedNote(id)
             .then(res =>
-                this.loadSavedNotes(this.state.detail._id))
+                this.loadSavedNotes(initialLoadData))
             .catch(err => console.log(err));
     };
 
-    loadSavedNotes = id => {
-        API.getSavedNotes(id)
+    loadSavedNotes = noteDataObject => {
+        API.getSavedNotes(noteDataObject)
             .then(res =>
                 this.setState({ savedNotes: res.data })
             )

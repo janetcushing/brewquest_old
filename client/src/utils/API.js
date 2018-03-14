@@ -74,10 +74,11 @@ export default {
     });
   },
 
-  getSavedNotes: function (breweryId) {
+  getSavedNotes: function (noteData) {
     return axios.get("/api/savednotes", {
       params: {
-        id: breweryId
+        id: noteData.brewery_id,
+        aud: noteData.aud
       }
     });
   },
