@@ -1,16 +1,16 @@
 import React from "react";
-import { Card, CardActions, 
+import {
+    Card, CardActions,
     // CardTitle, 
-    CardText, CardHeader } from 'material-ui/Card';
+    CardText, CardHeader
+} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-// import Clear from 'material-ui/svg-icons/content/clear';
 // import Container from "../Container";
 // import Row from "../Row";
 // import Col from "../Col";
-// import SavedNotes from "../SavedNotes";
 // import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
 
@@ -24,16 +24,20 @@ const PlaceDetailReviews = props =>
         <CardHeader
             actAsExpander={true}
             showExpandableButton={true}
-            title="Reviews" />
+            title="Reviews"
+            className="raleway-text" />
 
 
-        <CardText expandable={true}>
+        <CardText expandable={true}
+            className="raleway-text">
 
             <SelectField
                 hintText="Rating"
                 value={props.ratingInput}
                 onChange={props.handleRatingInputChange}
             >
+
+                <MenuItem value={null} primaryText="" />
                 <MenuItem value={5} primaryText="Very Good" />
                 <MenuItem value={4} primaryText="Good" />
                 <MenuItem value={3} primaryText="Not Bad" />
@@ -53,35 +57,34 @@ const PlaceDetailReviews = props =>
 
             <CardActions>
 
-                <FlatButton
+                <RaisedButton
                     onClick={(event) => props.handleSaveReview(event)}
-                    label="Add Review" />
+                    label="Add Review"
+                    primary={true} />
 
             </CardActions>
 
-            {/* {props.savedNotes.map(note =>
+            {props.savedReviews.map(review =>
 
 
-                <Card key={note._id}>
+                <Card key={review._id}>
 
                     <CardText>
 
-                        {note.body}
+                        {props.renderStars(review.rating)}
                         <br />
-                        {note.date}
+                        {review.rating}
+                        <br />
+                        {review.body}
+                        <br />
+                        {review.date}
 
                     </CardText>
-
-                    <CardActions>
-
-                        <Clear onClick={() => props.handleDeleteNote(note._id)} />
-
-                    </CardActions>
 
                 </Card>
 
             )}
- */}
+
         </CardText>
     </Card>
 

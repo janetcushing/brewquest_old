@@ -8,6 +8,8 @@ import { grey50, grey800 } from 'material-ui/styles/colors';
 import { login, logout, isLoggedIn, clearIdToken, 
     clearAccessToken, getUserName, getUserAud, clearUser } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
+import Person from 'material-ui/svg-icons/social/person';
+import PersonOutline from 'material-ui/svg-icons/social/person-outline';
 
 
 const styles = {
@@ -17,11 +19,11 @@ const styles = {
     labelStyle: {
         color: grey50,
     },
-    smallIcon: {
-        width: 36,
-        height: 36,
+    mediumIcon: {
+        width: 48,
+        height: 48,
         color: grey50
-    }
+      }
 };
 
 
@@ -138,10 +140,10 @@ class Nav extends React.Component {
                             {
                                 (this.state.loggedIn) ?
                                 // (isLoggedIn()) ?
-                                 <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
-                                    : (<FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogin} label="Login" />)
+                                <Person style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={() => logout()} label="Logout" />
+                                : (<PersonOutline style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={() => login()} label="Login" />)
                             }
-                            <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
+                            <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
                         </div>
 
                         <Drawer id="drawer-container"

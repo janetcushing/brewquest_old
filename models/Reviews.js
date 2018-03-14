@@ -6,6 +6,10 @@ const ReviewsSchema = new Schema({
         type: String,
         required: true
     },
+    aud: {
+        type: String,
+        required: true
+    },
     rating: {
         type: Number,
         required: true,
@@ -20,12 +24,10 @@ const ReviewsSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    name: {
-        type: String
-    },
-    aud: {
-        type: String
-    }
+    // name: {
+    //     type: String
+    // },
+
 });
 
 const Reviews = mongoose.model("Reviews", ReviewsSchema);

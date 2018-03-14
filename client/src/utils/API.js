@@ -62,7 +62,6 @@ export default {
     },
 
   saveNote: function (savedNoteData) {
-    console.log("in saveNote on the client side");
     return axios.post("/api/savednotes", savedNoteData);
   },
 
@@ -74,31 +73,25 @@ export default {
     });
   },
 
-  getSavedNotes: function (breweryId) {
+  getSavedNotes: function (noteData) {
     return axios.get("/api/savednotes", {
       params: {
-        id: breweryId
+        id: noteData.brewery_id,
+        aud: noteData.aud
       }
     });
   },
 
   saveReview: function (savedReviewData) {
-    // return axios.post("/api/savednotes", savedNoteData);
+    return axios.post("/api/savedreviews", savedReviewData);
   },
 
-  // deleteSavedReview: function (noteId) {
-  //   return axios.delete("/api/savednotes/", {
-  //     params: {
-  //       id: noteId
-  //     }
-  //   });
-  // },
-
-  getSavedReviews: function (breweryId) {
-    // return axios.get("/api/savednotes", {
-    //   params: {
-    //     id: breweryId
-    //   }
-    // });
+  getSavedReviews: function (reviewData) {
+    console.log(reviewData)
+    return axios.get("/api/savedreviews", {
+      params: {
+        id: reviewData.brewery_id
+      }
+    });
   }
 };
