@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setIdToken, decodeToken, getTokenExpirationDate, clearIdToken, clearAccessToken, setUser } from '../../utils/AuthService';
+import { setIdToken, decodeToken, getTokenExpirationDate, setUser } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
@@ -37,6 +37,7 @@ class Callback extends Component {
     console.log(user.aud);
     debugger
     let userAud = user.aud;
+    debugger
     API.findUser(userAud)
       .then(res => {
         console.log(`res: `);
@@ -57,10 +58,11 @@ class Callback extends Component {
         }
 
       })
-    console.log("clearing tokens");
+      
+    console.log("setting user");
     setUser(user) ;
-    clearIdToken();
-    clearAccessToken();
+    // clearIdToken();
+    // clearAccessToken();
     this.setState({ redirect: true });
     // .catch(err => console.log(err));
 
