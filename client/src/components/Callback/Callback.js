@@ -43,18 +43,11 @@ class Callback extends Component {
         console.log(res);
         if (res.aud) {
           console.log("user is there");
-          let loggedIn = { loggedIn: true };
-          API.updateUser(userAud, loggedIn)
-            .then(respons => {
-              console.log(respons);
-              console.log("user is logged in");
-            })
-            .catch(err => console.log(err));
         } else {
           console.log("user is not there");
           console.log("im about to API.saveUser");
           let userData = user;
-          userData.loggedIn = true;
+          // userData.loggedIn = true;
           API.saveUser(userData)
             .then(resp => {
               console.log(resp);
