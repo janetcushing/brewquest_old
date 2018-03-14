@@ -1,4 +1,4 @@
-const config = require('dotenv').config({path: './config.env'});
+const config = require('dotenv').config({path: './.env'});
 const express = require("express");
 const bodyParser = require("body-parser");
 var path = require("path");
