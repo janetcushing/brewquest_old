@@ -8,7 +8,6 @@ import Clear from 'material-ui/svg-icons/content/clear';
 // import Container from "../Container";
 // import Row from "../Row";
 // import Col from "../Col";
-// import SavedNotes from "../SavedNotes";
 // import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
 

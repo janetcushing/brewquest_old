@@ -27,7 +27,7 @@ class Detail extends Component {
         savedNotes: [],
         savedReviews: [],
         noteInput: "",
-        ratingInput: "",
+        ratingInput: null,
         reviewInput: ""
     };
 
@@ -47,7 +47,14 @@ class Detail extends Component {
         console.log(this.props.location.state)
         console.log("this is" + this.state.detail)
         console.log(this.state.been_there)
-        this.loadSavedNotes(this.state.detail._id);
+
+        let initialLoadData = {
+            brewery_id: this.state.detail._id,
+            aud: this.state.user.aud,
+        };
+
+        this.loadSavedNotes(initialLoadData.brewery_id);
+        this.loadSavedReviews(initialLoadData);
     }
 
     deletePlace = id => {
@@ -123,33 +130,24 @@ class Detail extends Component {
     handleSaveReview = event => {
         event.preventDefault();
 
-        console.log(this.state.reviewInput);
-        console.log(this.state.ratingInput);
-        console.log(this.state.user.name);
-        console.log(this.state.user.aud);
-        // if (!this.state.noteInput) {
-        //     alert("Please add a note");
-        // } else {
-        //     let savedNoteData = {
-        //         brewery_id: this.state.detail._id,
-        //         body: this.state.noteInput
-        //     }
-        //     API.saveNote(savedNoteData)
-        //         .then(res =>
-        //             console.log("Saved a note"));
-        //     this.loadSavedNotes(this.state.detail._id);
-        // }
+        if (this.state.ratingInput === null) {
+            alert("You must provide a Rating.");
+        } else {
+            let savedReviewData = {
+                brewery_id: this.state.detail._id,
+                aud: this.state.user.aud,
+                rating: this.state.ratingInput,
+                body: this.state.reviewInput
+            }
+            API.saveReview(savedReviewData)
+                .then(res =>
+                    console.log("Saved a review"));
+            this.loadSavedReviews(savedReviewData);
+        }
     };
 
-    // handleDeleteReview = id => {
-    //     API.deleteSavedReview(id)
-    //         .then(res =>
-    //             this.loadSavedReviews(this.state.detail._id))
-    //         .catch(err => console.log(err));
-    // };
-
-    loadSavedReviews = id => {
-        API.getSavedReviews(id)
+    loadSavedReviews = reviewDataObject => {
+        API.getSavedReviews(reviewDataObject)
             .then(res =>
                 this.setState({ savedReviews: res.data })
             )
@@ -229,6 +227,7 @@ class Detail extends Component {
                                         handleRatingInputChange={this.handleRatingInputChange}
                                         handleReviewInputChange={this.handleReviewInputChange}
                                         handleSaveReview={this.handleSaveReview}
+                                        savedReviews={this.state.savedReviews}
                                     />
 
                                 </Col>
