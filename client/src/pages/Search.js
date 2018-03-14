@@ -21,7 +21,7 @@ class Search extends Component {
       searchLocation: "",
       loggedIn: "",
       result: [],
-      saved: [], 
+      saved: [],
       user: {}
     };
   }
@@ -71,6 +71,7 @@ class Search extends Component {
     console.log(`query: ${query}`);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
+    console.log(`going to API.getApiPlaces query ${query}`);
     API.getApiPlaces(query)
       .then(res => {
         if (res.data === "location error from geocoder.geocode") {
@@ -79,6 +80,8 @@ class Search extends Component {
           for (let i = 0; i < res.data.placeDetails.length; i++) {
             console.log(res.data.placeDetails[i].brewery_name);
             console.log(res.data.placeDetails[i].saved);
+            console.log(res.data.placeDetails[i].phone);
+            console.log(res.data.placeDetails[i].website);
           }
           this.setState({
             result: res.data.placeDetails
@@ -127,55 +130,66 @@ class Search extends Component {
     console.log(`im in handlePlacesDelete`);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
-    let holdResult = this.state.result;
-    holdResult[details_key].saved = false;
-    this.setState({
-      result: holdResult
-    });
+    // let holdResult = this.state.result;
+    // holdResult[details_key].saved = false;
+    // this.setState({
+    //   result: holdResult
+    // });
     let breweryId = this.state.result[details_key].brewery_id;
     API.deleteSavedPlaceByBreweryId(breweryId)
       .then(res => {
         this.searchApiPlaces(this.state.searchLocation);
-  });
-}
+      });
+  }
 
-render() {
+  render() {
 
-  return (
-    <div id="search-page-background">
-      <div class="main-container">
-      {/* <div>
-            <p id="beer-text">Hello {this.state.user.name}</p>
-        </div> */}
-        <Container>
-          <Row>
-            <Col size="sm-12">
-              {/* {"this.state.loggedIn: " + this.state.loggedIn} */}
-              <SearchField
-                handleSearchLocationChange={this.handleSearchLocationChange}
-                handleFormSubmit={this.handleFormSubmit}
-                searchLocation={this.state.searchLocation}
-              />
+    return (<
+      div id="search-page-background" >
+      <div class="main-container" > {
+        /* <div>
+                    <p id="beer-text">Hello {this.state.user.name}</p>
+                </div> */
+      } <Container >
+          <Row >
+            <Col size="sm-12" > { /* {"this.state.loggedIn: " + this.state.loggedIn} */} <
+              SearchField handleSearchLocationChange={
+                this.handleSearchLocationChange
+              }
+              handleFormSubmit={
+                this.handleFormSubmit
+              }
+              searchLocation={
+                this.state.searchLocation
+              }
+            />
             </Col>
           </Row>
         </Container>
 
-        <Container id="results-card-container">
-          <Row>
-            <Col size="sm-12">
-              <ResultsCard
-                results={this.state.result}
-                handlePlacesSave={this.handlePlacesSave}
-                handlePlacesDelete={this.handlePlacesDelete}
-                loggedIn={this.state.loggedIn}
+        <Container id="results-card-container" >
+          <Row >
+            <Col size="sm-12" >
+              <ResultsCard results={
+                this.state.result
+              }
+                handlePlacesSave={
+                  this.handlePlacesSave
+                }
+                handlePlacesDelete={
+                  this.handlePlacesDelete
+                }
+                loggedIn={
+                  this.state.loggedIn
+                }
               />
             </Col>
           </Row>
         </Container>
       </div>
     </div>
-  );
-}
+    );
+  }
 }
 
 export default Search;
