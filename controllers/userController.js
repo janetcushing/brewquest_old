@@ -14,6 +14,13 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  update: function(req, res) {
+    console.log("im in update in userCOntroller");
+    db.UserStore
+      .findOneAndUpdate({ aud: req.params.aud }, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   // update: function(req, res) {
   //   console.log("got to user controller ");
   //   console.log(req.body);
@@ -31,17 +38,17 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
-  findByName: function (req, res) {
-    console.log("got to user controller findByName ");
+  findByAud: function (req, res) {
+    console.log("got to user controller findByAud ");
     db.UserStore
-      .find({name: req.params.name})
+      .find({aud: req.params.aud})
       .then(dbModel => {
-        console.log("back from findByName");
+        console.log("back from findByAud");
         console.log(dbModel);
-        if (dbModel.name) {
-          console.log(`User found ${dbModel.name}`);
+        if (dbModel.data[0].aud) {
+          console.log(`User found ${dbModel[0].aud}`);
         }
-        res.json(dbModel)
+        res.json(dbModel[0])
       })
       .catch(err => res.status(422).json(err));
   }

@@ -6,6 +6,10 @@ const NotesSchema = new Schema({
         type: String,
         required: true
     },
+    aud: {
+        type: String,
+        required: true
+    },
     body: {
         type: String,
         maxlength: 5000
@@ -14,9 +18,8 @@ const NotesSchema = new Schema({
         type: Date,
         default: Date.now
     }
-  });
-  
- const Notes = mongoose.model("Notes", NotesSchema);
-  
-  module.exports = Notes;
-  
+});
+
+const Notes = mongoose.model("Notes", NotesSchema);
+
+module.exports = Notes;

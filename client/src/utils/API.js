@@ -42,40 +42,56 @@ export default {
   // savePlace: function(savedPlacesData) {
   //   return axios.post("/api/savedplaces", savedPlacesData.been_there);
   // },
-  
+
 
   getApiPlaces: function (query) {
-    console.log(`im in getApiPlaces: ${query}`)
-    console.log(`/api/apiplaces/${query}`)
-   return axios.get("/api/apiplaces/" + query)
+    console.log(`in getAPIPlaces on the client side query is: ${query}`);
+    return axios.get("/api/apiplaces/" + query)
   },
   // Saves a user to the database
-  saveUser: function(userData) {
-    console.log("im in saveUser on the client side");
-    console.log(`userData ${JSON.stringify(userData)}`);
+  saveUser: function (userData) {
     return axios.post("/api/user/", userData);
-  },  
-  // Looks for a user to the database
-  findUser: function(name) {
-    console.log("im in findUser on the client side");
-    console.log(`userName ${name}`);
-    console.log("/api/user/" + name);
-    return axios.get("/api/user/" + name);
-  
   },
+  // Looks for a user to the database
+  findUser: function (aud) {
+    return axios.get("/api/user/" + aud);
+  },
+    // Looks for a user to the database
+    updateUser: function (aud, loggedIn) {
+      console.log("in client API updateUSER");
+      return axios.put("/api/user/" + aud, loggedIn);
+    },
 
   saveNote: function (savedNoteData) {
     return axios.post("/api/savednotes", savedNoteData);
   },
 
-  deleteSavedNote: function (id) {
-    return axios.delete("/api/savednotes/" + id);
+  deleteSavedNote: function (noteId) {
+    return axios.delete("/api/savednotes/", {
+      params: {
+        id: noteId
+      }
+    });
   },
 
-  getSavedNotes: function (breweryId) {
+  getSavedNotes: function (noteData) {
     return axios.get("/api/savednotes", {
       params: {
-        id: breweryId
+        id: noteData.brewery_id,
+        aud: noteData.aud
+      }
+    });
+  },
+
+  saveReview: function (savedReviewData) {
+    return axios.post("/api/savedreviews", savedReviewData);
+  },
+
+  getSavedReviews: function (reviewData) {
+    console.log(reviewData)
+    return axios.get("/api/savedreviews", {
+      params: {
+        id: reviewData.brewery_id
       }
     });
   }

@@ -40,7 +40,7 @@ const OPTIONS = {
 const GEOCODER = NodeGeocoder(OPTIONS);
 
 var holdplacesBody = [];
-const holdDetailBody = [];
+var holdDetailBody = [];
 var holdDbBody = [];
 
 module.exports = {
@@ -58,11 +58,17 @@ module.exports = {
     GEOCODER.geocode(loc)
       .then(function (locResponse) {
         let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;
-        //second step, call the google places api
+        //second step, call the google places api 
+        holdplacesBody.length = 0;
+        holdDetailBody.length = 0; 
+        holdDbBody.length = 0;  
         getPlacesHeaderData(locn, res)
           .then(function (result) {
+            console.log(`BACK FROM getPlacesHeaderData result is: ${JSON.stringify(result[5])}`);
             prepareForClient(result)
               .then(function (placeDetails) {
+                console.log(`website: ${placeDetails[5].website}`);
+                console.log(`phone: ${placeDetails[5].phone}`);
                 res.send({
                   placeDetails
                 });
@@ -103,19 +109,24 @@ const getPlacesHeaderData = (locn, res) => {
           console.log(`*********************************`);
         }
         holdplacesBody = body.results;
-        console.log(`holdplacesBody[0].name ${holdplacesBody[0].name}`);
+        console.log(`holdplacesBody[5].name ${holdplacesBody[5].name}`);
+        
         // call the details api and make a call to the database to get more data
         getPlacesDetailData(body, res)
           .then(detailBody => {
+            console.log(`back from getPlacesDetailData`);
+            console.log(`detailBody[5].website ${detailBody[5].website}`);
             getPlacesfromDatabase(detailBody, res)
               .then(dbBody => {
                 console.log("I am back with all the data");
                 console.log(holdplacesBody.length);
                 console.log(holdDetailBody.length);
                 console.log(holdDbBody.length);
+               
                 let result = mergeByKey("place_id", holdplacesBody, holdDetailBody, holdDbBody);
                 console.log(`result[0].name ${result[0].name}`);
                 console.log(`result[0].saved ${result[0].saved}`);
+                console.log(`result[0].website ${result[0].website}`);
                 resolve(result);
               }).catch(error => {
                 console.log("Error returned from dbPromise");
@@ -172,6 +183,7 @@ const getPlacesDetailData = (body) => {
           }
           holdDetailBody.push(detailBody.result);
           console.log(`holdDetailBody[0].place_id ${holdDetailBody[0].place_id}`);
+          console.log(`holdDetailBody[5].website ${holdDetailBody[5].website}`);
           if (holdDetailBody.length === (body.results.length)) {
             resolve(holdDetailBody);
           }

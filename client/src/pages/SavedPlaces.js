@@ -4,21 +4,35 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 // import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";
-import { hasBeenThere } from "../utils/hasbeenthereapi";
+// import { hasBeenThere } from "../utils/hasbeenthereapi";
 import { Link } from "react-router-dom";
 import { SavedListItem, SavedList } from "../components/SavedPlacesList";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
-import Check from 'material-ui/svg-icons/navigation/check';
+import { Card, CardActions, CardTitle
+  // , CardText, CardHeader 
+} from 'material-ui/Card';
+// import Check from 'material-ui/svg-icons/navigation/check';
 import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import Check_box from 'material-ui/svg-icons/toggle/check-box'
-import Info_outline from 'material-ui/svg-icons/action/info-outline'
+// import Info_outline from 'material-ui/svg-icons/action/info-outline'
 
 class SavedPlaces extends Component {
   state = {
     results: [],
+    loggedIn: false,
     user:{}
   };
+
+  componentWillMount() {
+    console.log(`in search componentWillMount`);
+    if (this.props.location.state) {
+      this.setState({
+        user: this.props.location.state.user,
+        loggedIn: this.props.location.state.loggedIn
+      });
+    }
+    console.log(`state: ${JSON.stringify(this.state)}`);
+  }
 
   componentDidMount() {
     console.log("component did mount", this.state.results)
@@ -65,6 +79,9 @@ class SavedPlaces extends Component {
     return (
       <div id="saved-page-background">
         <Container>
+        {/* <div>
+            <p id="beer-text">Hello {this.state.user.name}</p>
+        </div> */}
           <Row>
             <Col size="sm-12">
               {/* <AppbarRow /> */}
@@ -83,7 +100,10 @@ class SavedPlaces extends Component {
                     <Row>
                     <Link to={{
                             pathname: '/savedplaces/' + result._id,
-                            state: { placedetail: result }
+                            state: { 
+                              placedetail: result,
+                              user: this.state.user
+                             }
                           }}>
                       <Col size="sm-10">
                       <div id="card-title-div">

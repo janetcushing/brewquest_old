@@ -8,8 +8,10 @@ const PlaceDetailHours = props =>
                 <Card>
                     <CardHeader title="Hours" 
                     actAsExpander={true}
-                    showExpandableButton={true}/>
-                    <CardText expandable={true}>
+                    showExpandableButton={true}
+                    className="raleway-text"/>
+                    <CardText expandable={true}
+                    className="raleway-text">
                         {/* Need hours from JSON object to put in here */}
                         <ul>
                             <p>

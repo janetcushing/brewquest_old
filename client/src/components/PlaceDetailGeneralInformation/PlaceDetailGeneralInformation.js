@@ -8,8 +8,10 @@ const PlaceGeneralInformation = props =>
                 <Card>
                     <CardHeader title="General Information" 
                     actAsExpander={true}
-                    showExpandableButton={true}/>
-                    <CardText expandable={true}>
+                    showExpandableButton={true}
+                    className="raleway-text"/>
+                    <CardText expandable={true}
+                    className="raleway-text">
                     <ul>
                         <p>
                     Address: {props.full_address}
