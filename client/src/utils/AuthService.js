@@ -30,6 +30,8 @@ export function login() {
     scope: SCOPE
   });
   console.log("is logged in " + isLoggedIn());
+  console.log(`process.env.CALLBACK_URI `);
+  console.log(process.env.CALLBACK_URI);
 }
 
 export function logout() {
