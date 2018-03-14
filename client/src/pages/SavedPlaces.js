@@ -79,9 +79,9 @@ class SavedPlaces extends Component {
     return (
       <div id="saved-page-background">
         <Container>
-        <div>
-            <p id="beer-text">Hello {this.state.user.given_name}</p>
-        </div>
+        {/* <div>
+            <p id="beer-text">Hello {this.state.user.name}</p>
+        </div> */}
           <Row>
             <Col size="sm-12">
               {/* <AppbarRow /> */}

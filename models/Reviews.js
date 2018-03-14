@@ -23,12 +23,6 @@ const ReviewsSchema = new Schema({
     name: {
         type: String
     },
-    given_name: {
-        type: String
-    },
-    name: {
-        type: String
-    },
     aud: {
         type: String
     }

@@ -1,11 +1,11 @@
-/// import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import React from 'react';
 import { Link } from "react-router-dom";
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { grey50, grey800 } from 'material-ui/styles/colors';
-import { login, logout, isLoggedIn, clearIdToken, clearAccessToken } from '../../utils/AuthService';
+import { login, logout, isLoggedIn, clearIdToken, clearAccessToken, getUserName, getUserAud } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
 
 
@@ -35,35 +35,33 @@ class Nav extends React.Component {
         };
     }
 
+
     componentWillMount() {
-        console.log(`in Nav componentWillMount`);
-        // console.log(this.props.location.state);
-    this.setState({
-        loggedIn: true,
-        user: {
-          "given_name" : "Harry",
-          "family_name" : "Cushing",
-          "nickname" : "janet.cushing",
-          "name" : "Janet Cushing",
-          "picture" : "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
-          "locale" : "en",
-          "updated_at" : "2018-03-13T15:13:01.357Z",
-          "iss" : "https://beer-quest.auth0.com/",
-          "sub" : "google-oauth2|116410805633322351871",
-          "aud" : "hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia",
-          "iat" : "1520953981",
-          "exp" : "1520989981",
-          "at_hash" : "AqO_Oj5NVnKf1FfQmn3r5w",
-          "nonce" : "OAGqPoR~tjXGnofJ8K1ngbCEkHXAoJet"
-      }
-      });
-
-      console.log("Hello " + (this.state.user.given_name));
-    }
-
-
-
-
+               console.log(`in Nav componentWillMount`);
+                // console.log(this.props.location.state);
+            this.setState({
+                loggedIn: true,
+                user: {
+                  "given_name" : "Harry",
+                  "family_name" : "Cushing",
+                  "nickname" : "janet.cushing",
+                  "name" : "Janet Cushing",
+                  "picture" : "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+                  "locale" : "en",
+                  "updated_at" : "2018-03-13T15:13:01.357Z",
+                  "iss" : "https://beer-quest.auth0.com/",
+                  "sub" : "google-oauth2|116410805633322351871",
+                  "aud" : "hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia",
+                  "iat" : "1520953981",
+                 "exp" : "1520989981",
+                  "at_hash" : "AqO_Oj5NVnKf1FfQmn3r5w",
+                  "nonce" : "OAGqPoR~tjXGnofJ8K1ngbCEkHXAoJet"
+              }
+              });
+        
+              console.log("Hello " + (this.state.user.given_name));
+            }
+        
     handleLogin = () => {
         console.log(`im in handleLogin`);
         try {
@@ -72,12 +70,16 @@ class Nav extends React.Component {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging in");
         } finally {
+            debugger
             if (isLoggedIn()) {
-                // let userName = getUserName();
-                // let userAud = getUserAud();
-                // let userData = {given_name: userName, aud: userAud};
+                console.log("is logged in");
+                let userName = getUserName();
+                let userAud = getUserAud();
+                let userData = {name: userName, aud: userAud};
+                this.setState({ user: userData });
                 this.setState({ loggedIn: true });
-                // this.setState({ user: userData });
+                console.log(this.state.user.name);
+                console.log(this.state.user.loggedIn);
 
             } else { this.setState({ loggedIn: false }); }
         }
@@ -90,7 +92,6 @@ class Nav extends React.Component {
             console.log("i just logged out");
             clearIdToken();
             clearAccessToken();
-            // clearUser();
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging out");
@@ -106,8 +107,7 @@ class Nav extends React.Component {
 
         handleClose = () => {
             console.log(`nav bar isLoggedIn ${isLoggedIn()}`);
-            // if (isLoggedIn()) {
-                if (this.state.loggedIn){
+            if (isLoggedIn()) {
                 this.setState({ open: false, loggedIn: true });
             } else {
                 this.setState({ open: false, loggedIn: false });
@@ -125,8 +125,9 @@ class Nav extends React.Component {
 
                         <div id="navBtns">
                             {
-                                // (isLoggedIn()) ? <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
-                                (this.state.loggedIn) ? <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
+                                (this.state.loggedIn) ?
+                                // (isLoggedIn()) ?
+                                 <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
                                     : (<FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogin} label="Login" />)
                             }
                             <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
@@ -170,9 +171,8 @@ class Nav extends React.Component {
                             {
                                 // (isLoggedIn()) ? 
                                 (this.state.loggedIn) ?
-                                <MenuItem onClick={() => logout()}>Logout</MenuItem>
-                                    : 
-                                    (<MenuItem onClick={() => login()}>Login</MenuItem>)
+                                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                                    : (<MenuItem onClick={this.handleLogin}>Login</MenuItem>)
                             }
 
 

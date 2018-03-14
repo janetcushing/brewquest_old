@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setIdToken, decodeToken, getTokenExpirationDate, clearIdToken, clearAccessToken } from '../../utils/AuthService';
+import { setIdToken, decodeToken, getTokenExpirationDate, clearIdToken, clearAccessToken, setUser } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
@@ -46,7 +46,9 @@ class Callback extends Component {
         } else {
           console.log("user is not there");
           console.log("im about to API.saveUser");
-          API.saveUser(user)
+          let userData = user;
+          // userData.loggedIn = true;
+          API.saveUser(userData)
             .then(resp => {
               console.log(resp);
               console.log("user added");
@@ -55,11 +57,11 @@ class Callback extends Component {
         }
 
       })
-      console.log("clearing tokens");
-      // setUser(user) ;
-      clearIdToken();
-      clearAccessToken();
-      this.setState({ redirect: true });
+    console.log("clearing tokens");
+    setUser(user) ;
+    clearIdToken();
+    clearAccessToken();
+    this.setState({ redirect: true });
     // .catch(err => console.log(err));
 
     // window.location.href = "/";
@@ -81,22 +83,22 @@ class Callback extends Component {
     }
 
     if (this.state.redirect) {
-    return <Redirect to={{
-      pathname: '/',
-      state: {
-        user: this.state.user,
-        loggedIn: this.state.loggedIn
-      }
-    }} />;
-}
+      return <Redirect to={{
+        pathname: '/',
+        state: {
+          user: this.state.user,
+          loggedIn: this.state.loggedIn
+        }
+      }} />;
+    }
 
 
     return (
-     
-        <div style={style}>
-          <img src={loading} alt="loading" />
-        </div>
-      
+
+      <div style={style}>
+        <img src={loading} alt="loading" />
+      </div>
+
     )
   }
 }
