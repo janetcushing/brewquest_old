@@ -64,6 +64,7 @@ class Home extends Component {
     if (!this.state.searchLocation) {
       alert("Please add search criteria");
     } else {
+      console.log(`search on: ${this.state.searchLocation}`)
       this.setState({ redirect: true });
     }
   };

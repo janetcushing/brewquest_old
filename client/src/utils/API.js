@@ -45,6 +45,7 @@ export default {
 
 
   getApiPlaces: function (query) {
+    console.log("in getAPIPlaces on the client side")
     return axios.get("/api/apiplaces/" + query)
   },
   // Saves a user to the database
