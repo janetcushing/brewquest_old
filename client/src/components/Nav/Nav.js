@@ -41,8 +41,6 @@ class Nav extends React.Component {
 
     componentWillMount() {
                console.log(`in Nav componentWillMount`);
-               debugger
-            
                 if (isLoggedIn()) {
                     console.log("is logged in");
                     debugger
@@ -51,7 +49,6 @@ class Nav extends React.Component {
                     let userData = {name: userName, aud: userAud};
                     this.setState({ user: userData });
                     this.setState({ loggedIn: true });
-                    debugger
                     console.log(this.state.user.name);
                     console.log(this.state.user.loggedIn);
     
@@ -93,24 +90,6 @@ class Nav extends React.Component {
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging in");
-        // } finally {
-        //     debugger
-        //     if (isLoggedIn()) {
-        //         console.log("is logged in");
-        //         debugger
-        //         let userName = getUserName();
-        //         let userAud = getUserAud();
-        //         let userData = {name: userName, aud: userAud};
-        //         this.setState({ user: userData });
-        //         this.setState({ loggedIn: true });
-        //         debugger
-        //         console.log(this.state.user.name);
-        //         console.log(this.state.user.loggedIn);
-
-        //     } else { 
-        //         this.setState({ loggedIn: false });
-        //         console.log("not logged in");
-        //         console.log(this.state.user.loggedIn); }
         }
     }
 
@@ -125,15 +104,6 @@ class Nav extends React.Component {
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging out");
-        } finally {
-            if (isLoggedIn()) {
-                debugger
-                console.log("in handleLogout i am still logged in");
-                this.setState({ loggedIn: true });
-            } else {
-                 this.setState({ loggedIn: false }); 
-                 this.setState({ user: {} }); 
-                }
         }
     }
 
@@ -160,8 +130,8 @@ class Nav extends React.Component {
 
                         <div id="navBtns">
                             {
-                                (this.state.loggedIn) ?
-                                // (isLoggedIn()) ?
+                                // (this.state.loggedIn) ?
+                                (isLoggedIn()) ?
                                 <Person style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={() => logout()} label="Logout" />
                                 : (<PersonOutline style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={() => login()} label="Login" />)
                             }
@@ -189,8 +159,8 @@ class Nav extends React.Component {
                             </Link>
                             {/* <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link> */}
                             {
-                                // (isLoggedIn()) ?
-                                (this.state.loggedIn) ?
+                                (isLoggedIn()) ?
+                                // (this.state.loggedIn) ?
                                     <Link to={{
                                         pathname: "/savedplaces",
                                         state: { user: this.state.user, loggedIn: this.state.loggedIn }
@@ -204,8 +174,8 @@ class Nav extends React.Component {
                             }
 
                             {
-                                // (isLoggedIn()) ? 
-                                (this.state.loggedIn) ?
+                                (isLoggedIn()) ? 
+                                // (this.state.loggedIn) ?
                                 <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                                     : (<MenuItem onClick={this.handleLogin}>Login</MenuItem>)
                             }
