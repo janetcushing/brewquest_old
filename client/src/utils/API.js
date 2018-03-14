@@ -83,22 +83,16 @@ export default {
   },
 
   saveReview: function (savedReviewData) {
-    // return axios.post("/api/savednotes", savedNoteData);
+    return axios.post("/api/savedreviews", savedReviewData);
   },
 
-  // deleteSavedReview: function (noteId) {
-  //   return axios.delete("/api/savednotes/", {
-  //     params: {
-  //       id: noteId
-  //     }
-  //   });
-  // },
-
-  getSavedReviews: function (breweryId) {
-    // return axios.get("/api/savednotes", {
-    //   params: {
-    //     id: breweryId
-    //   }
-    // });
+  getSavedReviews: function (reviewData) {
+    console.log(reviewData)
+    return axios.get("/api/savedreviews", {
+      params: {
+        id: reviewData.brewery_id,
+        aud: reviewData.aud
+      }
+    });
   }
 };

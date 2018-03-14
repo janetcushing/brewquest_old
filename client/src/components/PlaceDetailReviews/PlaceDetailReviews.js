@@ -8,11 +8,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-// import Clear from 'material-ui/svg-icons/content/clear';
 // import Container from "../Container";
 // import Row from "../Row";
 // import Col from "../Col";
-// import SavedNotes from "../SavedNotes";
 // import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
 
@@ -39,6 +37,7 @@ const PlaceDetailReviews = props =>
                 onChange={props.handleRatingInputChange}
             >
 
+                <MenuItem value={null} primaryText="" />
                 <MenuItem value={5} primaryText="Very Good" />
                 <MenuItem value={4} primaryText="Good" />
                 <MenuItem value={3} primaryText="Not Bad" />
@@ -65,29 +64,25 @@ const PlaceDetailReviews = props =>
 
             </CardActions>
 
-            {/* {props.savedNotes.map(note =>
+            {props.savedReviews.map(review =>
 
 
-                <Card key={note._id}>
+                <Card key={review._id}>
 
                     <CardText>
 
-                        {note.body}
+                        {review.rating}
                         <br />
-                        {note.date}
+                        {review.body}
+                        <br />
+                        {review.date}
 
                     </CardText>
-
-                    <CardActions>
-
-                        <Clear onClick={() => props.handleDeleteNote(note._id)} />
-
-                    </CardActions>
 
                 </Card>
 
             )}
- */}
+
         </CardText>
     </Card>
 
