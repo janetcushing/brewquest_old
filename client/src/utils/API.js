@@ -62,7 +62,6 @@ export default {
     },
 
   saveNote: function (savedNoteData) {
-    console.log("in saveNote on the client side");
     return axios.post("/api/savednotes", savedNoteData);
   },
 
@@ -91,8 +90,7 @@ export default {
     console.log(reviewData)
     return axios.get("/api/savedreviews", {
       params: {
-        id: reviewData.brewery_id,
-        aud: reviewData.aud
+        id: reviewData.brewery_id
       }
     });
   }

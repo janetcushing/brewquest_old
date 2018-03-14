@@ -10,6 +10,7 @@ import {
 } from 'material-ui/Card';
 import CheckBoxOutlineBlank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import CheckBox from 'material-ui/svg-icons/toggle/check-box'
+import Stars from 'material-ui/svg-icons/action/stars';
 import Place from 'material-ui/svg-icons/maps/place'
 import PlaceDetailHours from "../components/PlaceDetailHours";
 import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
@@ -54,7 +55,6 @@ class Detail extends Component {
         };
 
         this.loadSavedNotes(initialLoadData);
-        // this.loadSavedNotes(initialLoadData.brewery_id);
         this.loadSavedReviews(initialLoadData);
     }
 
@@ -148,8 +148,12 @@ class Detail extends Component {
             }
             API.saveReview(savedReviewData)
                 .then(res =>
-                    console.log("Saved a review"));
-            this.loadSavedReviews(savedReviewData);
+                    this.loadSavedReviews(savedReviewData))
+                .then(
+                    this.setState({
+                        reviewInput: "", ratingInput: null
+                    })
+                );
         }
     };
 
@@ -160,6 +164,24 @@ class Detail extends Component {
             )
             .catch(err => console.log(err));
     };
+
+    renderStars(ratingValue) {
+        switch (ratingValue) {
+            case 5:
+                return <div><Stars /><Stars /><Stars /><Stars /><Stars /></div>;
+            case 4:
+                return <div><Stars /><Stars /><Stars /><Stars /></div>;
+            case 3:
+                return <div><Stars /><Stars /><Stars /></div>;
+            case 2:
+                return <div><Stars /><Stars /></div>;
+            case 1:
+                return <div><Stars /></div>;
+            default:
+                return "";
+        }
+    };
+
 
     render() {
 
@@ -231,6 +253,7 @@ class Detail extends Component {
                                     <PlaceDetailReviews
                                         ratingInput={this.state.ratingInput}
                                         reviewInput={this.state.reviewInput}
+                                        renderStars={this.renderStars}
                                         handleRatingInputChange={this.handleRatingInputChange}
                                         handleReviewInputChange={this.handleReviewInputChange}
                                         handleSaveReview={this.handleSaveReview}

@@ -71,6 +71,8 @@ const PlaceDetailReviews = props =>
 
                     <CardText>
 
+                        {props.renderStars(review.rating)}
+                        <br />
                         {review.rating}
                         <br />
                         {review.body}
