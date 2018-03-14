@@ -5,8 +5,8 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { grey50, grey800 } from 'material-ui/styles/colors';
-import { login, logout, isLoggedIn, clearIdToken, 
-    clearAccessToken, getUserName, getUserAud, clearUser } from '../../utils/AuthService';
+import { login, logout, isLoggedIn, 
+     getUserName, getUserAud } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
 import Person from 'material-ui/svg-icons/social/person';
 import PersonOutline from 'material-ui/svg-icons/social/person-outline';
@@ -42,6 +42,25 @@ class Nav extends React.Component {
     componentWillMount() {
                console.log(`in Nav componentWillMount`);
                debugger
+            
+                if (isLoggedIn()) {
+                    console.log("is logged in");
+                    debugger
+                    let userName = getUserName();
+                    let userAud = getUserAud();
+                    let userData = {name: userName, aud: userAud};
+                    this.setState({ user: userData });
+                    this.setState({ loggedIn: true });
+                    debugger
+                    console.log(this.state.user.name);
+                    console.log(this.state.user.loggedIn);
+    
+                } else { 
+                    this.setState({ loggedIn: false });
+                    console.log("not logged in");
+                    console.log(this.state.user.loggedIn);
+                 }
+            
                 // console.log(this.props.location.state);
             // this.setState({
             //     loggedIn: true,
@@ -74,24 +93,24 @@ class Nav extends React.Component {
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging in");
-        } finally {
-            debugger
-            if (isLoggedIn()) {
-                console.log("is logged in");
-                debugger
-                let userName = getUserName();
-                let userAud = getUserAud();
-                let userData = {name: userName, aud: userAud};
-                this.setState({ user: userData });
-                this.setState({ loggedIn: true });
-                debugger
-                console.log(this.state.user.name);
-                console.log(this.state.user.loggedIn);
+        // } finally {
+        //     debugger
+        //     if (isLoggedIn()) {
+        //         console.log("is logged in");
+        //         debugger
+        //         let userName = getUserName();
+        //         let userAud = getUserAud();
+        //         let userData = {name: userName, aud: userAud};
+        //         this.setState({ user: userData });
+        //         this.setState({ loggedIn: true });
+        //         debugger
+        //         console.log(this.state.user.name);
+        //         console.log(this.state.user.loggedIn);
 
-            } else { 
-                this.setState({ loggedIn: false });
-                console.log("not logged in");
-                console.log(this.state.user.loggedIn); }
+        //     } else { 
+        //         this.setState({ loggedIn: false });
+        //         console.log("not logged in");
+        //         console.log(this.state.user.loggedIn); }
         }
     }
 
@@ -100,9 +119,9 @@ class Nav extends React.Component {
         try {
             logout();
             console.log("i just logged out");
-            clearIdToken();
-            clearAccessToken();
-            clearUser();
+            // clearIdToken();
+            // clearAccessToken();
+            // clearUser();
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging out");
@@ -111,7 +130,10 @@ class Nav extends React.Component {
                 debugger
                 console.log("in handleLogout i am still logged in");
                 this.setState({ loggedIn: true });
-            } else { this.setState({ loggedIn: false }); }
+            } else {
+                 this.setState({ loggedIn: false }); 
+                 this.setState({ user: {} }); 
+                }
         }
     }
 

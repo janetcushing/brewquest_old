@@ -36,6 +36,7 @@ export function logout() {
   console.log("im in logout()");
   clearIdToken();
   clearAccessToken();
+  clearUser();
   // browserHistory.push('/');
   console.log("is logged in " + isLoggedIn());
   window.location.href = window.location.origin;
@@ -113,7 +114,7 @@ export function getTokenExpirationDate(encodedToken) {
   }
 
   export function decodeToken(token) {
-    var decoded = decode(token);
+    const decoded = decode(token);
     console.log((decoded));
     return decoded;
   }
