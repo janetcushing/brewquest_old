@@ -5,8 +5,14 @@ const ACCESS_TOKEN_KEY = 'access_token';
 
 const CLIENT_ID = 'hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia';
 const CLIENT_DOMAIN = 'beer-quest.auth0.com';
-const REDIRECT = 'http://localhost:3000/callback';
-// const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
+// const REDIRECT = 'http://localhost:3000/callback';
+const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
+
+// if (process.env.NODE_ENV === "production") {
+//   const REDIRECT = process.env.CALLBACK_URI;
+// }else{
+//   const REDIRECT = 'http://localhost:3000/callback';
+// }
 
 const SCOPE = 'openid profile';
 const AUDIENCE = 'https://beer-quest.auth0.com/userinfo';
@@ -17,7 +23,6 @@ var auth = new auth0.WebAuth({
 });
 
 export function login() {
-
   auth.authorize({
     responseType: 'token id_token',
     redirectUri: REDIRECT,
@@ -25,40 +30,13 @@ export function login() {
     scope: SCOPE
   });
   console.log("is logged in " + isLoggedIn());
-  // var token = localStorage.getItem(ID_TOKEN_KEY);
-  // var accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-  // var accToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-  // console.log(token);
-  // console.log(token.name);
-  // console.log(token.given_name);
-  // console.log(token.family_name);
-  // let userName = decodeToken(accToken);
-  // let userName = getTokenExpirationDate(token);
-  // decodeToken(token);
-  // console.log(`*************************`);
-  // console.log(userName);
-  // console.log(`*************************`);
-
-  // setTimeout(function () {
-  //   console.log(token)
-  // }, 10000);
-
-  // auth.client.userInfo(accessToken, function (err, user) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log(`*************************`);
-  //     console.log(user);
-  //     console.log(`*************************`);
-  //   }
-  // });
-
 }
 
 export function logout() {
   console.log("im in logout()");
   clearIdToken();
   clearAccessToken();
+  clearUser();
   // browserHistory.push('/');
   console.log("is logged in " + isLoggedIn());
   window.location.href = window.location.origin;
@@ -121,27 +99,54 @@ export function getTokenExpirationDate(encodedToken) {
   const token = decode(encodedToken);
   if (!token.exp) {
     return null;
+  }
+
+  const date = new Date(0);
+  date.setUTCSeconds(token.exp);
+
+  return date;
 }
 
-const date = new Date(0);
-date.setUTCSeconds(token.exp);
 
-return date;
-}
+  function isTokenExpired(token) {
+    const expirationDate = getTokenExpirationDate(token);
+    return expirationDate < new Date();
+  }
 
-function isTokenExpired(token) {
-  const expirationDate = getTokenExpirationDate(token);
-  return expirationDate < new Date();
-}
-
-export function decodeToken(token) {
-  var decoded = decode(token);
-  console.log((decoded));
-  return decoded;
-}
+  export function decodeToken(token) {
+    const decoded = decode(token);
+    console.log((decoded));
+    return decoded;
+  }
 
 // function getUserName(encodedToken) {
 //   const token = decode(encodedToken);
 //   let userName = token.name;
 //   return userName;
 // }
+
+// Get and store user name in local storage
+export function setUser(user) {
+  console.log("im in setUser");
+  console.log(`user: ${user}`);
+  localStorage.setItem('uname', user.name);
+  localStorage.setItem('uaud', user.aud);
+  return;
+}
+
+// Clear user name from local storage
+export function clearUser() {
+  console.log("im in clearUser");
+  localStorage.removeItem('uname');
+  localStorage.removeItem('uaud');
+}
+
+// Get  user name from local storage
+export function getUserName() {
+  return localStorage.getItem('uname');
+}
+
+// Get  user aud from local storage
+export function getUserAud() {
+  return localStorage.getItem('uaud');
+}

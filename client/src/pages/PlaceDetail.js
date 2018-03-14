@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
-import PlaceDetailNotes from "../components/PlaceDetailNotes";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
-import { Card, CardActions, CardTitle, CardText, CardMedia } from 'material-ui/Card';
-import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
-import Check_box from 'material-ui/svg-icons/toggle/check-box'
+import {
+    Card, CardActions, CardTitle
+    // , CardText, CardMedia 
+} from 'material-ui/Card';
+import CheckBoxOutlineBlank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
+import CheckBox from 'material-ui/svg-icons/toggle/check-box'
+import Stars from 'material-ui/svg-icons/action/stars';
 import Place from 'material-ui/svg-icons/maps/place'
 import PlaceDetailHours from "../components/PlaceDetailHours";
 import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
+import PlaceDetailNotes from "../components/PlaceDetailNotes";
+import PlaceDetailReviews from "../components/PlaceDetailReviews";
 // import Snackbar from 'material-ui/Snackbar';
 // import RaisedButton from 'material-ui/RaisedButton';
 
@@ -19,25 +24,38 @@ class Detail extends Component {
         results: [],
         detail: [],
         been_there: null,
-        user:{},
+        user: {},
+        savedNotes: [],
+        savedReviews: [],
         noteInput: "",
-        savedNotes: []
+        ratingInput: null,
+        reviewInput: ""
     };
 
     componentWillMount() {
+        console.log("im in placeDetails componentWillMount ");
         if (this.props.location.state) {
+            console.log("ive got state ");
             this.setState({ detail: this.props.location.state.placedetail })
             this.setState({ been_there: this.props.location.state.placedetail.been_there })
+            this.setState({ user: this.props.location.state.user })
         }
 
-        
+
     }
 
     componentDidMount() {
         console.log(this.props.location.state)
         console.log("this is" + this.state.detail)
         console.log(this.state.been_there)
-        this.loadSavedNotes(this.state.detail._id);
+
+        let initialLoadData = {
+            brewery_id: this.state.detail._id,
+            aud: this.state.user.aud,
+        };
+
+        this.loadSavedNotes(initialLoadData);
+        this.loadSavedReviews(initialLoadData);
     }
 
     deletePlace = id => {
@@ -76,35 +94,104 @@ class Detail extends Component {
         } else {
             let savedNoteData = {
                 brewery_id: this.state.detail._id,
-                body: this.state.noteInput
+                body: this.state.noteInput,
+                aud: this.state.user.aud
             }
-            console.log(savedNoteData)
             API.saveNote(savedNoteData)
                 .then(res =>
-                    console.log("Saved a note"));
-                    this.loadSavedNotes(this.state.detail._id);
+                    this.loadSavedNotes(savedNoteData))
+                .then(
+                    this.setState({ noteInput: "" })
+                );
         }
     };
 
-    handleDeleteNote = id => { };
+    handleDeleteNote = id => {
+        let initialLoadData = {
+            brewery_id: this.state.detail._id,
+            aud: this.state.user.aud,
+        };
 
-    loadSavedNotes = id => {
-        console.log("Loading notes for this brewery: " + id)
-        API.getSavedNotes(id)
+        API.deleteSavedNote(id)
+            .then(res =>
+                this.loadSavedNotes(initialLoadData))
+            .catch(err => console.log(err));
+    };
+
+    loadSavedNotes = noteDataObject => {
+        API.getSavedNotes(noteDataObject)
             .then(res =>
                 this.setState({ savedNotes: res.data })
             )
             .catch(err => console.log(err));
     };
 
-    // loadMap = id => {
+    handleRatingInputChange = (event, index, ratingInput) => this.setState({ ratingInput });
 
-    // }
+    handleReviewInputChange = event => {
+        this.setState({
+            reviewInput: event.target.value
+        });
+    };
+
+    handleSaveReview = event => {
+        event.preventDefault();
+
+        if (this.state.ratingInput === null) {
+            alert("You must provide a Rating.");
+        } else {
+            let savedReviewData = {
+                brewery_id: this.state.detail._id,
+                aud: this.state.user.aud,
+                rating: this.state.ratingInput,
+                body: this.state.reviewInput
+            }
+            API.saveReview(savedReviewData)
+                .then(res =>
+                    this.loadSavedReviews(savedReviewData))
+                .then(
+                    this.setState({
+                        reviewInput: "", ratingInput: null
+                    })
+                );
+        }
+    };
+
+    loadSavedReviews = reviewDataObject => {
+        API.getSavedReviews(reviewDataObject)
+            .then(res =>
+                this.setState({ savedReviews: res.data })
+            )
+            .catch(err => console.log(err));
+    };
+
+    renderStars(ratingValue) {
+        switch (ratingValue) {
+            case 5:
+                return <div><Stars /><Stars /><Stars /><Stars /><Stars /></div>;
+            case 4:
+                return <div><Stars /><Stars /><Stars /><Stars /></div>;
+            case 3:
+                return <div><Stars /><Stars /><Stars /></div>;
+            case 2:
+                return <div><Stars /><Stars /></div>;
+            case 1:
+                return <div><Stars /></div>;
+            default:
+                return "";
+        }
+    };
+
 
     render() {
+
+
         return (
             <div id="saved-detail-page-background">
                 <div class="main-container">
+                    {/* <div>
+            <p id="beer-text">Hello {this.state.user.name}</p>
+        </div> */}
                     <Container>
                         <Card key={this.state.detail._id}>
                             <Row>
@@ -118,7 +205,7 @@ class Detail extends Component {
                                         <CardActions>
                                             {
                                                 (this.state.been_there) ?
-                                                    <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
+                                                    <CheckBox onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <CheckBoxOutlineBlank onClick={() => this.checkBeenThere(this.state.detail._id)} />
                                             }
                                             )}
 
@@ -137,7 +224,8 @@ class Detail extends Component {
                                         full_address={this.state.detail.full_address}
                                         num_reviews={this.state.detail.num_reviews}
                                         phone={this.state.detail.phone}
-                                        website={this.state.detail.website}
+                                        // website={this.state.detail.website}
+                                        website={<a href={this.state.detail.website} target="_new_tab">{this.state.detail.website}</a>}
                                     />
 
                                     {/* Lauren add HOURS component under here */}
@@ -156,11 +244,21 @@ class Detail extends Component {
                                     <PlaceDetailNotes
                                         handleNoteInputChange={this.handleNoteInputChange}
                                         handleSaveNote={this.handleSaveNote}
+                                        handleDeleteNote={this.handleDeleteNote}
                                         noteInput={this.state.noteInput}
                                         savedNotes={this.state.savedNotes}
                                     />
 
                                     {/* Add REVIEWS component under here */}
+                                    <PlaceDetailReviews
+                                        ratingInput={this.state.ratingInput}
+                                        reviewInput={this.state.reviewInput}
+                                        renderStars={this.renderStars}
+                                        handleRatingInputChange={this.handleRatingInputChange}
+                                        handleReviewInputChange={this.handleReviewInputChange}
+                                        handleSaveReview={this.handleSaveReview}
+                                        savedReviews={this.state.savedReviews}
+                                    />
 
                                 </Col>
                             </Row>

@@ -29,13 +29,28 @@ class Home extends Component {
       open: false,
       redirect: false,
       searchLocation: "",
-      loggedIn: "",
-      user:{}
+      loggedIn: false,
+      user: {}
     };
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.handleTouchTap = this.handleTouchTap.bind(this);
   }
+
+  componentWillMount() {
+    console.log(`in Home componentWillMount`);
+    console.log(this.props.location.state);
+    if (this.props.location.state) {
+    console.log('im inside the if');
+    this.setState({
+      loggedIn: this.props.location.state.loggedIn,
+      user: this.props.location.state.user
+    });
+  } 
+   console.log("Hello " + (this.state.user.name));
+   console.log("Hello " + (this.state.loggedIn));  
+  }
+
 
   handleSearchLocationChange = event => {
     this.setState({ searchLocation: event.target.value });
@@ -49,10 +64,17 @@ class Home extends Component {
     if (!this.state.searchLocation) {
       alert("Please add search criteria");
     } else {
+      console.log(`search on: ${this.state.searchLocation}`)
       this.setState({ redirect: true });
     }
   };
 
+   
+    
+    
+      
+    
+  
   handleRequestClose() {
     console.log(`isLoggedIn ${isLoggedIn()}`);
     this.setState({
@@ -71,7 +93,12 @@ class Home extends Component {
     if (this.state.redirect) {
       return <Redirect to={{
         pathname: '/search',
-        state: { searchLocation: this.state.searchLocation }
+        state: {
+          searchLocation: this.state.searchLocation,
+          user: this.state.user,
+          loggedIn: this.state.loggedIn
+        }
+
       }} />;
     }
 
@@ -85,7 +112,9 @@ class Home extends Component {
             </div>
 
             <br />
-
+            {/* <div>
+              <p id="beer-text">Hello {this.state.user.given_name}</p>
+            </div> */}
             <div id="search-field-div">
               <SearchField
                 handleSearchLocationChange={this.handleSearchLocationChange}
@@ -96,17 +125,17 @@ class Home extends Component {
         </div>
         <div id="secondary-info">
           <div id="find-beer-home">
-            <LocalDrink class="home-page-icon" style={styles.smallIcon} />
+            <LocalDrink className="home-page-icon" style={styles.smallIcon} />
             <h2>Find Beer</h2>
             <h4>Search for places you can go to get a really good beer!</h4>
           </div>
           <div id="save-places-home">
-            <CheckCircle class="home-page-icon" style={styles.smallIcon} />
+            <CheckCircle className="home-page-icon" style={styles.smallIcon} />
             <h2>Save Places</h2>
             <h4>Save places you want to check out to your saved list!</h4>
           </div>
           <div id="rate-places-home">
-            <ThumbUp class="home-page-icon" style={styles.smallIcon} />
+            <ThumbUp className="home-page-icon" style={styles.smallIcon} />
             <h2>Rate Places</h2>
             <h4>Rate the places you visit and see others' reviews.</h4>
           </div>

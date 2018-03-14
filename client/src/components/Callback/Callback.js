@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setAccessToken, setIdToken, decodeToken, getTokenExpirationDate } from '../../utils/AuthService';
+import { setIdToken, decodeToken, getTokenExpirationDate, setUser } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loggedIn: false,
+      redirect: false,
+      user: {}
+    };
   }
 
-  componentDidMount() {
-    console.log("im in callback componentDidMount");
-    let accessToken = setAccessToken();
+  componentWillMount() {
+    console.log("im in callback componentWillMount");
+    // let accessToken = setAccessToken();
     let token = setIdToken();
     console.log(token);
     // let token = localStorage.getItem('id_token')
@@ -22,30 +27,30 @@ class Callback extends Component {
     let user = decodeToken(token);
     console.log(user);
     this.setState({ user: user });
-
-    console.log("this.state.user:");
-    console.log(this.state.user);
-    console.log(user);
-    
-    console.log("im about to API.findUser");
-    console.log(user.name);
+    this.setState({ loggedIn: true });
     debugger
-    let userName = user.name;
-    API.findUser(userName)
+    console.log("this.state.user:");
+    console.log(`state user ${JSON.stringify(this.state.user)}`);
+    console.log(`variable ${JSON.stringify(user)}`);
+
+    console.log("im about to API.findUser");
+    console.log(user.aud);
+    debugger
+    let userAud = user.aud;
+    debugger
+    API.findUser(userAud)
       .then(res => {
         console.log(`res: `);
         console.log(res);
-        debugger
-        if (res.name) {
-          
+        if (res.aud) {
           console.log("user is there");
         } else {
           console.log("user is not there");
           console.log("im about to API.saveUser");
-          debugger
-          API.saveUser(user)
+          let userData = user;
+          // userData.loggedIn = true;
+          API.saveUser(userData)
             .then(resp => {
-              debugger
               console.log(resp);
               console.log("user added");
             })
@@ -53,9 +58,16 @@ class Callback extends Component {
         }
 
       })
-      .catch(err => console.log(err));
+      
+    console.log("setting user");
+    setUser(user) ;
+    // clearIdToken();
+    // clearAccessToken();
+    this.setState({ redirect: true });
+    // .catch(err => console.log(err));
 
-    window.location.href = "/";
+    // window.location.href = "/";
+    // window.location.href = window.location.origin;
   }
 
   render() {
@@ -72,11 +84,23 @@ class Callback extends Component {
       backgroundColor: 'white',
     }
 
+    if (this.state.redirect) {
+      return <Redirect to={{
+        pathname: '/',
+        state: {
+          user: this.state.user,
+          loggedIn: this.state.loggedIn
+        }
+      }} />;
+    }
+
+
     return (
 
       <div style={style}>
         <img src={loading} alt="loading" />
       </div>
+
     )
   }
 }
