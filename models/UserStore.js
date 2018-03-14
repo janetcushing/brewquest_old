@@ -59,9 +59,6 @@ const UserStoreSchema = new Schema({
   },
   nonce: {
     type: String
-  },
-  loggedIn: {
-    type: Boolean
   }
 });
 
