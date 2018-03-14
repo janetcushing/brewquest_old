@@ -41,8 +41,6 @@ class Nav extends React.Component {
 
     componentWillMount() {
                console.log(`in Nav componentWillMount`);
-               debugger
-            
                 if (isLoggedIn()) {
                     console.log("is logged in");
                     debugger
@@ -51,7 +49,6 @@ class Nav extends React.Component {
                     let userData = {name: userName, aud: userAud};
                     this.setState({ user: userData });
                     this.setState({ loggedIn: true });
-                    debugger
                     console.log(this.state.user.name);
                     console.log(this.state.user.loggedIn);
     

@@ -408,12 +408,40 @@ h2 {
     left: 10%;
     position: relative;
   }
+  #card-action-div {
+    float: left;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #card-action-div {
+    float: left;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #card-action-div {
+    float: left;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #searchPlacesDiv {
+    left: 15%;
+    position: relative;
+  }
+  #card-action-div {
+    float: left;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   #searchPlacesDiv {
     left: 8%;
     position: relative;
+  }
+  #card-action-div {
+    float: left;
   }
 }
 
@@ -422,12 +450,18 @@ h2 {
     left: 7%;
     position: relative;
   }
+  #card-action-div {
+    float: left;
+  }
 }
 
 @media only screen and (max-width: 550px) {
   #searchPlacesDiv {
     left: 5%;
     position: relative;
+  }
+  #card-action-div {
+    float: left;
   }
 }
 
@@ -439,6 +473,9 @@ h2 {
   #beer-text {
     font-size: 24px;
   }
+  #card-action-div {
+    float: left;
+  }
 }
 
 @media only screen and (max-width: 375px) {
@@ -448,6 +485,10 @@ h2 {
   }
   #beer-text {
     font-size: 24px;
+  }
+
+  #card-action-div {
+    float: left;
   }
   #SearchforPlaces {
     width: 75%;
