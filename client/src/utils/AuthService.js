@@ -5,13 +5,13 @@ const ACCESS_TOKEN_KEY = 'access_token';
 
 const CLIENT_ID = 'hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia';
 const CLIENT_DOMAIN = 'beer-quest.auth0.com';
-const REDIRECT = 'http://localhost:3000/callback';
-// const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
-if (process.env.NODE_ENV === "production") {
-  const REDIRECT = process.env.CALLBACK_URI;
-}else{
-  const REDIRECT = 'http://localhost:3000/callback';
-}
+// const REDIRECT = 'http://localhost:3000/callback';
+const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
+// if (process.env.NODE_ENV === "production") {
+//   const REDIRECT = process.env.CALLBACK_URI;
+// }else{
+//   const REDIRECT = 'http://localhost:3000/callback';
+// }
 
 const SCOPE = 'openid profile';
 const AUDIENCE = 'https://beer-quest.auth0.com/userinfo';
