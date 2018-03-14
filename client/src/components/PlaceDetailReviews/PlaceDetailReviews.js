@@ -1,9 +1,11 @@
 import React from "react";
-import { Card, CardActions, 
+import {
+    Card, CardActions,
     // CardTitle, 
-    CardText, CardHeader } from 'material-ui/Card';
+    CardText, CardHeader
+} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 // import Container from "../Container";
@@ -22,16 +24,19 @@ const PlaceDetailReviews = props =>
         <CardHeader
             actAsExpander={true}
             showExpandableButton={true}
-            title="Reviews" />
+            title="Reviews"
+            className="raleway-text" />
 
 
-        <CardText expandable={true}>
+        <CardText expandable={true}
+            className="raleway-text">
 
             <SelectField
                 hintText="Rating"
                 value={props.ratingInput}
                 onChange={props.handleRatingInputChange}
             >
+
                 <MenuItem value={null} primaryText="" />
                 <MenuItem value={5} primaryText="Very Good" />
                 <MenuItem value={4} primaryText="Good" />
@@ -52,9 +57,10 @@ const PlaceDetailReviews = props =>
 
             <CardActions>
 
-                <FlatButton
+                <RaisedButton
                     onClick={(event) => props.handleSaveReview(event)}
-                    label="Add Review" />
+                    label="Add Review"
+                    primary={true} />
 
             </CardActions>
 

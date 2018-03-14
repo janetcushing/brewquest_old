@@ -1,17 +1,17 @@
 import React from "react";
-import { Card, CardActions, 
+import {
+    Card, CardActions,
     // CardTitle, 
-    CardText, CardHeader } from 'material-ui/Card';
+    CardText, CardHeader
+} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Clear from 'material-ui/svg-icons/content/clear';
-// import Container from "../Container";
-// import Row from "../Row";
-// import Col from "../Col";
+import Container from "../Container";
+import Row from "../Row";
+import Col from "../Col";
 // import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
-
-
 
 const PlaceDetailNotes = props =>
 
@@ -21,10 +21,11 @@ const PlaceDetailNotes = props =>
         <CardHeader
             actAsExpander={true}
             showExpandableButton={true}
-            title="My Notes" />
+            title="My Notes"
+            className="raleway-text" />
 
-
-        <CardText expandable={true}>
+        <CardText expandable={true}
+            className="raleway-text">
 
             <TextField
                 hintText="Enter a Note Here"
@@ -38,30 +39,40 @@ const PlaceDetailNotes = props =>
 
             <CardActions>
 
-                <FlatButton
+                <RaisedButton
                     onClick={(event) => props.handleSaveNote(event)}
-                    label="Add a Note" />
+                    label="Add a Note"
+                    primary={true} />
 
             </CardActions>
+
 
             {props.savedNotes.map(note =>
 
 
                 <Card key={note._id}>
 
-                    <CardText>
+                    <Container>
+                        <Row>
+                            <Col size="sm-10">
+                                <CardText className="raleway-text notes-column">
 
-                        {note.body}
-                        <br />
-                        {note.date}
+                                    {note.body}
+                                    {/* <br />
+                                    {note.date} */}
 
-                    </CardText>
+                                </CardText>
+                            </Col>
 
-                    <CardActions>
+                            <Col size="sm-2">
+                                <CardActions className="delete-note-column">
 
-                        <Clear onClick={() => props.handleDeleteNote(note._id)} />
+                                    <Clear onClick={() => props.handleDeleteNote(note._id)} />
 
-                    </CardActions>
+                                </CardActions>
+                            </Col>
+                        </Row>
+                    </Container>
 
                 </Card>
 

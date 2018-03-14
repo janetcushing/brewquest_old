@@ -8,8 +8,8 @@ import {
     Card, CardActions, CardTitle
     // , CardText, CardMedia 
 } from 'material-ui/Card';
-import Check_box_outline_blank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
-import Check_box from 'material-ui/svg-icons/toggle/check-box'
+import CheckBoxOutlineBlank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
+import CheckBox from 'material-ui/svg-icons/toggle/check-box'
 import Place from 'material-ui/svg-icons/maps/place'
 import PlaceDetailHours from "../components/PlaceDetailHours";
 import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
@@ -176,7 +176,7 @@ class Detail extends Component {
                                         <CardActions>
                                             {
                                                 (this.state.been_there) ?
-                                                    <Check_box onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <Check_box_outline_blank onClick={() => this.checkBeenThere(this.state.detail._id)} />
+                                                    <CheckBox onClick={() => this.unCheckBeenThere(this.state.detail._id)} /> : <CheckBoxOutlineBlank onClick={() => this.checkBeenThere(this.state.detail._id)} />
                                             }
                                             )}
 

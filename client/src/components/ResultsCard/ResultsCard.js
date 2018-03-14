@@ -1,13 +1,10 @@
 import React from "react";
 import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { login } from '../../utils/AuthService';
 // import { Link } from "react-router-dom";
 
-
 const ResultsCard = props =>
-
-
     <Card>
         <CardTitle title="Results"
             className="raleway-text" />
@@ -25,37 +22,37 @@ const ResultsCard = props =>
                         subtitle={'Rating: ' + result.rating}
                         className="raleway-text"
                     />
-
                     <CardText expandable={true}
                         className="raleway-text">
 
-                        {'Category: Brewery'}
+                        <h4>Total Reviews</h4>
+                        {result.num_reviews} reviews
                         <br />
-                        {/* {'Price: ' + result.price_level} */}
-                        {' Total Reviews: ' + result.num_reviews}
-                        <br />
+                        <h4>Open Now?</h4>
                         {(result.open_now) ? 'Open Now' : 'Not Open Now'}
                         <br />
-                        {/* {' Address: ' + result.full_address} */}
-                        {' Address: ' + result.vicinity}
+                        <h4>Address</h4>
+                        {result.vicinity}
                         <br />
-                        {' Phone: ' + result.phone}
+                        <h4>Phone</h4>
+                        {result.phone}
                         <br />
-                        <a href={result.website} target="_new_tab">{' Website: ' + result.website}</a>
+                        <h4>Website</h4>
+                        <a href={result.website} target="_new_tab">{result.website}</a>
                         <br />
                         {result.saved}
 
-                        <CardActions>
+                                                <CardActions>
                             {
                                 (!props.loggedIn) ?
-                                    <FlatButton
+                                    <RaisedButton
                                         onClick={() => login()}
                                         label="Login to Save"
                                         className="save-button" />
 
                                     :
                                     (result.saved) ?
-                                        <FlatButton
+                                        <RaisedButton
                                             // primary={true}
                                             // href={result.web_url}
                                             // target="_blank"
@@ -65,13 +62,16 @@ const ResultsCard = props =>
                                             className="save-button" />
                                         :
                                         // (!result.saved) 
-                                        <FlatButton
+                                        <RaisedButton
                                             onClick={(event) => props.handlePlacesSave(event, result.details_key)}
                                             value={result.details_key}
                                             label="Save to my list"
-                                            className="save-button" />
+                                            className="save-button"
+                                            primary={true} />
                             }
+                        </CardActions>
 
+                        <CardActions>
                             {/* <FlatButton
                                 // secondary={true}
                                 // onClick={() => props.handleArticleSave({
@@ -81,14 +81,11 @@ const ResultsCard = props =>
                                 //     url: result.web_url
                                 // })}
                                 label="More Info" /> */}
-
                         </CardActions>
-
                     </CardText>
                 </Card>
             )}
         </ CardText>
-
     </Card>;
 
 export default ResultsCard;
