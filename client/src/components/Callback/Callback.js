@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setIdToken, decodeToken, getTokenExpirationDate, clearIdToken, clearAccessToken, setUser } from '../../utils/AuthService';
+import { setIdToken, decodeToken, getTokenExpirationDate, setUser } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
@@ -15,8 +15,8 @@ class Callback extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("im in callback componentDidMount");
+  componentWillMount() {
+    console.log("im in callback componentWillMount");
     // let accessToken = setAccessToken();
     let token = setIdToken();
     console.log(token);
@@ -30,13 +30,14 @@ class Callback extends Component {
     this.setState({ loggedIn: true });
     debugger
     console.log("this.state.user:");
-    console.log(this.state.user);
-    console.log(user);
+    console.log(`state user ${JSON.stringify(this.state.user)}`);
+    console.log(`variable ${JSON.stringify(user)}`);
 
     console.log("im about to API.findUser");
     console.log(user.aud);
     debugger
     let userAud = user.aud;
+    debugger
     API.findUser(userAud)
       .then(res => {
         console.log(`res: `);
@@ -57,10 +58,11 @@ class Callback extends Component {
         }
 
       })
-    console.log("clearing tokens");
+      
+    console.log("setting user");
     setUser(user) ;
-    clearIdToken();
-    clearAccessToken();
+    // clearIdToken();
+    // clearAccessToken();
     this.setState({ redirect: true });
     // .catch(err => console.log(err));
 

@@ -41,36 +41,14 @@ class Home extends Component {
     console.log(`in Home componentWillMount`);
     console.log(this.props.location.state);
     if (this.props.location.state) {
-    // console.log(this.props.location.state);
+    console.log('im inside the if');
     this.setState({
       loggedIn: this.props.location.state.loggedIn,
       user: this.props.location.state.user
     });
-  }
-    // this.setState({
-    //       loggedIn: true,
-    //       user: {
-    //         "given_name" : "Harry",
-    //         "family_name" : "Cushing",
-    //         "nickname" : "janet.cushing",
-    //         "name" : "Janet Cushing",
-    //         "picture" : "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
-    //         "locale" : "en",
-    //         "updated_at" : "2018-03-13T15:13:01.357Z",
-    //         "iss" : "https://beer-quest.auth0.com/",
-    //         "sub" : "google-oauth2|116410805633322351871",
-    //         "aud" : "hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia",
-    //         "iat" : "1520953981",
-    //         "exp" : "1520989981",
-    //         "at_hash" : "AqO_Oj5NVnKf1FfQmn3r5w",
-    //         "nonce" : "OAGqPoR~tjXGnofJ8K1ngbCEkHXAoJet"
-    //     }
-    //     });
-
-    // }
-   
-      console.log("Hello " + (this.state.user.name));
-    
+  } 
+   console.log("Hello " + (this.state.user.name));
+   console.log("Hello " + (this.state.loggedIn));  
   }
 
 
@@ -86,6 +64,7 @@ class Home extends Component {
     if (!this.state.searchLocation) {
       alert("Please add search criteria");
     } else {
+      console.log(`search on: ${this.state.searchLocation}`)
       this.setState({ redirect: true });
     }
   };
@@ -148,17 +127,17 @@ class Home extends Component {
           <div id="find-beer-home">
             <LocalDrink className="home-page-icon" style={styles.smallIcon} />
             <h2>Find Beer</h2>
-            <p>Search for places you can go to get a really good beer!</p>
+            <h4>Search for places you can go to get a really good beer!</h4>
           </div>
           <div id="save-places-home">
             <CheckCircle className="home-page-icon" style={styles.smallIcon} />
             <h2>Save Places</h2>
-            <p>Save places you want to check out to your saved list!</p>
+            <h4>Save places you want to check out to your saved list!</h4>
           </div>
           <div id="rate-places-home">
             <ThumbUp className="home-page-icon" style={styles.smallIcon} />
             <h2>Rate Places</h2>
-            <p>Rate the places you visit and see others' reviews.</p>
+            <h4>Rate the places you visit and see others' reviews.</h4>
           </div>
         </div>
       </div>

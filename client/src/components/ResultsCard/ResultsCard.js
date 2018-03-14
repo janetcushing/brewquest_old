@@ -24,6 +24,24 @@ const ResultsCard = props =>
                     />
                     <CardText expandable={true}
                         className="raleway-text">
+
+                        <h4>Total Reviews</h4>
+                        {result.num_reviews} reviews
+                        <br />
+                        <h4>Open Now?</h4>
+                        {(result.open_now) ? 'Open Now' : 'Not Open Now'}
+                        <br />
+                        <h4>Address</h4>
+                        {result.vicinity}
+                        <br />
+                        <h4>Phone</h4>
+                        {result.phone}
+                        <br />
+                        <h4>Website</h4>
+                        <a href={result.website} target="_new_tab">{result.website}</a>
+                        <br />
+                        {result.saved}
+
                         <CardActions>
                             {
                                 (!props.loggedIn) ?
@@ -48,39 +66,11 @@ const ResultsCard = props =>
                                             onClick={(event) => props.handlePlacesSave(event, result.details_key)}
                                             value={result.details_key}
                                             label="Save to my list"
-                                            className="save-button" />
+                                            className="save-button"
+                                            primary={true} />
                             }
                         </CardActions>
-                        {/* {'Category: Brewery'} */}
-                        <br />
-                        <h3>Total Reviews</h3>
-                        {result.num_reviews} reviews
-                        <br />
-                        <h3>Open Now?</h3>
-                        {(result.open_now) ? 'Open Now' : 'Not Open Now'}
-                        <br />
-                        <h3>Address</h3>
-                        {result.vicinity}
-                        <br />
-                        <h3>Phone</h3>
-                        {result.phone}
-                        <br />
-                        <h3>Website</h3>
-                        <a href={result.website} target="_new_tab">{result.website}</a>
-                        <br />
-                        {result.saved}
 
-                        <CardActions>
-                            {/* <FlatButton
-                                // secondary={true}
-                                // onClick={() => props.handleArticleSave({
-                                //     title: result.headline.main,
-                                //     snippet: result.snippet,
-                                //     date: result.pub_date,
-                                //     url: result.web_url
-                                // })}
-                                label="More Info" /> */}
-                        </CardActions>
                     </CardText>
                 </Card>
             )}
@@ -88,3 +78,8 @@ const ResultsCard = props =>
     </Card>;
 
 export default ResultsCard;
+
+
+
+
+

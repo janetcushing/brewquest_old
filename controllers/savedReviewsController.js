@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the savedNotesController
+// Defining methods for the savedReviewsController
 module.exports = {
     findAllbyBrewery: function (req, res) {
         db.Reviews
@@ -8,7 +8,7 @@ module.exports = {
                 brewery_id: req.query.id
             })
             .sort({
-                brewery_name: -1
+                date: -1
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -18,11 +18,5 @@ module.exports = {
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
-    },
-    // remove: function (req, res) {
-    //     db.Notes
-    //         .findById(req.query.id).remove()
-    //         .then(dbModel => res.json(dbModel))
-    //         .catch(err => res.status(422).json(err));
-    // }
+    }
 };

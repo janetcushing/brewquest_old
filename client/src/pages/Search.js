@@ -38,8 +38,12 @@ class Search extends Component {
         user: this.props.location.state.user,
         loggedIn: this.props.location.state.loggedIn
       });
+      console.log(`search on: ${this.state.searchLocation}`);
+      console.log(`user: ${JSON.stringify(this.state.user)}`);
+      console.log(`loggedIn: ${this.state.loggedIn}`);
     }
     console.log(`state: ${JSON.stringify(this.state)}`);
+    console.log(`search on: ${this.state.searchLocation}`);
   }
 
   componentDidMount() {
@@ -53,12 +57,18 @@ class Search extends Component {
       console.log(`isLoggedIn ${isLoggedIn()}`);
       console.log("current state: " + this.state.searchLocation);
       console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
+      console.log(`search on: ${this.state.searchLocation}`);
+      console.log(`user: ${this.state.user}`);
+      console.log(`loggedIn: ${this.state.loggedIn}`);
+      if (this.props.location.state.searchLocation) {
       this.searchApiPlaces(this.state.searchLocation);
+      }
     }
   }
 
   searchApiPlaces = query => {
     console.log("Im in searchPlaces");
+    console.log(`query: ${query}`);
     console.log(`isLoggedIn ${isLoggedIn()}`);
     console.log(`this.state.LoggedIn ${this.state.loggedIn}`);
     API.getApiPlaces(query)

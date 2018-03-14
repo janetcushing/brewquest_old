@@ -6,9 +6,10 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { grey50, grey800 } from 'material-ui/styles/colors';
 import { login, logout, isLoggedIn,
-    //  clearIdToken, clearAccessToken,
       getUserName, getUserAud } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
+import Person from 'material-ui/svg-icons/social/person';
+import PersonOutline from 'material-ui/svg-icons/social/person-outline';
 
 
 const styles = {
@@ -18,11 +19,11 @@ const styles = {
     labelStyle: {
         color: grey50,
     },
-    smallIcon: {
-        width: 36,
-        height: 36,
+    mediumIcon: {
+        width: 48,
+        height: 48,
         color: grey50
-    }
+      }
 };
 
 
@@ -40,6 +41,26 @@ class Nav extends React.Component {
 
     componentWillMount() {
                console.log(`in Nav componentWillMount`);
+               debugger
+            
+                if (isLoggedIn()) {
+                    console.log("is logged in");
+                    debugger
+                    let userName = getUserName();
+                    let userAud = getUserAud();
+                    let userData = {name: userName, aud: userAud};
+                    this.setState({ user: userData });
+                    this.setState({ loggedIn: true });
+                    debugger
+                    console.log(this.state.user.name);
+                    console.log(this.state.user.loggedIn);
+    
+                } else { 
+                    this.setState({ loggedIn: false });
+                    console.log("not logged in");
+                    console.log(this.state.user.loggedIn);
+                 }
+            
                 // console.log(this.props.location.state);
             // this.setState({
             //     loggedIn: true,
@@ -61,7 +82,8 @@ class Nav extends React.Component {
             //   }
             //   });
         
-              console.log("Hello " + (this.state.user.given_name));
+              console.log("Hello " + (this.state.user.name));
+              console.log("loggedIn " + (this.state.user.loggedIn));
             }
         
     handleLogin = () => {
@@ -71,19 +93,7 @@ class Nav extends React.Component {
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging in");
-        } finally {
-            debugger
-            if (isLoggedIn()) {
-                console.log("is logged in");
-                let userName = getUserName();
-                let userAud = getUserAud();
-                let userData = {name: userName, aud: userAud};
-                this.setState({ user: userData });
-                this.setState({ loggedIn: true });
-                console.log(this.state.user.name);
-                console.log(this.state.user.loggedIn);
-
-            } else { this.setState({ loggedIn: false }); }
+        
         }
     }
 
@@ -94,13 +104,10 @@ class Nav extends React.Component {
             console.log("i just logged out");
             // clearIdToken();
             // clearAccessToken();
+            // clearUser();
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging out");
-        } finally {
-            if (isLoggedIn()) {
-                this.setState({ loggedIn: true });
-            } else { this.setState({ loggedIn: false }); }
         }
     }
 
@@ -127,12 +134,12 @@ class Nav extends React.Component {
 
                         <div id="navBtns">
                             {
-                                (this.state.loggedIn) ?
-                                // (isLoggedIn()) ?
-                                 <FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogout} label="Logout" />
-                                    : (<FlatButton labelStyle={styles.labelStyle} onClick={this.handleLogin} label="Login" />)
+                                // (this.state.loggedIn) ?
+                                (isLoggedIn()) ?
+                                <Person style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={() => logout()} label="Logout" />
+                                : (<PersonOutline style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={() => login()} label="Login" />)
                             }
-                            <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.smallIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
+                            <NavigationMenu id="nav-menu" style={styles.iconStyle} style={styles.mediumIcon} iconStyle={styles.iconStyle} onClick={this.handleToggle} />
                         </div>
 
                         <Drawer id="drawer-container"
@@ -156,8 +163,8 @@ class Nav extends React.Component {
                             </Link>
                             {/* <Link to="/search"><MenuItem onClick={this.handleClose}>Search Beer</MenuItem></Link> */}
                             {
-                                // (isLoggedIn()) ?
-                                (this.state.loggedIn) ?
+                                (isLoggedIn()) ?
+                                // (this.state.loggedIn) ?
                                     <Link to={{
                                         pathname: "/savedplaces",
                                         state: { user: this.state.user, loggedIn: this.state.loggedIn }
@@ -171,8 +178,8 @@ class Nav extends React.Component {
                             }
 
                             {
-                                // (isLoggedIn()) ? 
-                                (this.state.loggedIn) ?
+                                (isLoggedIn()) ? 
+                                // (this.state.loggedIn) ?
                                 <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                                     : (<MenuItem onClick={this.handleLogin}>Login</MenuItem>)
                             }

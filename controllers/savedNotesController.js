@@ -5,17 +5,16 @@ module.exports = {
     findAllbyBrewery: function (req, res) {
         db.Notes
             .find({
-                brewery_id: req.query.id
+                brewery_id: req.query.id,
+                aud: req.query.aud
             })
             .sort({
-                brewery_name: -1
+                date: -1
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
-        console.log("im createing a note");
-        console.log(req.body);
         db.Notes
             .create(req.body)
             .then(dbModel => res.json(dbModel))
