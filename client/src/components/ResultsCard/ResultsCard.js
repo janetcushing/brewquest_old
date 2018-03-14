@@ -42,7 +42,7 @@ const ResultsCard = props =>
                         <br />
                         {result.saved}
 
-                                                <CardActions>
+                        <CardActions>
                             {
                                 (!props.loggedIn) ?
                                     <RaisedButton
@@ -71,17 +71,6 @@ const ResultsCard = props =>
                             }
                         </CardActions>
 
-                        <CardActions>
-                            {/* <FlatButton
-                                // secondary={true}
-                                // onClick={() => props.handleArticleSave({
-                                //     title: result.headline.main,
-                                //     snippet: result.snippet,
-                                //     date: result.pub_date,
-                                //     url: result.web_url
-                                // })}
-                                label="More Info" /> */}
-                        </CardActions>
                     </CardText>
                 </Card>
             )}
@@ -89,3 +78,8 @@ const ResultsCard = props =>
     </Card>;
 
 export default ResultsCard;
+
+
+
+
+

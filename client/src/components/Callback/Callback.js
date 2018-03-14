@@ -15,8 +15,8 @@ class Callback extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("im in callback componentDidMount");
+  componentWillMount() {
+    console.log("im in callback componentWillMount");
     // let accessToken = setAccessToken();
     let token = setIdToken();
     console.log(token);
@@ -30,8 +30,8 @@ class Callback extends Component {
     this.setState({ loggedIn: true });
     debugger
     console.log("this.state.user:");
-    console.log(this.state.user);
-    console.log(user);
+    console.log(`state user ${JSON.stringify(this.state.user)}`);
+    console.log(`variable ${JSON.stringify(user)}`);
 
     console.log("im about to API.findUser");
     console.log(user.aud);
