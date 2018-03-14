@@ -41,36 +41,14 @@ class Home extends Component {
     console.log(`in Home componentWillMount`);
     console.log(this.props.location.state);
     if (this.props.location.state) {
-    // console.log(this.props.location.state);
+    console.log('im inside the if');
     this.setState({
       loggedIn: this.props.location.state.loggedIn,
       user: this.props.location.state.user
     });
-  }
-    // this.setState({
-    //       loggedIn: true,
-    //       user: {
-    //         "given_name" : "Harry",
-    //         "family_name" : "Cushing",
-    //         "nickname" : "janet.cushing",
-    //         "name" : "Janet Cushing",
-    //         "picture" : "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
-    //         "locale" : "en",
-    //         "updated_at" : "2018-03-13T15:13:01.357Z",
-    //         "iss" : "https://beer-quest.auth0.com/",
-    //         "sub" : "google-oauth2|116410805633322351871",
-    //         "aud" : "hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia",
-    //         "iat" : "1520953981",
-    //         "exp" : "1520989981",
-    //         "at_hash" : "AqO_Oj5NVnKf1FfQmn3r5w",
-    //         "nonce" : "OAGqPoR~tjXGnofJ8K1ngbCEkHXAoJet"
-    //     }
-    //     });
-
-    // }
-   
-      console.log("Hello " + (this.state.user.name));
-    
+  } 
+   console.log("Hello " + (this.state.user.name));
+   console.log("Hello " + (this.state.loggedIn));  
   }
 
 

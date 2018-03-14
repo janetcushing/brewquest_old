@@ -37,6 +37,7 @@ class Callback extends Component {
     console.log(user.aud);
     debugger
     let userAud = user.aud;
+    debugger
     API.findUser(userAud)
       .then(res => {
         console.log(`res: `);
@@ -57,6 +58,7 @@ class Callback extends Component {
         }
 
       })
+      
     console.log("clearing tokens");
     setUser(user) ;
     clearIdToken();

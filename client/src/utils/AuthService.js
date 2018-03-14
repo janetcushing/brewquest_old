@@ -128,7 +128,7 @@ export function setUser(user) {
 }
 
 // Clear user name from local storage
-export function clearUser(user) {
+export function clearUser() {
   console.log("im in clearUser");
   localStorage.removeItem('uname');
   localStorage.removeItem('uaud');
