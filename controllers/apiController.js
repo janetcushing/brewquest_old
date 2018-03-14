@@ -55,6 +55,7 @@ module.exports = {
     console.log("Im in getApiData");
     //first step, translate the search location to longitude and latitude
     loc = req.params.location;
+    console.log(`loc: ${loc}`);
     GEOCODER.geocode(loc)
       .then(function (locResponse) {
         let locn = `${locResponse[0].latitude},${locResponse[0].longitude}`;

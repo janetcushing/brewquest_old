@@ -5,8 +5,8 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { grey50, grey800 } from 'material-ui/styles/colors';
-import { login, logout, isLoggedIn, 
-     getUserName, getUserAud } from '../../utils/AuthService';
+import { login, logout, isLoggedIn,
+      getUserName, getUserAud } from '../../utils/AuthService';
 import FlatButton from 'material-ui/FlatButton';
 import Person from 'material-ui/svg-icons/social/person';
 import PersonOutline from 'material-ui/svg-icons/social/person-outline';
@@ -90,6 +90,7 @@ class Nav extends React.Component {
         } catch (err) {
             console.log(`error logging in: ${err}`);
             alert("There was an error logging in");
+        
         }
     }
 
