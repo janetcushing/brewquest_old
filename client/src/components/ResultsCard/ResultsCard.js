@@ -41,7 +41,7 @@ const ResultsCard = props =>
                         <a href={result.website} target="_new_tab">{result.website}</a>
                         <br />
                         {result.saved}
-
+                    
                         <CardActions>
                             {
                                 (!props.loggedIn) ?
@@ -70,6 +70,8 @@ const ResultsCard = props =>
                                             primary={true} />
                             }
                         </CardActions>
+                        <br />
+                        
 
                     </CardText>
                 </Card>
