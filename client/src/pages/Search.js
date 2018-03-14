@@ -60,7 +60,9 @@ class Search extends Component {
       console.log(`search on: ${this.state.searchLocation}`);
       console.log(`user: ${this.state.user}`);
       console.log(`loggedIn: ${this.state.loggedIn}`);
+      if (this.props.location.state.searchLocation) {
       this.searchApiPlaces(this.state.searchLocation);
+      }
     }
   }
 
