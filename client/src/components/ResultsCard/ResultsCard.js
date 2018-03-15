@@ -2,20 +2,15 @@ import React from "react";
 import { Card, CardActions, CardTitle, CardText, CardHeader } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { login } from '../../utils/AuthService';
-// import { Link } from "react-router-dom";
 
 const ResultsCard = props =>
     <Card>
         <CardTitle title="Results"
             className="raleway-text" />
         <CardText>
-            {/* {"props.loggedIn: " + props.loggedIn} */}
             {props.results.map(result =>
-
                 <Card key={result.details_key}>
-
                     <CardHeader
-                        // avatar={result.icon}
                         actAsExpander={true}
                         showExpandableButton={true}
                         title={result.brewery_name}
@@ -41,7 +36,6 @@ const ResultsCard = props =>
                         <a href={result.website} target="_new_tab">{result.website}</a>
                         <br />
                         {result.saved}
-                    
                         <CardActions>
                             {
                                 (!props.loggedIn) ?
@@ -49,19 +43,14 @@ const ResultsCard = props =>
                                         onClick={() => login()}
                                         label="Login to Save"
                                         className="save-button" />
-
                                     :
                                     (result.saved) ?
                                         <RaisedButton
-                                            // primary={true}
-                                            // href={result.web_url}
-                                            // target="_blank"
                                             onClick={(event) => props.handlePlacesDelete(event, result.details_key)}
                                             value={result.details_key}
                                             label="Delete from Saved"
                                             className="save-button" />
                                         :
-                                        // (!result.saved) 
                                         <RaisedButton
                                             onClick={(event) => props.handlePlacesSave(event, result.details_key)}
                                             value={result.details_key}
@@ -71,8 +60,6 @@ const ResultsCard = props =>
                             }
                         </CardActions>
                         <br />
-                        
-
                     </CardText>
                 </Card>
             )}

@@ -10,20 +10,11 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    console.log("got to controller for place detail page")
-    console.log("WE'RE HERE")
-    console.log(req.params.id)
     db.Breweries
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // find: function(req, res) {
-  //   db.Breweries
-  //     .find()
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // }, 
   create: function(req, res) {
     db.Breweries
       .create(req.body)
@@ -31,20 +22,14 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("got to controller for beentoplace");
-    console.log(req.body);
-    console.log(req.params);
     db.Breweries
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => 
-        {console.log(dbModel)
-        res.json(dbModel)})
+      .then(dbModel => {res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
     db.Breweries
       .findById(req.params.id).remove()
-      // .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

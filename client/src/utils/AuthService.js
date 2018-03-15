@@ -1,19 +1,13 @@
 import decode from 'jwt-decode';
 import auth0 from 'auth0-js';
+
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
-
 const CLIENT_ID = 'hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia';
 const CLIENT_DOMAIN = 'beer-quest.auth0.com';
-// const REDIRECT = 'http://localhost:3000/callback';
 const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
 // const REDIRECT = process.env.CALLBACK_URI || 'https://beer-quest.herokuapp.com/callback';
 
-// if (process.env.NODE_ENV === "production") {
-//   const REDIRECT = process.env.CALLBACK_URI;
-// }else{
-//   const REDIRECT = 'http://localhost:3000/callback';
-// }
 
 const SCOPE = 'openid profile';
 const AUDIENCE = 'https://beer-quest.auth0.com/userinfo';
@@ -30,9 +24,6 @@ export function login() {
     audience: AUDIENCE,
     scope: SCOPE
   });
-  console.log("is logged in " + isLoggedIn());
-  console.log(`process.env.CALLBACK_URI `);
-  console.log(process.env.CALLBACK_URI);
 }
 
 export function logout() {
@@ -40,8 +31,6 @@ export function logout() {
   clearIdToken();
   clearAccessToken();
   clearUser();
-  // browserHistory.push('/');
-  console.log("is logged in " + isLoggedIn());
   window.location.href = window.location.origin;
 }
 
@@ -77,18 +66,14 @@ function getParameterByName(name) {
 
 // Get and store access_token in local storage
 export function setAccessToken() {
-  console.log("im in setAccessToken");
   let accessToken = getParameterByName('access_token');
-  console.log(`accessToken: ${accessToken}`);
   localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
   return accessToken;
 }
 
 // Get and store id_token in local storage
 export function setIdToken() {
-  console.log("im in setIdToken");
   let idToken = getParameterByName('id_token');
-  console.log(`idToken: ${idToken}`);
   localStorage.setItem(ID_TOKEN_KEY, idToken);
   return idToken;
 }
@@ -103,10 +88,8 @@ export function getTokenExpirationDate(encodedToken) {
   if (!token.exp) {
     return null;
   }
-
   const date = new Date(0);
   date.setUTCSeconds(token.exp);
-
   return date;
 }
 
@@ -122,31 +105,15 @@ export function getTokenExpirationDate(encodedToken) {
     return decoded;
   }
 
-// function getUserName(encodedToken) {
-//   const token = decode(encodedToken);
-//   let userName = token.name;
-//   return userName;
-// }
-
-// Get and store user name in local storage
+// Get and store user in local storage
 export function setUser(user) {
-  console.log("im in setUser");
-  console.log(`user: ${user}`);
-  localStorage.setItem('uname', user.name);
   localStorage.setItem('uaud', user.aud);
   return;
 }
 
 // Clear user name from local storage
 export function clearUser() {
-  console.log("im in clearUser");
-  localStorage.removeItem('uname');
   localStorage.removeItem('uaud');
-}
-
-// Get  user name from local storage
-export function getUserName() {
-  return localStorage.getItem('uname');
 }
 
 // Get  user aud from local storage

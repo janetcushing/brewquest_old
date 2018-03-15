@@ -5,6 +5,5 @@ const savedReviewsController = require("../../controllers/savedReviewsController
 router.route("/")
   .get(savedReviewsController.findAllbyBrewery)
   .post(savedReviewsController.create)
-//   .delete(savedNotesController.remove);
 
 module.exports = router;

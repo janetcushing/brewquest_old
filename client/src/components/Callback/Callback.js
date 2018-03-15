@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import loading from './loading.svg';
-import { setIdToken, decodeToken, getTokenExpirationDate, setUser } from '../../utils/AuthService';
+import { setIdToken, decodeToken, setUser } from '../../utils/AuthService';
 import API from "../../utils/API";
 
 class Callback extends Component {
@@ -16,58 +16,26 @@ class Callback extends Component {
   }
 
   componentWillMount() {
-    console.log("im in callback componentWillMount");
-    // let accessToken = setAccessToken();
     let token = setIdToken();
-    console.log(token);
-    // let token = localStorage.getItem('id_token')
-    let exp = getTokenExpirationDate(token);
-    console.log(exp)
-
     let user = decodeToken(token);
-    console.log(user);
     this.setState({ user: user });
     this.setState({ loggedIn: true });
-    debugger
-    console.log("this.state.user:");
-    console.log(`state user ${JSON.stringify(this.state.user)}`);
-    console.log(`variable ${JSON.stringify(user)}`);
-
-    console.log("im about to API.findUser");
-    console.log(user.aud);
-    debugger
     let userAud = user.aud;
-    debugger
     API.findUser(userAud)
       .then(res => {
-        console.log(`res: `);
-        console.log(res);
         if (res.aud) {
-          console.log("user is there");
+          //user is already in database
         } else {
-          console.log("user is not there");
-          console.log("im about to API.saveUser");
           let userData = user;
-          // userData.loggedIn = true;
           API.saveUser(userData)
             .then(resp => {
-              console.log(resp);
-              console.log("user added");
             })
             .catch(err => console.log(err));
         }
 
       })
-      
-    console.log("setting user");
-    setUser(user) ;
-    // clearIdToken();
-    // clearAccessToken();
+    setUser(user);
     this.setState({ redirect: true });
-    // .catch(err => console.log(err));
-
-    // window.location.href = "/";
-    // window.location.href = window.location.origin;
   }
 
   render() {
