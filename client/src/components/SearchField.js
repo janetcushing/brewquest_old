@@ -32,6 +32,7 @@ const SearchField = props => (
                 buttonStyle={styles.buttonStyle}
                 onTouchTap={this.handleTouchTap}
                 onClick={(event) => props.handleFormSubmit(event)}
+                className="search-button-home"
             />
     </div>
 );
