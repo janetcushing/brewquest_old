@@ -8,10 +8,8 @@ const CLIENT_DOMAIN = 'beer-quest.auth0.com';
 // const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
 const REDIRECT = process.env.CALLBACK_URI || 'https://beer-quest.herokuapp.com/callback';
 
-
 const SCOPE = 'openid profile';
 const AUDIENCE = 'https://beer-quest.auth0.com/userinfo';
-
 
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
