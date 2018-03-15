@@ -69,11 +69,9 @@ const PlaceDetailReviews = props =>
 
                 <Card key={review._id}>
 
-                    <CardText>
+                    <CardText className="raleway-text notes-column">
 
                         {props.renderStars(review.rating)}
-                        <br />
-                        {review.rating}
                         <br />
                         {review.body}
                         <br />
