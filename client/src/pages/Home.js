@@ -41,14 +41,19 @@ class Home extends Component {
     console.log(`in Home componentWillMount`);
     console.log(this.props.location.state);
     if (this.props.location.state) {
-    console.log('im inside the if');
-    this.setState({
-      loggedIn: this.props.location.state.loggedIn,
-      user: this.props.location.state.user
-    });
-  } 
-   console.log("Hello " + (this.state.user.name));
-   console.log("Hello " + (this.state.loggedIn));  
+      this.setState({
+        loggedIn: this.props.location.state.loggedIn,
+        user: this.props.location.state.user
+      });
+    }
+  }
+
+  componentDidMount() {
+    console.log(`in Home componentDidMount`);
+
+    console.log("Hello " + (this.state.user.name));
+    console.log("Hello " + (this.state.user.aud));
+    console.log("Hello " + (this.state.loggedIn));
   }
 
 
@@ -69,12 +74,12 @@ class Home extends Component {
     }
   };
 
-   
-    
-    
-      
-    
-  
+
+
+
+
+
+
   handleRequestClose() {
     console.log(`isLoggedIn ${isLoggedIn()}`);
     this.setState({

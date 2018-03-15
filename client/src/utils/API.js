@@ -63,6 +63,7 @@ export default {
     },
 
   saveNote: function (savedNoteData) {
+    console.log(savedNoteData);
     return axios.post("/api/savednotes", savedNoteData);
   },
 
@@ -84,6 +85,7 @@ export default {
   },
 
   saveReview: function (savedReviewData) {
+    console.log(savedReviewData);
     return axios.post("/api/savedreviews", savedReviewData);
   },
 

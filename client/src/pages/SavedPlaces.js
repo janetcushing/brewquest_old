@@ -36,6 +36,7 @@ class SavedPlaces extends Component {
 
   componentDidMount() {
     console.log("component did mount", this.state.results)
+    console.log("User: " + this.state.user);
     this.loadSavedPlaces();
   }
 
