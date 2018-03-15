@@ -2,7 +2,6 @@
 
 import React from "react";
 import { BrowserRouter as Router, Route
-  // , Link, Redirect
  } from "react-router-dom";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Nav from "./components/Nav";
@@ -11,7 +10,6 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import SavedPlaces from "./pages/SavedPlaces";
 import PlaceDetail from "./pages/PlaceDetail";
-// import Dropdown from "./components/Dropdown";
 import { requireAuth } from './utils/AuthService';
 import Callback from './components/Callback';
 
