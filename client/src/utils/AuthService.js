@@ -7,6 +7,7 @@ const CLIENT_ID = 'hBUrEY7ugr1dCF8SatxQiOnIVVW4c5ia';
 const CLIENT_DOMAIN = 'beer-quest.auth0.com';
 // const REDIRECT = 'http://localhost:3000/callback';
 const REDIRECT = process.env.CALLBACK_URI || 'http://localhost:3000/callback';
+// const REDIRECT = process.env.CALLBACK_URI || 'https://beer-quest.herokuapp.com/callback';
 
 // if (process.env.NODE_ENV === "production") {
 //   const REDIRECT = process.env.CALLBACK_URI;
