@@ -51,6 +51,7 @@ export default {
     },
  // Saves a note to the Notes database
   saveNote: function (savedNoteData) {
+    console.log(savedNoteData);
     return axios.post("/api/savednotes", savedNoteData);
   },
 // Deletes a note to the Notes database
@@ -72,6 +73,7 @@ export default {
   },
 // Saves a review to the Reviews database
   saveReview: function (savedReviewData) {
+    console.log(savedReviewData);
     return axios.post("/api/savedreviews", savedReviewData);
   },
 // retrieves reviews from the Reviews database

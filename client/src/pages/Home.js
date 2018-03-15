@@ -40,6 +40,8 @@ class Home extends Component {
     }
   }
 
+
+
   handleSearchLocationChange = event => {
     this.setState({ searchLocation: event.target.value });
   };
@@ -52,6 +54,7 @@ class Home extends Component {
       this.setState({ redirect: true });
     }
   };
+
 
   handleRequestClose() {
     this.setState({
