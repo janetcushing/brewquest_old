@@ -1,20 +1,12 @@
 import React from "react";
 import {
     Card, CardActions,
-    // CardTitle, 
     CardText, CardHeader
 } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-// import Container from "../Container";
-// import Row from "../Row";
-// import Col from "../Col";
-// import { login } from '../../utils/AuthService';
-// import { Link } from "react-router-dom";
-
-
 
 const PlaceDetailReviews = props =>
 
@@ -69,15 +61,11 @@ const PlaceDetailReviews = props =>
 
                 <Card key={review._id}>
 
-                    <CardText>
+                    <CardText className="raleway-text notes-column">
 
                         {props.renderStars(review.rating)}
                         <br />
-                        {review.rating}
-                        <br />
                         {review.body}
-                        <br />
-                        {review.date}
 
                     </CardText>
 

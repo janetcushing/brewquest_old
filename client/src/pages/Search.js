@@ -107,6 +107,7 @@ class Search extends Component {
       alert("Please add search criteria");
     } else {
       console.log(this.state.searchLocation);
+      this.setState({ searchLocation: "", results: [] })
       this.searchApiPlaces(this.state.searchLocation);
     }
   };

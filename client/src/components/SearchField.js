@@ -13,6 +13,9 @@ const styles = {
     },
     inputStyle: {
         color: grey50
+    },
+    textfieldStyle: {
+        marginRight: 10
     }
 };
 
@@ -25,6 +28,7 @@ const SearchField = props => (
             hintStyle={styles.hintStyle}
             inputStyle={styles.inputStyle}
             value={props.searchLocation}
+            style={styles.textfieldStyle}
             onChange={props.handleSearchLocationChange}
         />
             <RaisedButton
@@ -32,6 +36,7 @@ const SearchField = props => (
                 buttonStyle={styles.buttonStyle}
                 onTouchTap={this.handleTouchTap}
                 onClick={(event) => props.handleFormSubmit(event)}
+                className="search-button-home"
             />
     </div>
 );
