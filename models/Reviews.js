@@ -23,10 +23,7 @@ const ReviewsSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    },
-    // name: {
-    //     type: String
-    // },
+    }
 
 });
 

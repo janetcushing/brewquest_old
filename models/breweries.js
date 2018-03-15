@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 // Get a reference to the mongoose Schema constructor
 const Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new ExampleSchema object
-// This is similar to a Sequelize model
+// Using the Schema constructor, create a new Schema object
 
 const BreweriesSchema = new Schema({
   been_there: {
