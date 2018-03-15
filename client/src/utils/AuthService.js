@@ -10,6 +10,7 @@ const REDIRECT = process.env.CALLBACK_URI || 'https://beer-quest.herokuapp.com/c
 const SCOPE = 'openid profile';
 const AUDIENCE = 'https://beer-quest.auth0.com/userinfo';
 
+
 var auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN
