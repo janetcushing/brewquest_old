@@ -27,34 +27,12 @@ const styles = {
     handleLogin = () => {
       console.log(`im in handleLogin`);
       login();
-      // if (isLoggedIn()) {
-        //   this.setState({ loggedIn: true });
-        //   let token = getIdToken();
-        //   console.log(token);
-        // let user = decodeToken(token);
-        // console.log(user);
-        // this.setState({ user: user });
-        // console.log("im about to API.saveUser");
-        // console.log(this.state.user);
-
-        // setTimeout(function () {
-        // API.saveUser(this.state.user)
-        //     .then(res => {
-        //         console.log("user added");
-        //     })
-        //     .catch(err => console.log(err));
-        // }, 10000);
-         
-      // } else { this.setState({ loggedIn: false }); }
-
   }
 
     handleRequestClose() {
       this.setState({
         open: false,
-      });
-      
-        
+      });    
     }
   
     handleTouchTap() {

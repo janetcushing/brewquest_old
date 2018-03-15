@@ -5,67 +5,55 @@ export default {
   getSavedPlaces: function () {
     return axios.get("/api/savedplaces");
   },
-  // Gets the brewery with the given id
+  // Gets the brewery from the breweries collection with the given id
   getSavedPlace: function (id) {
-    console.log("getting to api for place detail")
-    console.log("get saved place in API.js ID: " + id)
     return axios.get("/api/savedplaces/" + id);
   },
   // Deletes the place with the given id
   deleteSavedPlaceByBreweryId: function (breweryId) {
     return axios.delete("/api/savedplace/" + breweryId);
   },
-  // Saves a place to the database
+  // Saves a place to the breweries database
   savePlace: function (savedPlacesData) {
-    console.log("im in savePlace on the client side");
     return axios.post("/api/savedplaces", savedPlacesData);
   },
+  // delete a place from the breweries database
   deleteSavedPlace: function (id) {
     return axios.delete("/api/savedplaces/" + id);
   },
-
+  //update the been to place boolean
   beenToPlace: function (id) {
-    console.log("got to beentoplace in api.js")
     return axios.put("/api/savedplaces/" + id, {
       been_there: true
     })
   },
-
+  //update the been to place boolean
   haveNotBeenToPlace: function (id) {
-    console.log("got to beentoplace in api.js")
     return axios.put("/api/savedplaces/" + id, {
       been_there: false
     })
-
   },
-  // Saves a book to the database
-  // savePlace: function(savedPlacesData) {
-  //   return axios.post("/api/savedplaces", savedPlacesData.been_there);
-  // },
-
-
+  // get data from the google places api
   getApiPlaces: function (query) {
-    console.log(`in getAPIPlaces on the client side query is: ${query}`);
     return axios.get("/api/apiplaces/" + query)
   },
-  // Saves a user to the database
+  // Saves a user to the UserStore database
   saveUser: function (userData) {
     return axios.post("/api/user/", userData);
   },
-  // Looks for a user to the database
+  // Looks for a user in the UserStore database
   findUser: function (aud) {
     return axios.get("/api/user/" + aud);
   },
-    // Looks for a user to the database
+    // Updates a user in the UserStore database
     updateUser: function (aud, loggedIn) {
-      console.log("in client API updateUSER");
       return axios.put("/api/user/" + aud, loggedIn);
     },
-
+ // Saves a note to the Notes database
   saveNote: function (savedNoteData) {
     return axios.post("/api/savednotes", savedNoteData);
   },
-
+// Deletes a note to the Notes database
   deleteSavedNote: function (noteId) {
     return axios.delete("/api/savednotes/", {
       params: {
@@ -73,7 +61,7 @@ export default {
       }
     });
   },
-
+ // retrieves notes from the Notes database
   getSavedNotes: function (noteData) {
     return axios.get("/api/savednotes", {
       params: {
@@ -82,13 +70,12 @@ export default {
       }
     });
   },
-
+// Saves a review to the Reviews database
   saveReview: function (savedReviewData) {
     return axios.post("/api/savedreviews", savedReviewData);
   },
-
+// retrieves reviews from the Reviews database
   getSavedReviews: function (reviewData) {
-    console.log(reviewData)
     return axios.get("/api/savedreviews", {
       params: {
         id: reviewData.brewery_id

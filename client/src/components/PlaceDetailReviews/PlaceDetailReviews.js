@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    Card, CardActions,
-    CardText, CardHeader
-} from 'material-ui/Card';
+import { Card, CardActions, CardText, CardHeader } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';

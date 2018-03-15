@@ -4,10 +4,7 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import API from "../utils/API";
 import Clear from 'material-ui/svg-icons/content/clear';
-import {
-    Card, CardActions, CardTitle
-    // , CardText, CardMedia 
-} from 'material-ui/Card';
+import { Card, CardActions, CardTitle } from 'material-ui/Card';
 import CheckBoxOutlineBlank from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import CheckBox from 'material-ui/svg-icons/toggle/check-box'
 import Stars from 'material-ui/svg-icons/action/stars';
@@ -16,8 +13,7 @@ import PlaceDetailHours from "../components/PlaceDetailHours";
 import PlaceDetailGeneralInformation from "../components/PlaceDetailGeneralInformation";
 import PlaceDetailNotes from "../components/PlaceDetailNotes";
 import PlaceDetailReviews from "../components/PlaceDetailReviews";
-// import Snackbar from 'material-ui/Snackbar';
-// import RaisedButton from 'material-ui/RaisedButton';
+import { getUserAud } from '../utils/AuthService';
 
 class Detail extends Component {
     state = {
@@ -33,22 +29,19 @@ class Detail extends Component {
     };
 
     componentWillMount() {
-        console.log("im in placeDetails componentWillMount ");
+        let userAud = getUserAud();
+        let userData = { aud: userAud };
+        this.setState({ user: userData });
+        this.setState({ loggedIn: true });
         if (this.props.location.state) {
-            console.log("ive got state ");
             this.setState({ detail: this.props.location.state.placedetail })
             this.setState({ been_there: this.props.location.state.placedetail.been_there })
-            this.setState({ user: this.props.location.state.user })
         }
 
 
     }
 
     componentDidMount() {
-        console.log(this.props.location.state)
-        console.log("this is" + this.state.detail)
-        console.log(this.state.been_there)
-
         let initialLoadData = {
             brewery_id: this.state.detail._id,
             aud: this.state.user.aud,
@@ -65,16 +58,12 @@ class Detail extends Component {
     };
 
     checkBeenThere = id => {
-        console.log(id)
-        console.log("in checkbeenthere on saved places page")
         API.beenToPlace(id)
             .then(res => this.setState({ been_there: true }))
             .catch(err => console.log(err));
-        console.log("this is this.state.been_there: " + this.state.been_there)
     };
 
     unCheckBeenThere = id => {
-        console.log("in uncheckbeenthere on saved places page")
         API.haveNotBeenToPlace(id)
             .then(res => this.setState({ been_there: false }))
             .catch(err => console.log(err));
@@ -189,9 +178,6 @@ class Detail extends Component {
         return (
             <div id="saved-detail-page-background">
                 <div class="main-container">
-                    {/* <div>
-            <p id="beer-text">Hello {this.state.user.name}</p>
-        </div> */}
                     <Container>
                         <Card key={this.state.detail._id}>
                             <Row>
@@ -219,16 +205,13 @@ class Detail extends Component {
                             </Row>
                             <Row>
                                 <Col size="sm-12">
-                                    {/* Lauren add GENERAL INFORMATION component under here */}
                                     <PlaceDetailGeneralInformation
                                         full_address={this.state.detail.full_address}
                                         num_reviews={this.state.detail.num_reviews}
                                         phone={this.state.detail.phone}
-                                        // website={this.state.detail.website}
                                         website={<a href={this.state.detail.website} target="_new_tab">{this.state.detail.website}</a>}
                                     />
 
-                                    {/* Lauren add HOURS component under here */}
                                     <PlaceDetailHours
                                         SundayHours={this.state.detail.weekday_text[6]}
                                         MondayHours={this.state.detail.weekday_text[0]}
@@ -240,7 +223,6 @@ class Detail extends Component {
                                     />
 
 
-                                    {/* James add NOTES component under here */}
                                     <PlaceDetailNotes
                                         handleNoteInputChange={this.handleNoteInputChange}
                                         handleSaveNote={this.handleSaveNote}
@@ -249,7 +231,6 @@ class Detail extends Component {
                                         savedNotes={this.state.savedNotes}
                                     />
 
-                                    {/* Add REVIEWS component under here */}
                                     <PlaceDetailReviews
                                         ratingInput={this.state.ratingInput}
                                         reviewInput={this.state.reviewInput}

@@ -1,28 +1,10 @@
 import React, { Component } from "react";
-// import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { isLoggedIn } from '../utils/AuthService';
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-
-
-// const styles = {
-//   container: {
-//     textAlign: 'center',
-//     paddingTop: 200,
-//   },
-// };
-
-// const muiTheme = getMuiTheme({
-//   palette: {
-//     accent1Color: deepOrange500,
-//   },
-// });
 
 class Login extends Component {
   constructor(props, context) {
