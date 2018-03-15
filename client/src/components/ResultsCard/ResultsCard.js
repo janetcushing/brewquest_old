@@ -32,7 +32,7 @@ const ResultsCard = props =>
                         {(result.open_now) ? 'Open Now' : 'Not Open Now'}
                         <br />
                         <h4>Address</h4>
-                        {result.vicinity}
+                        {result.full_address}
                         <br />
                         <h4>Phone</h4>
                         {result.phone}
