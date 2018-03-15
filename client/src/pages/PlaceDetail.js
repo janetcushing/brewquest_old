@@ -48,6 +48,7 @@ class Detail extends Component {
         console.log(this.props.location.state)
         console.log("this is" + this.state.detail)
         console.log(this.state.been_there)
+        console.log("User Aud: " + this.state.user.aud)
 
         let initialLoadData = {
             brewery_id: this.state.detail._id,
