@@ -24,9 +24,7 @@ module.exports = {
   update: function(req, res) {
     db.Breweries
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => 
-        {console.log(dbModel)
-        res.json(dbModel)})
+      .then(dbModel => {res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {

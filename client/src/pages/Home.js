@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router';
 import SearchField from "../components/SearchField";
-import { isLoggedIn } from '../utils/AuthService';
 import "../App.css";
 import LocalDrink from 'material-ui/svg-icons/maps/local-drink';
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import { grey50 } from 'material-ui/styles/colors';
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
 
 const styles = {
   smallIcon: {
@@ -18,8 +14,6 @@ const styles = {
     color: grey50
   },
 };
-
-
 
 class Home extends Component {
   constructor(props, context) {
@@ -38,8 +32,6 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    console.log(`in Home componentWillMount`);
-    console.log(this.props.location.state);
     if (this.props.location.state) {
       this.setState({
         loggedIn: this.props.location.state.loggedIn,
@@ -48,47 +40,29 @@ class Home extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log(`in Home componentDidMount`);
-
-    console.log("Hello " + (this.state.user.name));
-    console.log("Hello " + (this.state.user.aud));
-    console.log("Hello " + (this.state.loggedIn));
-  }
 
 
   handleSearchLocationChange = event => {
     this.setState({ searchLocation: event.target.value });
-    console.log(`isLoggedIn ${isLoggedIn()}`);
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log(`isLoggedIn ${isLoggedIn()}`);
-    // console.log("im in handleFormSubmit");
     if (!this.state.searchLocation) {
       alert("Please add search criteria");
     } else {
-      console.log(`search on: ${this.state.searchLocation}`)
       this.setState({ redirect: true });
     }
   };
 
 
-
-
-
-
-
   handleRequestClose() {
-    console.log(`isLoggedIn ${isLoggedIn()}`);
     this.setState({
       open: false,
     });
   }
 
   handleTouchTap() {
-    console.log(`isLoggedIn ${isLoggedIn()}`);
     this.setState({
       open: true,
     });
@@ -115,11 +89,7 @@ class Home extends Component {
             <div id="title-div">
               <h2 id="beer-text">Where can I find a really good beer?</h2>
             </div>
-
             <br />
-            {/* <div>
-              <p id="beer-text">Hello {this.state.user.given_name}</p>
-            </div> */}
             <div id="search-field-div">
               <SearchField
                 handleSearchLocationChange={this.handleSearchLocationChange}

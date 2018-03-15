@@ -23,7 +23,6 @@ class Logout extends React.Component {
 
   handleLogout = () => {
     logout();
-    console.log("i just logged out");
     handleRequestClose();
   }
 
