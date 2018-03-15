@@ -12,8 +12,6 @@ const Breweries = require("../models/breweries.js");
 module.exports = {
 
   createBrewery: (req, res) => {
-    console.log("Im in insertNewBreweryIntoDatabase");
-    console.log(req.body);
     let currentBrewery = {
       brewery_id: req.body.brewery_id,
       brewery_name: req.body.brewery_name,

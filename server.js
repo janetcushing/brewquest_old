@@ -1,10 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-var path = require("path");
+const path = require("path");
 const mongoose = require("mongoose");
-// const routes = require("./routes");
 const routes = require("./routes");
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -16,11 +14,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// app.get("*", function(req, res){
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
-
-// Add routes, both API and view
+// Add routes, both API and database
 app.use(routes);
 
 // Set up mongoose access to mongoDB database
