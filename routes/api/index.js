@@ -11,17 +11,16 @@ const userRoute = require("./user");
 router.use("/savedplaces", savedPlacesRoutes);
 router.use("/savedplace", savedPlaceRoutes);
 
-
 // Database routes - Notes table     //
 router.use("/savednotes", savedNotesRoutes);
 
 // Database routes - Reviews table     //
 router.use("/savedreviews", savedReviewsRoutes);
 
-// API route - to get Google api places data
-router.use("/apiplaces", apiPlacesRoute);
-
 // Database Routes - User table
 router.use("/user", userRoute);
+
+// API route - to get Google api places data
+router.use("/apiplaces", apiPlacesRoute);
 
 module.exports = router;
