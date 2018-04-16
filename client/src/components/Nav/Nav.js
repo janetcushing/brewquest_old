@@ -12,8 +12,7 @@ import PersonOutline from 'material-ui/svg-icons/social/person-outline';
 
 const styles = {
     style: {
-        background: grey800,
-        zindex: 2
+        background: grey800
     },
     labelStyle: {
         color: grey50,
@@ -88,7 +87,7 @@ class Nav extends React.Component {
                         <a href="/"><img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} alt="logo" /></a>
                     </div>
 
-                    <div id="navBar">
+                    <div id="navBar" position="absolute" zindex="2">
 
                         <div id="navBtns">
                             {
