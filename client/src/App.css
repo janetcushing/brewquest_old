@@ -52,8 +52,6 @@ h4 {
   background-attachment: fixed;
   height: 72vh;
   display: flex;
-  position: absolute;
-  z-index: 1;
   align-items: center;
   margin: 0px;
 }
@@ -163,7 +161,7 @@ h2 {
 }
 
 #navBar {
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
   /* Set the navbar to fixed position */
   top: 0;
@@ -197,8 +195,6 @@ h2 {
   align-items: center;
   margin: 0px;
   overflow: auto;
-  position: absolute;
-  z-index: 1;
 }
 
 #results-card-container {
@@ -235,8 +231,6 @@ h2 {
   align-items: center;
   margin: 0px;
   overflow: auto;
-  position: absolute;
-  z-index: 1;
 }
 
 h2 {
@@ -260,8 +254,6 @@ h2 {
   align-items: center;
   margin: 0px;
   overflow: auto;
-  position: absolute;
-  z-index: 1;
 }
 
 .delete-note-column {
