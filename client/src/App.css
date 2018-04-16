@@ -56,6 +56,35 @@ h4 {
   margin: 0px;
 }
 
+/* @supports (-webkit-overflow-scrolling: touch) {
+  /* CSS specific to iOS devices */ 
+  /* #home-page-background { */
+  /* background-image: url("images/bar.jpg"); */
+  /* background-repeat: repeat; */
+  /* background-size: cover; */
+  /* background-attachment: fixed; */
+  /* height: 72vh; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* margin: 0px; */
+  /* position: relative; */
+  /* z-index: 10; */
+/* } */
+/* } */ 
+
+/* @supports not (-webkit-overflow-scrolling: touch) {
+  /* CSS for other than iOS devices */ 
+  /* #home-page-background { */
+  /* background-image: url("images/bar.jpg"); */
+  /* background-repeat: repeat; */
+  /* background-size: cover; */
+  /* background-attachment: fixed; */
+  /* height: 72vh; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* margin: 0px; */
+/* } */
+/* } */ 
 /* Home Page Background Text, Search Field Styling, and Content Styling */
 
 #searchPlacesDiv {
@@ -170,7 +199,54 @@ h2 {
   /* Full width */
   z-index: 100;
   height: 75px;
-}
+} 
+   /* #whattheheck {
+    background-color: orange;
+    position: relative;
+    z-index: 110;
+  }
+
+/* @supports (-webkit-overflow-scrolling: touch) { */
+  /* CSS specific to iOS devices */ 
+  /* #drawer-container {
+    background-color: yellow;
+    position: relative;
+    z-index: 110;
+  } */
+  /* #navBar { */
+    /* position: absolute; */
+    /* background-color: green; */
+    /* Set the navbar to fixed position */
+    /* top: 0; */
+    /* Position the navbar at the top of the page */
+    /* width: 100%; */
+    /* Full width */
+    /* z-index: 100; */
+    /* height: 75px; */
+  /* } */
+/* } */
+
+/* @supports not (-webkit-overflow-scrolling: touch) { */
+  /* CSS for other than iOS devices */ 
+   /* #drawer-container {
+    background-color: pink;
+    position: relative;
+    z-index: 110;
+  } */
+  /* #navBar { */
+     /* background-color: purple; */
+    /* overflow: hidden; */
+    /* position: absolute; */
+    /* Set the navbar to fixed position */
+    /* top: 0; */
+    /* Position the navbar at the top of the page */
+    /* width: 100%; */
+    /* Full width */
+    /* z-index: 100; */
+    /* height: 75px; */
+  /* } */
+/* } */
+
 
 #navBtns {
   float: right;

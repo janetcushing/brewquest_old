@@ -47,6 +47,14 @@ class Nav extends React.Component {
                 } else { 
                     this.setState({ loggedIn: false });
                  }
+
+                 var userAgent = window.navigator.userAgent;
+                 console.log("userAgent " + userAgent);
+            }
+
+            componentDidMount() {
+                var userAgent = window.navigator.userAgent;
+                console.log("userAgent " + userAgent);
             }
         
     handleLogin = () => {
@@ -82,7 +90,7 @@ class Nav extends React.Component {
 
         render() {
             return (
-                <div>
+                <div id="whattheheck">
                     <div id="logoDiv">
                         <a href="/"><img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} alt="logo" /></a>
                     </div>
