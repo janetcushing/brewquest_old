@@ -84,7 +84,7 @@ class Home extends Component {
     return (
 
       <div>
-        <div id="home-page-background">
+        <div id="home-page-background" position="absolute" zindex="1">
           <div id="searchPlacesDiv">
             <div id="title-div">
               <h2 id="beer-text">Where can I find a really good beer?</h2>
