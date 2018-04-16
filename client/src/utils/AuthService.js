@@ -17,12 +17,15 @@ const auth = new auth0.WebAuth({
 });
 
 export function login() {
+  console.log('window.location.hostname');
+  console.log(window.location.hostname);
   auth.authorize({
     responseType: 'token id_token',
     redirectUri: REDIRECT,
     audience: AUDIENCE,
     scope: SCOPE
   });
+
 }
 
 export function logout() {
