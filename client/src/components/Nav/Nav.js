@@ -13,6 +13,7 @@ import PersonOutline from 'material-ui/svg-icons/social/person-outline';
 const styles = {
     style: {
         background: grey800,
+        zindex: 2
     },
     labelStyle: {
         color: grey50,
