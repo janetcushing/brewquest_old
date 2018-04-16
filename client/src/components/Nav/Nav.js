@@ -87,7 +87,7 @@ class Nav extends React.Component {
                         <a href="/"><img id="logo" src={require(`../../images/logo.png`)} style={styles.logoStyle} alt="logo" /></a>
                     </div>
 
-                    <div id="navBar" position="absolute" zindex="2">
+                    <div id="navBar">
 
                         <div id="navBtns">
                             {
